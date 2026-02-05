@@ -1,0 +1,808 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>{{BRAND_NAME}} | {{CITY_STATE}}</title>
+<meta name="description" content="{{META_DESCRIPTION}}"/>
+
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#ffffff;
+  --ink:#0b1220;
+  --muted:#5b6472;
+
+  --accent: {{ACCENT_COLOR}};
+  --accent2: {{ACCENT_COLOR_DARK}};
+
+  --max:1180px;
+  --line:rgba(11,18,32,.12);
+  --card:#ffffff;
+  --radius:12px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+}
+a{text-decoration:none;color:inherit}
+.wrap{width:min(var(--max),92%);margin:auto}
+
+/* Buttons */
+.pill{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:10px 14px;border-radius:999px;border:1px solid var(--line);
+  background:#fff;font-weight:850;font-size:13px;transition:140ms ease;
+}
+.pill.primary{background:var(--accent);border-color:transparent;color:#fff;}
+.pill.primary:hover{background:var(--accent2)}
+.pill:hover{transform:translateY(-1px)}
+
+/* Cut corners (Chipotle-ish) */
+.cut-corners{
+  border:1px solid var(--line);
+  background:#fff;
+  clip-path: polygon(
+    14px 0%, calc(100% - 14px) 0%, 100% 14px,
+    100% calc(100% - 14px), calc(100% - 14px) 100%,
+    14px 100%, 0% calc(100% - 14px), 0% 14px
+  );
+}
+
+/* TOP BAR (Ambridge-style: phone + order is obvious) */
+.topbar{
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.topbar-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 0;
+}
+.topbar-left{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  color:var(--muted);
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.topbar-left b{color:var(--ink);letter-spacing:0;text-transform:none;font-size:13px}
+.topbar-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.topbar .pill{padding:9px 12px;font-size:12px}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:10;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+.top{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:14px 0;
+}
+.brand{display:flex;align-items:center;gap:12px;min-width:220px;}
+.logo{height:44px;display:block}
+.nav{display:flex;align-items:center;gap:24px;}
+.nav a{
+  font-family:Oswald, system-ui, sans-serif;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--ink);
+  font-size:16px;
+}
+.nav a:hover{opacity:.72}
+.right{display:flex;align-items:center;gap:12px;min-width:220px;justify-content:flex-end;}
+
+/* HERO SLIDESHOW */
+.hero-slider{
+  position:relative;
+  height:70vh;
+  min-height:440px;
+  overflow:hidden;
+  background:#0b1220;
+}
+.slide{
+  position:absolute;
+  inset:0;
+  background-size:cover;
+  background-position:center;
+  opacity:0;
+  transition:opacity .8s ease;
+  transform:translateZ(0);
+}
+.slide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,.62));
+}
+.slide.active{opacity:1;z-index:1;}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  text-align:left;
+  color:#fff;
+  padding:24px;
+}
+.hero-inner{
+  width:min(640px, 92%);
+  margin-left:clamp(0px, 6vw, 64px);
+}
+.hero-kicker{
+  font-family:Oswald, system-ui, sans-serif;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:700;
+  font-size:14px;
+  color:rgba(255,255,255,.86);
+  margin:0 0 10px;
+}
+.hero-content h1{
+  font-family:Oswald, system-ui, sans-serif;
+  font-size:clamp(42px, 5.2vw, 82px);
+  margin:0 0 10px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  text-shadow:0 12px 40px rgba(0,0,0,.55);
+}
+.hero-content p{
+  font-size:16px;
+  font-weight:800;
+  max-width:56ch;
+  margin:0 0 18px;
+  color:rgba(255,255,255,.92);
+  text-shadow:0 10px 30px rgba(0,0,0,.45);
+  line-height:1.55;
+}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.hero-actions .pill.primary{padding:12px 18px;font-size:14px}
+.hero-actions .pill{padding:12px 16px;font-size:13px}
+
+/* dots */
+.hero-dots{
+  position:absolute;
+  left:50%;
+  bottom:14px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+  z-index:5;
+}
+.hero-dot{
+  width:10px;height:10px;border-radius:999px;
+  background:rgba(255,255,255,.40);
+  border:1px solid rgba(255,255,255,.28);
+}
+.hero-dot.active{background:#fff;}
+
+/* SECTION */
+section{padding:64px 0}
+.h2{font-size:40px;font-weight:950;letter-spacing:-.02em;margin:0 0 10px}
+.sub{color:var(--muted);font-weight:650;max-width:60ch}
+
+/* SHELL */
+.shell{
+  background:var(--card);
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+  overflow:hidden;
+}
+.shell-head{padding:20px 18px;border-bottom:1px solid var(--line);}
+.shell-title{
+  font-family:Oswald, system-ui, sans-serif;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  font-size:18px;
+  font-weight:700;
+  margin:0 0 6px;
+}
+.shell-note{color:var(--muted);font-weight:650;font-size:14px;margin:0}
+
+/* QUICK LINKS (Menu / Catering / Bakery / Food Truck) */
+.quicklinks{padding:0 0 64px;}
+.quick-grid{
+  padding:18px;
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:12px;
+}
+.quick-card{
+  display:block;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:#fff;
+  padding:14px;
+  transition:140ms ease;
+}
+.quick-card:hover{transform:translateY(-2px);border-color:rgba(123,45,26,.35);}
+.quick-top{
+  display:flex;justify-content:space-between;gap:10px;align-items:flex-start;
+}
+.quick-title{
+  font-weight:950;
+  font-size:14px;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  margin:0;
+}
+.quick-sub{
+  margin:8px 0 0;
+  color:var(--muted);
+  font-weight:650;
+  font-size:13px;
+  line-height:1.45;
+}
+.quick-tag{
+  border:1px solid var(--line);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:900;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* INFO STRIP (Hours + Delivery + Promo) */
+.info{padding:0 0 64px;}
+.info-grid{
+  padding:18px;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+}
+.info-box{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:#fff;
+  padding:14px;
+}
+.info-title{
+  font-weight:950;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  font-size:12px;
+  margin:0 0 8px;
+}
+.info-text{
+  margin:0;
+  color:var(--muted);
+  font-weight:650;
+  font-size:13px;
+  line-height:1.5;
+}
+.info-text b{color:var(--ink);font-weight:900}
+
+/* CATEGORY GRID */
+.category-grid{
+  padding:18px;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:18px;
+}
+.cat-card{
+  display:block;
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:#fff;
+  border:1px solid var(--line);
+  transition:140ms ease;
+}
+.cat-card:hover{transform:translateY(-2px);border-color:rgba(123,45,26,.35);}
+.cat-card .img{height:160px;background:#f6f7f9;overflow:hidden;}
+.cat-card .img img{width:100%;height:100%;object-fit:cover;display:block;transform:scale(1.01);transition:transform .45s ease;}
+.cat-card:hover .img img{transform:scale(1.06)}
+.cat-card .label{padding:14px 14px 6px;font-size:24px;font-weight:950;color:var(--ink);}
+.cat-card .meta{padding:0 14px 16px;color:var(--muted);font-weight:700;font-size:13px;line-height:1.35;}
+
+/* INGREDIENTS FEATURE PANEL */
+.trust{padding:0 0 64px;}
+.trust-feature{display:grid;grid-template-columns: 1.05fr .95fr;gap:0;overflow:hidden;}
+.trust-left{
+  padding:34px 28px;border-right:1px solid var(--line);
+  display:flex;flex-direction:column;justify-content:center;min-height:420px;
+}
+.trust-kicker{
+  font-family:Oswald, system-ui, sans-serif;
+  text-transform:uppercase;letter-spacing:.12em;font-weight:700;font-size:14px;
+  color:var(--muted);margin:0 0 10px;
+}
+.trust-h{
+  font-family:Oswald, system-ui, sans-serif;
+  text-transform:uppercase;letter-spacing:.06em;font-weight:800;font-size:44px;
+  line-height:1.05;margin:0 0 14px;
+}
+.trust-p{margin:0 0 18px;color:var(--ink);font-weight:650;font-size:16px;line-height:1.6;max-width:52ch;}
+.trust-bullets{margin:0 0 22px;padding:0;list-style:none;display:grid;gap:10px;max-width:56ch;}
+.trust-bullets li{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-weight:700;font-size:13px;line-height:1.45;}
+.trust-bullets li::before{content:"■";color:var(--accent);line-height:1;margin-top:2px;font-size:10px;}
+.trust-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;}
+.trust-right{position:relative;min-height:420px;background:#0b1220;}
+.trust-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+.trust-right::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(0,0,0,.10), rgba(0,0,0,.35));pointer-events:none;}
+.trust-note{color:var(--muted);font-weight:650;font-size:12px;line-height:1.4;}
+
+/* SOCIAL PROOF */
+.proof{padding:0 0 64px;}
+.proof-body{padding:18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;font-weight:900;font-size:13px;}
+.badge span{color:var(--muted);font-weight:800}
+
+/* RATINGS */
+.ratings{padding:0 0 64px;}
+.ratings-grid{padding:18px;display:grid;grid-template-columns:1.2fr .8fr;gap:16px;}
+.rating-box{border:1px solid var(--line);border-radius:var(--radius);background:#fff;padding:16px;}
+.stars{font-size:18px;letter-spacing:2px;}
+.rating-line{margin:8px 0 0;font-weight:950;}
+.rating-sub{margin:6px 0 0;color:var(--muted);font-weight:700;font-size:13px;}
+.rating-actions{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;}
+
+/* EMAIL SIGNUP */
+.signup-wrap{padding:0 0 64px;}
+.signup-form{padding:18px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+.signup-input{
+  flex:1;min-width:240px;padding:12px 14px;border-radius:var(--radius);
+  border:1px solid var(--line);font-weight:850;outline:none;
+}
+.signup-input:focus{border-color:rgba(123,45,26,.40);box-shadow:0 0 0 4px rgba(123,45,26,.10);}
+.signup-btn{
+  display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:999px;
+  border:1px solid transparent;background:var(--accent);color:#fff;font-weight:950;cursor:pointer;transition:140ms ease;
+}
+.signup-btn:hover{background:var(--accent2); transform:translateY(-1px)}
+.signup-fineprint{padding:0 18px 18px;color:var(--muted);font-weight:650;font-size:12px;line-height:1.4;}
+.signup-msg{padding:0 18px 18px;font-weight:850;font-size:13px;}
+.signup-msg.ok{color:#0a7a35}
+.signup-msg.err{color:#b42318}
+
+/* FOOTER */
+footer{
+  padding:40px 0;color:var(--muted);font-weight:650;text-align:center;
+  border-top:1px solid var(--line);background:#fff;
+}
+
+/* MOBILE */
+@media(max-width:980px){
+  .nav{display:none}
+  .right{min-width:auto}
+  .hero-inner{margin-left:0}
+  .quick-grid{grid-template-columns:1fr 1fr}
+  .info-grid{grid-template-columns:1fr}
+  .category-grid{grid-template-columns:1fr}
+  .ratings-grid{grid-template-columns:1fr}
+  .trust-feature{grid-template-columns:1fr;}
+  .trust-left{border-right:none;border-bottom:1px solid var(--line);min-height:auto;}
+  .trust-right{min-height:260px;}
+  .trust-h{font-size:36px;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="wrap topbar-inner">
+    <div class="topbar-left">
+      <span>{{TOPBAR_LABEL}}</span>
+      <b>{{PHONE_DISPLAY}}</b>
+      <span>{{TOPBAR_NOTE}}</span>
+    </div>
+    <div class="topbar-right">
+      <a class="pill" href="tel:{{PHONE_TEL}}">Call</a>
+      <a class="pill primary" href="{{ORDER_URL}}" target="_blank" rel="noopener">{{ORDER_BUTTON_TEXT}}</a>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="wrap top">
+    <a class="brand" href="index.html" aria-label="{{BRAND_NAME}} Home">
+      <img src="{{LOGO_PATH}}" class="logo" alt="{{BRAND_NAME}} Logo"
+           onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23ffffff%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22%230b1220%22>LOGO</text></svg>';">
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <a href="#categories">Menu</a>
+      <a href="{{CATERING_URL}}">Catering</a>
+      <a href="{{DEALS_URL}}">Deals</a>
+      <a href="{{REWARDS_URL}}">Rewards</a>
+      <a href="{{LOCATIONS_URL}}">Locations</a>
+      <a href="{{CAREERS_URL}}">Careers</a>
+    </nav>
+
+    <div class="right">
+      <a class="pill" href="{{DIRECTIONS_URL}}">Directions</a>
+      <a class="pill primary" href="{{ORDER_URL}}" target="_blank" rel="noopener">{{ORDER_BUTTON_TEXT}}</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO SLIDESHOW -->
+<div class="hero-slider" aria-label="Featured items">
+  <div class="slide active" style="background-image:url('{{HERO_1_IMAGE}}')">
+    <div class="hero-content">
+      <div class="hero-inner">
+        <p class="hero-kicker">{{HERO_KICKER}}</p>
+        <h1>{{HERO_1_HEADLINE}}</h1>
+        <p>{{HERO_1_SUBTEXT}}</p>
+        <div class="hero-actions">
+          <a href="{{ORDER_URL}}" class="pill primary" target="_blank" rel="noopener">{{HERO_PRIMARY_CTA}}</a>
+          <a href="menu.html" class="pill">{{HERO_SECONDARY_CTA}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('{{HERO_2_IMAGE}}')">
+    <div class="hero-content">
+      <div class="hero-inner">
+        <p class="hero-kicker">{{HERO_KICKER}}</p>
+        <h1>{{HERO_2_HEADLINE}}</h1>
+        <p>{{HERO_2_SUBTEXT}}</p>
+        <div class="hero-actions">
+          <a href="{{ORDER_URL}}" class="pill primary" target="_blank" rel="noopener">{{HERO_PRIMARY_CTA}}</a>
+          <a href="menu.html" class="pill">{{HERO_SECONDARY_CTA}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('{{HERO_3_IMAGE}}')">
+    <div class="hero-content">
+      <div class="hero-inner">
+        <p class="hero-kicker">{{HERO_KICKER}}</p>
+        <h1>{{HERO_3_HEADLINE}}</h1>
+        <p>{{HERO_3_SUBTEXT}}</p>
+        <div class="hero-actions">
+          <a href="{{ORDER_URL}}" class="pill primary" target="_blank" rel="noopener">{{HERO_PRIMARY_CTA}}</a>
+          <a href="menu.html" class="pill">{{HERO_SECONDARY_CTA}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('{{HERO_4_IMAGE}}')">
+    <div class="hero-content">
+      <div class="hero-inner">
+        <p class="hero-kicker">{{HERO_KICKER}}</p>
+        <h1>{{HERO_4_HEADLINE}}</h1>
+        <p>{{HERO_4_SUBTEXT}}</p>
+        <div class="hero-actions">
+          <a href="{{ORDER_URL}}" class="pill primary" target="_blank" rel="noopener">{{HERO_PRIMARY_CTA}}</a>
+          <a href="menu.html" class="pill">{{HERO_SECONDARY_CTA}}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-dots" aria-hidden="true">
+    <span class="hero-dot active"></span>
+    <span class="hero-dot"></span>
+    <span class="hero-dot"></span>
+    <span class="hero-dot"></span>
+  </div>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="quicklinks">
+  <div class="wrap">
+    <div class="shell">
+      <div class="shell-head">
+        <div class="shell-title">{{QUICKLINKS_TITLE}}</div>
+        <p class="shell-note">{{QUICKLINKS_NOTE}}</p>
+      </div>
+      <div class="quick-grid" aria-label="Quick links">
+        <a class="quick-card" href="menu.html">
+          <div class="quick-top">
+            <p class="quick-title">{{QL1_TITLE}}</p>
+            <span class="quick-tag">{{QL1_TAG}}</span>
+          </div>
+          <p class="quick-sub">{{QL1_DESC}}</p>
+        </a>
+        <a class="quick-card" href="{{CATERING_URL}}">
+          <div class="quick-top">
+            <p class="quick-title">{{QL2_TITLE}}</p>
+            <span class="quick-tag">{{QL2_TAG}}</span>
+          </div>
+          <p class="quick-sub">{{QL2_DESC}}</p>
+        </a>
+        <a class="quick-card" href="{{BAKERY_URL}}">
+          <div class="quick-top">
+            <p class="quick-title">{{QL3_TITLE}}</p>
+            <span class="quick-tag">{{QL3_TAG}}</span>
+          </div>
+          <p class="quick-sub">{{QL3_DESC}}</p>
+        </a>
+        <a class="quick-card" href="{{FOODTRUCK_URL}}">
+          <div class="quick-top">
+            <p class="quick-title">{{QL4_TITLE}}</p>
+            <span class="quick-tag">{{QL4_TAG}}</span>
+          </div>
+          <p class="quick-sub">{{QL4_DESC}}</p>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INFO STRIP (Hours / Delivery / Promo) -->
+<div class="info">
+  <div class="wrap">
+    <div class="cut-corners">
+      <div class="info-grid">
+        <div class="info-box">
+          <p class="info-title">Hours</p>
+          <p class="info-text">{{HOURS_TEXT}}</p>
+        </div>
+        <div class="info-box">
+          <p class="info-title">Delivery Area</p>
+          <p class="info-text">{{DELIVERY_TEXT}}</p>
+        </div>
+        <div class="info-box">
+          <p class="info-title">Today</p>
+          <p class="info-text"><b>{{PROMO_BOLD}}</b> {{PROMO_TEXT}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MENU CATEGORIES -->
+<section id="categories">
+  <div class="wrap">
+    <h2 class="h2">Menu</h2>
+    <p class="sub">{{MENU_SUBTEXT}}</p>
+
+    <div class="shell">
+      <div class="shell-head">
+        <div class="shell-title">Choose a Category</div>
+        <p class="shell-note">{{MENU_NOTE}}</p>
+      </div>
+
+      <div class="category-grid" aria-label="Menu categories">
+        <a class="cat-card" href="menu.html?cat={{CAT1_ID}}" aria-label="Open {{CAT1_TITLE}}">
+          <div class="img"><img src="{{CAT1_IMAGE}}" alt="{{CAT1_TITLE}}" loading="lazy" decoding="async"
+            onerror="this.onerror=null;this.src='{{CAT1_FALLBACK}}';"></div>
+          <div class="label">{{CAT1_TITLE}}</div>
+          <div class="meta">{{CAT1_DESC}}</div>
+        </a>
+
+        <a class="cat-card" href="menu.html?cat={{CAT2_ID}}" aria-label="Open {{CAT2_TITLE}}">
+          <div class="img"><img src="{{CAT2_IMAGE}}" alt="{{CAT2_TITLE}}" loading="lazy" decoding="async"
+            onerror="this.onerror=null;this.src='{{CAT2_FALLBACK}}';"></div>
+          <div class="label">{{CAT2_TITLE}}</div>
+          <div class="meta">{{CAT2_DESC}}</div>
+        </a>
+
+        <a class="cat-card" href="menu.html?cat={{CAT3_ID}}" aria-label="Open {{CAT3_TITLE}}">
+          <div class="img"><img src="{{CAT3_IMAGE}}" alt="{{CAT3_TITLE}}" loading="lazy" decoding="async"
+            onerror="this.onerror=null;this.src='{{CAT3_FALLBACK}}';"></div>
+          <div class="label">{{CAT3_TITLE}}</div>
+          <div class="meta">{{CAT3_DESC}}</div>
+        </a>
+
+        <a class="cat-card" href="menu.html?cat={{CAT4_ID}}" aria-label="Open {{CAT4_TITLE}}">
+          <div class="img"><img src="{{CAT4_IMAGE}}" alt="{{CAT4_TITLE}}" loading="lazy" decoding="async"
+            onerror="this.onerror=null;this.src='{{CAT4_FALLBACK}}';"></div>
+          <div class="label">{{CAT4_TITLE}}</div>
+          <div class="meta">{{CAT4_DESC}}</div>
+        </a>
+
+        <a class="cat-card" href="menu.html?cat={{CAT5_ID}}" aria-label="Open {{CAT5_TITLE}}">
+          <div class="img"><img src="{{CAT5_IMAGE}}" alt="{{CAT5_TITLE}}" loading="lazy" decoding="async"
+            onerror="this.onerror=null;this.src='{{CAT5_FALLBACK}}';"></div>
+          <div class="label">{{CAT5_TITLE}}</div>
+          <div class="meta">{{CAT5_DESC}}</div>
+        </a>
+
+        <a class="cat-card" href="menu.html?cat={{CAT6_ID}}" aria-label="Open {{CAT6_TITLE}}">
+          <div class="img"><img src="{{CAT6_IMAGE}}" alt="{{CAT6_TITLE}}" loading="lazy" decoding="async"
+            onerror="this.onerror=null;this.src='{{CAT6_FALLBACK}}';"></div>
+          <div class="label">{{CAT6_TITLE}}</div>
+          <div class="meta">{{CAT6_DESC}}</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INGREDIENT TRUST (split panel + cut corners + video) -->
+<div class="trust" id="ingredients">
+  <div class="wrap">
+    <div class="trust-feature cut-corners" aria-label="Ingredients you can trust">
+      <div class="trust-left">
+        <p class="trust-kicker">{{ING_KICKER}}</p>
+        <h3 class="trust-h">{{ING_HEADLINE}}</h3>
+        <p class="trust-p">{{ING_PARAGRAPH}}</p>
+
+        <ul class="trust-bullets" aria-label="Ingredient standards">
+          <li><b>{{ING_B1_BOLD}}</b> {{ING_B1_TEXT}}</li>
+          <li><b>{{ING_B2_BOLD}}</b> {{ING_B2_TEXT}}</li>
+          <li><b>{{ING_B3_BOLD}}</b> {{ING_B3_TEXT}}</li>
+          <li><b>{{ING_B4_BOLD}}</b> {{ING_B4_TEXT}}</li>
+          <li><b>{{ING_B5_BOLD}}</b> {{ING_B5_TEXT}}</li>
+        </ul>
+
+        <div class="trust-actions">
+          <a class="pill primary" href="{{ORDER_URL}}" target="_blank" rel="noopener">{{ORDER_BUTTON_TEXT}}</a>
+          <a class="pill" href="menu.html">{{VIEW_MENU_TEXT}}</a>
+        </div>
+
+        <div class="trust-note" style="padding:16px 0 0; margin:0;">
+          {{ING_FINEPRINT}}
+        </div>
+      </div>
+
+      <div class="trust-right">
+        <video class="trust-video" src="{{ING_VIDEO_SRC}}" autoplay muted loop playsinline preload="metadata"></video>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL PROOF -->
+<div class="proof">
+  <div class="wrap">
+    <div class="shell">
+      <div class="shell-head">
+        <div class="shell-title">{{PROOF_HEADLINE}}</div>
+        <p class="shell-note">{{PROOF_SUBTEXT}}</p>
+      </div>
+      <div class="proof-body" aria-label="Social proof">
+        <div class="badge">{{PROOF_1}} <span>{{PROOF_1_NOTE}}</span></div>
+        <div class="badge">{{PROOF_2}} <span>{{PROOF_2_NOTE}}</span></div>
+        <div class="badge">{{PROOF_3}} <span>{{PROOF_3_NOTE}}</span></div>
+        <div class="badge">{{PROOF_4}} <span>{{PROOF_4_NOTE}}</span></div>
+        <div class="badge">{{PROOF_5}} <span>{{PROOF_5_NOTE}}</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RATINGS (Yelp links) -->
+<div class="ratings" id="ratings">
+  <div class="wrap">
+    <div class="shell">
+      <div class="shell-head">
+        <div class="shell-title">{{RATINGS_HEADLINE}}</div>
+        <p class="shell-note">{{RATINGS_SUBTEXT}}</p>
+      </div>
+
+      <div class="ratings-grid">
+        <div class="rating-box">
+          <div class="stars" aria-hidden="true">{{RATING_STARS}}</div>
+          <div class="rating-line">{{RATING_LINE}}</div>
+          <div class="rating-sub">{{RATING_NOTE}}</div>
+          <div class="rating-actions">
+            <a class="pill primary" href="#" id="yelpLink" target="_blank" rel="noopener">Open Yelp</a>
+            <a class="pill" href="#" id="leaveReviewLink" target="_blank" rel="noopener">Leave a Review</a>
+          </div>
+        </div>
+
+        <div class="rating-box">
+          <div class="rating-line">{{RATINGS_BOX2_TITLE}}</div>
+          <div class="rating-sub">{{RATINGS_BOX2_TEXT}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL SIGNUP -->
+<div class="signup-wrap" id="signup">
+  <div class="wrap">
+    <div class="shell">
+      <div class="shell-head">
+        <div class="shell-title">{{SIGNUP_HEADLINE}}</div>
+        <p class="shell-note">{{SIGNUP_SUBTEXT}}</p>
+      </div>
+
+      <form class="signup-form" id="emailSignupForm" novalidate>
+        <input class="signup-input" id="emailInput" type="email" inputmode="email" autocomplete="email"
+               placeholder="{{SIGNUP_PLACEHOLDER}}" aria-label="Email address" required />
+        <button class="signup-btn" type="submit">{{SIGNUP_BUTTON}}</button>
+      </form>
+
+      <div class="signup-msg" id="signupMsg" aria-live="polite"></div>
+      <div class="signup-fineprint">{{SIGNUP_FINEPRINT}}</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  © {{BRAND_NAME}} · {{ADDRESS_LINE}} · {{PHONE_DISPLAY}} ·
+  <a href="{{CAREERS_URL}}">Careers</a>
+</footer>
+
+<script>
+const TEMPLATE = {
+  destinationEmail: "{{DESTINATION_EMAIL}}",
+  yelpUrl: "{{YELP_URL}}",
+  yelpReviewUrl: "{{YELP_REVIEW_URL}}",
+};
+
+/* HERO SLIDESHOW */
+(function(){
+  const slides = document.querySelectorAll(".hero-slider .slide");
+  const dots = document.querySelectorAll(".hero-slider .hero-dot");
+  if(!slides.length) return;
+
+  let current = 0;
+  const INTERVAL_MS = 5000;
+
+  function setSlide(i){
+    slides[current].classList.remove("active");
+    if(dots[current]) dots[current].classList.remove("active");
+    current = i;
+    slides[current].classList.add("active");
+    if(dots[current]) dots[current].classList.add("active");
+  }
+
+  setInterval(() => setSlide((current + 1) % slides.length), INTERVAL_MS);
+})();
+
+/* RATINGS LINKS */
+(function(){
+  const yelpLink = document.getElementById("yelpLink");
+  const leaveReview = document.getElementById("leaveReviewLink");
+  if(yelpLink) yelpLink.href = TEMPLATE.yelpUrl;
+  if(leaveReview) leaveReview.href = TEMPLATE.yelpReviewUrl;
+})();
+
+/* EMAIL SIGNUP (mailto test version) */
+(function(){
+  const form = document.getElementById("emailSignupForm");
+  const input = document.getElementById("emailInput");
+  const msg = document.getElementById("signupMsg");
+
+  function setMsg(text, ok){
+    msg.textContent = text;
+    msg.className = "signup-msg " + (ok ? "ok" : "err");
+  }
+  function isValidEmail(email){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(email).trim());
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    const email = (input.value || "").trim();
+
+    if(!isValidEmail(email)){
+      setMsg("Please enter a valid email address.", false);
+      input.focus();
+      return;
+    }
+
+    const subject = encodeURIComponent("Email Signup");
+    const body = encodeURIComponent("Please add this email to the list:\n\n" + email + "\n");
+    window.location.href = `mailto:${TEMPLATE.destinationEmail}?subject=${subject}&body=${body}`;
+
+    setMsg("Thanks! You’re all set.", true);
+    form.reset();
+  });
+})();
+</script>
+
+</body>
+</html>
