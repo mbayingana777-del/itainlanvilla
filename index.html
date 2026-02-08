@@ -235,6 +235,81 @@ section{padding:72px 0}
 .card b{font-size:18px}
 .card p{margin:8px 0 0; color:rgba(11,18,32,.65); font-weight:800; line-height:1.35}
 
+/* ===== CATEGORY GRID (big image cards) ===== */
+.category-shell{
+  background:#fff;
+  border-radius:18px;
+  box-shadow:0 18px 60px rgba(2,6,23,.10);
+  overflow:hidden;
+  border:1px solid rgba(11,18,32,.10);
+}
+.category-head{
+  padding:20px 18px;
+  border-bottom:1px solid rgba(11,18,32,.10);
+}
+.category-head .title{
+  font-family:Oswald, system-ui, sans-serif;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  font-size:20px;
+  font-weight:900;
+  margin:0 0 6px;
+}
+.category-head .note{
+  color:rgba(11,18,32,.65);
+  font-weight:800;
+  font-size:14px;
+  margin:0;
+}
+
+.category-grid{
+  padding:18px;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:18px;
+}
+.cat-card{
+  display:block;
+  border-radius:16px;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid rgba(11,18,32,.10);
+  box-shadow:0 14px 34px rgba(2,6,23,.08);
+  transition:140ms ease;
+}
+.cat-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(193,18,31,.25);
+  box-shadow:0 18px 44px rgba(2,6,23,.12);
+}
+.cat-card .img{
+  height:240px;
+  background:#f3f4f6;
+  overflow:hidden;
+}
+.cat-card .img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform:scale(1.01);
+  transition:transform .45s ease;
+}
+.cat-card:hover .img img{transform:scale(1.07)}
+.cat-card .label{
+  padding:14px 14px 6px;
+  font-size:26px;
+  font-weight:950;
+  color:var(--ink);
+}
+.cat-card .meta{
+  padding:0 14px 16px;
+  color:rgba(11,18,32,.65);
+  font-weight:800;
+  font-size:13px;
+  line-height:1.35;
+}
+
 .split{
   display:grid;
   grid-template-columns: 1.2fr .8fr;
@@ -274,6 +349,8 @@ footer{
   .nav{display:none}
   .split{grid-template-columns:1fr}
   .grid-3{grid-template-columns:1fr}
+  .category-grid{grid-template-columns:1fr}
+  .cat-card .label{font-size:24px}
   .brand{min-width:auto}
   .right{min-width:auto}
 }
@@ -339,24 +416,79 @@ footer{
     </div>
   </div>
 
+  <!-- ✅ CATEGORY SELECT MENU (matches Italian Villa menu) -->
   <section id="menu">
     <div class="wrap">
       <h2 class="section-title">Menu</h2>
-      <p class="section-sub">Tap a category to order instantly through our online ordering.</p>
+      <p class="section-sub">Pick a category to order instantly through our online ordering.</p>
 
-      <div class="grid grid-3" aria-label="Menu categories">
-        <a class="card" href="#" data-order>
-          <b>Greek Plates</b>
-          <p>Gyros, souvlaki, salads, tzatziki, and more.</p>
-        </a>
-        <a class="card" href="#" data-order>
-          <b>Pizza & Pasta</b>
-          <p>Classic pies, baked pasta, and Italian staples.</p>
-        </a>
-        <a class="card" href="#" data-order>
-          <b>Wings & Sides</b>
-          <p>Wings, fries, and extras to round out the meal.</p>
-        </a>
+      <div class="category-shell">
+        <div class="category-head">
+          <div class="title">Choose a Category</div>
+          <p class="note">Tap a card to open online ordering.</p>
+        </div>
+
+        <div class="category-grid" aria-label="Menu categories">
+          <a class="cat-card" href="#" data-order aria-label="Pizza & Calzones">
+            <div class="img">
+              <img src="assets/cat-pizza-calzone.png" alt="Pizza and calzones"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Pizza & Calzones</div>
+            <div class="meta">Sicilian, hand tossed, thick/thin + specialty pies.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Gyros & Greek Specialties">
+            <div class="img">
+              <img src="assets/cat-gyros.png" alt="Gyros and Greek specialties"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Gyros & Greek</div>
+            <div class="meta">Home of the gyro — souvlaki, platters, Greek favorites.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Hoagies, Sandwiches & Wraps">
+            <div class="img">
+              <img src="assets/cat-hoagies-wraps.png" alt="Hoagies and wraps"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Hoagies & Wraps</div>
+            <div class="meta">12” hoagies, grilled sandwiches, wraps & more.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Wings, Fries & Finger Foods">
+            <div class="img">
+              <img src="assets/cat-wings-fries.png" alt="Wings and fries"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Wings & Finger Foods</div>
+            <div class="meta">Wings, fries, loaded fries, mozzarella sticks, apps.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Salads & Soups">
+            <div class="img">
+              <img src="assets/cat-salads-soups.png" alt="Salads and soups"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Salads & Soups</div>
+            <div class="meta">Greek feta, chef/gyro/chicken/steak salads + soup & chili.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Breakfast & Daily Specials">
+            <div class="img">
+              <img src="assets/cat-breakfast.png" alt="Breakfast and specials"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Breakfast & Specials</div>
+            <div class="meta">Omelets, pancakes/french toast + daily specials.</div>
+          </a>
+        </div>
       </div>
     </div>
   </section>
