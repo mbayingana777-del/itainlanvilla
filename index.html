@@ -204,6 +204,31 @@ header{
   font-weight:900;
   color:rgba(255,255,255,.90);
 }
+/* ===== Menu background (under hero) ===== */
+.menu-bg{
+  position: relative;
+  background-image: url("assets/assetssantorini-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* light black / charcoal tint (airy but grounded) */
+.menu-bg::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    rgba(0,0,0,.18),
+    rgba(0,0,0,.22)
+  );
+}
+
+/* keep menu content above the overlay */
+.menu-bg > .wrap{
+  position: relative;
+  z-index: 2;
+}
 
 /* ===== Sections ===== */
 section{padding:72px 0}
