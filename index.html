@@ -167,10 +167,7 @@ header{
   text-transform:uppercase;
   letter-spacing:.4px;
 
-  /* ✅ new: warm ivory that complements the blue */
   color:#f6f7f4;
-
-  /* ✅ new: softer shadow (no heavy dark overlay needed) */
   text-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
@@ -178,13 +175,8 @@ header{
   margin:0 0 20px;
   max-width:680px;
   font-weight:900;
-
-  /* ✅ new: softer ivory */
   color:rgba(246,247,244,.88);
-
   line-height:1.45;
-
-  /* ✅ new: lighter shadow */
   text-shadow:0 8px 24px rgba(0,0,0,.22);
 }
 
@@ -212,6 +204,7 @@ header{
   font-weight:900;
   color:rgba(255,255,255,.90);
 }
+
 /* ===== Menu background (under hero) ===== */
 .menu-bg{
   position: relative;
@@ -220,8 +213,6 @@ header{
   background-position: center;
   background-repeat: no-repeat;
 }
-
-/* light black / charcoal tint (airy but grounded) */
 .menu-bg::before{
   content:"";
   position:absolute;
@@ -231,8 +222,6 @@ header{
     rgba(0,0,0,.22)
   );
 }
-
-/* keep menu content above the overlay */
 .menu-bg > .wrap{
   position: relative;
   z-index: 2;
@@ -241,7 +230,7 @@ header{
 /* ===== Sections ===== */
 section{
   padding:72px 0;
-  background:#f5f6f7; /* soft light gray */
+  background:#f5f6f7;
 }
 
 .section-title{
@@ -255,11 +244,9 @@ section{
   font-weight:800;
 }
 
-.grid{
-  display:grid;
-  gap:16px;
-}
+.grid{display:grid;gap:16px;}
 .grid-3{grid-template-columns:repeat(3, 1fr)}
+
 .card{
   border:1px solid rgba(11,18,32,.10);
   border-radius:var(--radius);
@@ -271,6 +258,9 @@ section{
 .card:hover{transform:translateY(-2px); box-shadow:0 22px 70px rgba(2,6,23,.12)}
 .card b{font-size:18px}
 .card p{margin:8px 0 0; color:rgba(11,18,32,.65); font-weight:800; line-height:1.35}
+
+/* Make favorites clickable like buttons */
+.card.link-card{cursor:pointer}
 
 /* ===== CATEGORY GRID (big image cards) ===== */
 .category-shell{
@@ -347,18 +337,26 @@ section{
   line-height:1.35;
 }
 
+/* ===== SERVICES (Food Truck + Catering) ===== */
+#services{
+  background:#eceff1; /* slightly darker gray for contrast */
+}
 .split{
   display:grid;
-  grid-template-columns: 1.2fr .8fr;
+  grid-template-columns: 1.25fr .75fr; /* left bigger */
   gap:18px;
-  align-items:start;
+  align-items:stretch;
 }
 .panel{
   border:1px solid rgba(11,18,32,.10);
   border-radius:18px;
-  padding:18px;
+  padding:22px;
   background:#fff;
   box-shadow:0 18px 60px rgba(2,6,23,.08);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:340px;
 }
 .panel p{margin:8px 0;color:rgba(11,18,32,.70);font-weight:800;line-height:1.45}
 .kicker{
@@ -371,6 +369,40 @@ section{
   font-weight:900;
   color:rgba(11,18,32,.85);
 }
+
+.service-list{
+  list-style:none;
+  padding:0;
+  margin:14px 0 18px;
+}
+.service-list li{
+  font-weight:800;
+  color:rgba(11,18,32,.75);
+  margin:8px 0;
+}
+.service-actions{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+/* ===== Contact ===== */
+#contact .panel{min-height:auto}
+.form{
+  display:grid;
+  gap:10px;
+  margin-top:12px;
+}
+.input{
+  width:100%;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid rgba(11,18,32,.12);
+  font-weight:700;
+  font-family:inherit;
+}
+textarea.input{min-height:120px; resize:vertical}
 
 /* ===== Footer ===== */
 footer{
@@ -414,9 +446,10 @@ footer{
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <a href="#menu">Menu</a>
+      <a href="menu.html">Menu</a>
       <a href="#favorites">Favorites</a>
-      <a href="#hours">Hours</a>
+      <a href="#services">Food Truck</a>
+      <a href="#contact">Catering</a>
     </nav>
 
     <div class="right">
@@ -427,20 +460,18 @@ footer{
 </header>
 
 <main id="top">
-  <div class="hero" role="img" aria-label="Greek platter background">
+  <div class="hero" role="img" aria-label="Santorini background">
     <div class="wrap hero-inner">
       <div class="flag-bar" aria-hidden="true">
         <span class="g"></span><span class="w"></span><span class="r"></span>
       </div>
 
       <h1>A Taste of the Mediterranean</h1>
-<p>
-  Greek tradition, Italian classics, and family recipes — made fresh every day.
-</p>
+      <p>Greek tradition, Italian classics, and family recipes — made fresh every day.</p>
 
       <div class="hero-actions">
         <a class="pill red" href="#" id="orderHero" target="_blank" rel="noopener">Order Online</a>
-        <a class="pill green" href="#menu">View Menu</a>
+        <a class="pill green" href="menu.html">View Menu</a>
         <a class="pill" href="#" id="directionsHero">Get Directions</a>
       </div>
 
@@ -452,8 +483,8 @@ footer{
     </div>
   </div>
 
-  <!-- ✅ CATEGORY SELECT MENU (matches Italian Villa menu) -->
- <section id="menu" class="menu-bg">
+  <!-- ✅ CATEGORY SELECT MENU -->
+  <section id="menu" class="menu-bg">
     <div class="wrap">
       <h2 class="section-title">Menu</h2>
       <p class="section-sub">Have a bite of our Mediterranean cuisine.</p>
@@ -465,7 +496,7 @@ footer{
         </div>
 
         <div class="category-grid" aria-label="Menu categories">
-          <a class="cat-card" href="#" data-order aria-label="Pizza & Calzones">
+          <a class="cat-card" href="#" data-toast-category="pizza calzone" aria-label="Pizza & Calzones">
             <div class="img">
               <img src="assets/cat-pizza-calzone.png" alt="Pizza and calzones"
                    loading="lazy" decoding="async"
@@ -475,7 +506,7 @@ footer{
             <div class="meta">Sicilian, hand tossed, thick/thin + specialty pies.</div>
           </a>
 
-          <a class="cat-card" href="#" data-order aria-label="Gyros & Greek Specialties">
+          <a class="cat-card" href="#" data-toast-category="gyro souvlaki platter" aria-label="Gyros & Greek Specialties">
             <div class="img">
               <img src="assets/cat-gyros.png" alt="Gyros and Greek specialties"
                    loading="lazy" decoding="async"
@@ -485,7 +516,7 @@ footer{
             <div class="meta">Home of the gyro — souvlaki, platters, Greek favorites.</div>
           </a>
 
-          <a class="cat-card" href="#" data-order aria-label="Hoagies, Sandwiches & Wraps">
+          <a class="cat-card" href="#" data-toast-category="hoagie wrap sandwich" aria-label="Hoagies, Sandwiches & Wraps">
             <div class="img">
               <img src="assets/cat-hoagies-wraps.png" alt="Hoagies and wraps"
                    loading="lazy" decoding="async"
@@ -495,7 +526,7 @@ footer{
             <div class="meta">12” hoagies, grilled sandwiches, wraps & more.</div>
           </a>
 
-          <a class="cat-card" href="#" data-order aria-label="Wings, Fries & Finger Foods">
+          <a class="cat-card" href="#" data-toast-category="wings fries appetizers" aria-label="Wings, Fries & Finger Foods">
             <div class="img">
               <img src="assets/cat-wings-fries.png" alt="Wings and fries"
                    loading="lazy" decoding="async"
@@ -505,7 +536,7 @@ footer{
             <div class="meta">Wings, fries, loaded fries, mozzarella sticks, apps.</div>
           </a>
 
-          <a class="cat-card" href="#" data-order aria-label="Salads & Soups">
+          <a class="cat-card" href="#" data-toast-category="salad soup" aria-label="Salads & Soups">
             <div class="img">
               <img src="assets/cat-salads-soups.png" alt="Salads and soups"
                    loading="lazy" decoding="async"
@@ -515,7 +546,7 @@ footer{
             <div class="meta">Greek feta, chef/gyro/chicken/steak salads + soup & chili.</div>
           </a>
 
-          <a class="cat-card" href="#" data-order aria-label="Breakfast & Daily Specials">
+          <a class="cat-card" href="#" data-toast-category="breakfast omelet pancake" aria-label="Breakfast & Daily Specials">
             <div class="img">
               <img src="assets/cat-breakfast.png" alt="Breakfast and specials"
                    loading="lazy" decoding="async"
@@ -535,42 +566,114 @@ footer{
       <p class="section-sub">Best sellers — simple, satisfying, always consistent.</p>
 
       <div class="grid grid-3">
-        <div class="card"><b>Classic Gyro</b><p>Pita, seasoned meat, onions, tomatoes, tzatziki.</p></div>
-        <div class="card"><b>Chicken Souvlaki</b><p>Grilled chicken, lemony flavor, fresh sides.</p></div>
-        <div class="card"><b>Loaded Fries</b><p>Cheese, seasoning, and add-ons that slap.</p></div>
+        <div class="card link-card" data-toast-item="classic gyro">
+          <b>Classic Gyro</b>
+          <p>Pita, seasoned meat, onions, tomatoes, tzatziki.</p>
+        </div>
+        <div class="card link-card" data-toast-item="chicken souvlaki">
+          <b>Chicken Souvlaki</b>
+          <p>Grilled chicken, lemony flavor, fresh sides.</p>
+        </div>
+        <div class="card link-card" data-toast-item="loaded fries">
+          <b>Loaded Fries</b>
+          <p>Cheese, seasoning, and add-ons that slap.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="hours">
+  <!-- ✅ Replaces the old rating + greek vibe block -->
+  <section id="services">
     <div class="wrap">
       <div class="split">
-       <div class="panel">
-  <div class="kicker">★★★★★ Rated</div>
-  <h2 class="section-title" style="margin-top:10px;">Loved by Locals</h2>
 
-  <p>
-    “Always fresh, always consistent. The gyros are packed, the pizza never misses,
-    and the portions are more than fair.”
-  </p>
+        <!-- LEFT: FOOD TRUCK (bigger) -->
+        <div class="panel">
+          <div>
+            <div class="kicker">On the Road</div>
+            <h2 class="section-title" style="margin-top:10px;">Our Food Truck</h2>
 
-  <p>
-    Family-owned, community-trusted, and serving Ambridge for years —
-    this is the kind of place people come back to.
-  </p>
-</div>
+            <p>
+              Bringing our gyros, pizza, and classics on the road —
+              festivals, events, and private catering.
+            </p>
 
+            <ul class="service-list">
+              <li>✔ Festivals & large events</li>
+              <li>✔ Private parties & corporate bookings</li>
+              <li>✔ Crowd favorites (gyros, pizza, platters)</li>
+            </ul>
+          </div>
 
+          <div class="service-actions">
+            <a class="pill red" href="#contact">Book the Food Truck</a>
+            <a class="pill" href="menu.html">View Menu</a>
+            <a class="pill" href="#" id="orderTruck" target="_blank" rel="noopener">Order Online</a>
+          </div>
+        </div>
+
+        <!-- RIGHT: CATERING -->
+        <div class="panel">
+          <div>
+            <div class="kicker">Group Orders</div>
+            <h2 class="section-title" style="margin-top:10px;">Catering & Family Meals</h2>
+
+            <p>
+              Feeding a group? We offer easy catering options for pickup or delivery —
+              perfect for offices, family events, and special occasions.
+            </p>
+
+            <ul class="service-list">
+              <li>✔ Family-style trays & platters</li>
+              <li>✔ Office lunches & meetings</li>
+              <li>✔ Pickup or local delivery</li>
+            </ul>
+          </div>
+
+          <div class="service-actions">
+            <a class="pill green" href="#contact">Request Catering</a>
+            <a class="pill" href="#" id="directionsCatering">Pickup Directions</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2 class="section-title">Book Food Truck or Catering</h2>
+      <p class="section-sub">Fast response — tell us your date, headcount, and what you’re looking for.</p>
+
+      <div class="split">
+        <div class="panel">
+          <div class="kicker">Call Us</div>
+          <h3 style="margin:10px 0 0;font-size:26px;">(724) 266-1919</h3>
+          <p style="margin-top:10px;">
+            Prefer phone? Call and we’ll help you lock it in.
+          </p>
+          <div class="service-actions">
+            <a class="pill red" href="tel:+17242661919">Call Now</a>
+            <a class="pill" href="#" id="directionsContact">Get Directions</a>
+          </div>
+        </div>
 
         <div class="panel">
-          <div class="kicker">Greek Vibe</div>
-          <h2 class="section-title" style="margin-top:10px;">Kali Orexi</h2>
-          <p>
-            That means “enjoy your meal.”
-            We keep it simple: fresh ingredients, bold flavor, and food that feels like home.
-          </p>
-          <p>
-            Order online for pickup — or come in and we’ll take care of you.
+          <div class="kicker">Request Form</div>
+          <h3 style="margin:10px 0 0;font-size:26px;">Send a Request</h3>
+
+          <!-- simple mailto form (no backend needed) -->
+          <form class="form" action="mailto:your@email.com" method="post" enctype="text/plain">
+            <input class="input" name="Name" placeholder="Your name" required>
+            <input class="input" name="Phone" placeholder="Best phone number" required>
+            <input class="input" name="EventDate" placeholder="Event date / time">
+            <input class="input" name="Headcount" placeholder="Headcount (approx)">
+            <textarea class="input" name="Details" placeholder="Food Truck or Catering? Pickup or Delivery? Any notes?"></textarea>
+            <button class="pill green" type="submit" style="border:none;cursor:pointer;">Send Request</button>
+          </form>
+
+          <p style="margin-top:12px;font-size:13px;color:rgba(11,18,32,.60);font-weight:800;">
+            Tip: replace <b>your@email.com</b> with the restaurant email.
           </p>
         </div>
       </div>
@@ -588,24 +691,37 @@ footer{
   const mapsUrl = window.GMAPS_DIRECTIONS_URL;
 
   // Order links
-  ["orderTop","orderHero","orderHours"].forEach(id=>{
+  ["orderTop","orderHero","orderTruck"].forEach(id=>{
     const el = document.getElementById(id);
     if(el) el.href = orderUrl;
   });
 
   // Directions links
-  ["directionsTop","directionsHero","directionsHours"].forEach(id=>{
+  ["directionsTop","directionsHero","directionsCatering","directionsContact"].forEach(id=>{
     const el = document.getElementById(id);
     if(el){ el.href = mapsUrl; el.target="_blank"; el.rel="noopener"; }
   });
 
-  // Any element with data-order opens ordering
-  document.querySelectorAll("[data-order]").forEach(el=>{
-    el.addEventListener("click", (e)=>{
+  // Category cards -> Toast (best-effort: opens ordering + tries to prefill search)
+  document.querySelectorAll("[data-toast-category]").forEach(card=>{
+    card.addEventListener("click", (e)=>{
       e.preventDefault();
-      window.open(orderUrl, "_blank", "noopener");
+      const q = card.getAttribute("data-toast-category") || "";
+      // NOTE: Toast may ignore ?search=, but it won’t break anything.
+      const url = q ? (orderUrl + "?search=" + encodeURIComponent(q)) : orderUrl;
+      window.open(url, "_blank", "noopener");
     });
   });
+
+  // House favorites -> Toast (best-effort search)
+  document.querySelectorAll("[data-toast-item]").forEach(card=>{
+    card.addEventListener("click", ()=>{
+      const q = card.getAttribute("data-toast-item") || "";
+      const url = q ? (orderUrl + "?search=" + encodeURIComponent(q)) : orderUrl;
+      window.open(url, "_blank", "noopener");
+    });
+  });
+
 })();
 </script>
 
