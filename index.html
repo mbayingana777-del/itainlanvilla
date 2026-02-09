@@ -451,6 +451,59 @@ footer{
       </div>
     </div>
   </div>
+<section class="foodtruck">
+  <div class="wrap foodtruck-inner">
+    <h2>Our Food Truck</h2>
+    <p>
+      Bringing our gyros, pizza, and classics on the road —
+      festivals, events, and private catering.
+    </p>
+
+    <div class="foodtruck-actions">
+      <a class="pill red" href="#contact">Book the Truck</a>
+      <a class="pill" href="#menu">View Menu</a>
+    </div>
+  </div>
+</section>
+.foodtruck{
+  position:relative;
+  padding:120px 0;
+  background-image:url("assets/food-truck.jpg"); /* replace */
+  background-size:cover;
+  background-position:center;
+  color:#fff;
+}
+
+.foodtruck::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.45);
+}
+
+.foodtruck-inner{
+  position:relative;
+  z-index:2;
+  max-width:720px;
+}
+
+.foodtruck h2{
+  font-family:Oswald, sans-serif;
+  font-size:clamp(36px,5vw,64px);
+  text-transform:uppercase;
+}
+
+.foodtruck p{
+  font-size:18px;
+  font-weight:800;
+  max-width:520px;
+}
+
+.foodtruck-actions{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
 
   <!-- ✅ CATEGORY SELECT MENU (matches Italian Villa menu) -->
  <section id="menu" class="menu-bg">
