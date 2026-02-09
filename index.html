@@ -123,7 +123,7 @@ header{
   background-repeat:no-repeat;
 }
 
-/* ✅ No tint overlay */
+/* ✅ Dark tint overlay */
 .hero::before{
   content:"";
   position:absolute;
@@ -166,7 +166,11 @@ header{
   margin:14px 0 10px;
   text-transform:uppercase;
   letter-spacing:.4px;
+
+  /* ✅ new: warm ivory that complements the blue */
   color:#f6f7f4;
+
+  /* ✅ new: softer shadow (no heavy dark overlay needed) */
   text-shadow:0 10px 30px rgba(0,0,0,.25);
 }
 
@@ -174,8 +178,13 @@ header{
   margin:0 0 20px;
   max-width:680px;
   font-weight:900;
+
+  /* ✅ new: softer ivory */
   color:rgba(246,247,244,.88);
+
   line-height:1.45;
+
+  /* ✅ new: lighter shadow */
   text-shadow:0 8px 24px rgba(0,0,0,.22);
 }
 
@@ -203,7 +212,6 @@ header{
   font-weight:900;
   color:rgba(255,255,255,.90);
 }
-
 /* ===== Menu background (under hero) ===== */
 .menu-bg{
   position: relative;
@@ -213,19 +221,14 @@ header{
   background-repeat: no-repeat;
 }
 
-/* ✅ NEW: darker band ONLY for menu section */
-#menu.menu-bg{
-  background-color:#e4e7ec;
-}
-
-/* ✅ NEW: lighter tint so it doesn’t feel heavy */
+/* light black / charcoal tint (airy but grounded) */
 .menu-bg::before{
   content:"";
   position:absolute;
   inset:0;
   background: linear-gradient(
-    rgba(0,0,0,.14),
-    rgba(0,0,0,.18)
+    rgba(0,0,0,.18),
+    rgba(0,0,0,.22)
   );
 }
 
@@ -238,7 +241,7 @@ header{
 /* ===== Sections ===== */
 section{
   padding:72px 0;
-  background:#f6f7f9; /* ✅ NEW: cleaner light gray */
+  background:#f5f6f7; /* soft light gray */
 }
 
 .section-title{
@@ -393,6 +396,7 @@ footer{
 
 <body>
 
+<!-- ✅ Change these once -->
 <script>
   window.TOAST_ORDER_URL = "https://www.toasttab.com/local/order/ambridge-italian-villa-1710-duss-ave";
   window.GMAPS_DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=1710%20Duss%20Avenue%2C%20Ambridge%2C%20PA%2015003";
@@ -423,14 +427,16 @@ footer{
 </header>
 
 <main id="top">
-  <div class="hero" role="img" aria-label="Santorini background">
+  <div class="hero" role="img" aria-label="Greek platter background">
     <div class="wrap hero-inner">
       <div class="flag-bar" aria-hidden="true">
         <span class="g"></span><span class="w"></span><span class="r"></span>
       </div>
 
       <h1>A Taste of the Mediterranean</h1>
-      <p>Greek tradition, Italian classics, and family recipes — made fresh every day.</p>
+<p>
+  Greek tradition, Italian classics, and family recipes — made fresh every day.
+</p>
 
       <div class="hero-actions">
         <a class="pill red" href="#" id="orderHero" target="_blank" rel="noopener">Order Online</a>
@@ -446,7 +452,8 @@ footer{
     </div>
   </div>
 
-  <section id="menu" class="menu-bg">
+  <!-- ✅ CATEGORY SELECT MENU (matches Italian Villa menu) -->
+ <section id="menu" class="menu-bg">
     <div class="wrap">
       <h2 class="section-title">Menu</h2>
       <p class="section-sub">Have a bite of our Mediterranean cuisine.</p>
@@ -538,35 +545,32 @@ footer{
   <section id="hours">
     <div class="wrap">
       <div class="split">
+       <div class="panel">
+  <div class="kicker">★★★★★ Rated</div>
+  <h2 class="section-title" style="margin-top:10px;">Loved by Locals</h2>
+
+  <p>
+    “Always fresh, always consistent. The gyros are packed, the pizza never misses,
+    and the portions are more than fair.”
+  </p>
+
+  <p>
+    Family-owned, community-trusted, and serving Ambridge for years —
+    this is the kind of place people come back to.
+  </p>
+</div>
+
+
+
         <div class="panel">
-          <div class="kicker">★★★★★ Rated</div>
-          <h2 class="section-title" style="margin-top:10px;">Loved by Locals</h2>
-
+          <div class="kicker">Greek Vibe</div>
+          <h2 class="section-title" style="margin-top:10px;">Kali Orexi</h2>
           <p>
-            “Always fresh, always consistent. The gyros are packed, the pizza never misses,
-            and the portions are more than fair.”
+            That means “enjoy your meal.”
+            We keep it simple: fresh ingredients, bold flavor, and food that feels like home.
           </p>
-
           <p>
-            Family-owned, community-trusted, and serving Ambridge for years —
-            this is the kind of place people come back to.
-          </p>
-        </div>
-
-        <!-- ✅ REPLACED RIGHT PANEL -->
-        <div class="panel">
-          <div class="kicker">Our Story</div>
-          <h2 class="section-title" style="margin-top:10px;">Serving Beaver County 40+ Years</h2>
-
-          <p>
-            Known across the area for our legendary gyro — unmatched in size, quality, and taste.
-            A Greek immigrant family purchased the Villa in 1978 and expanded it beyond a pizza parlor
-            into a full-service favorite.
-          </p>
-
-          <p>
-            Today we serve 100+ menu items — from sandwiches, pizzas, and pastas to Greek & Italian specialties —
-            plus breakfast, catering, delivery, and a food truck available for events.
+            Order online for pickup — or come in and we’ll take care of you.
           </p>
         </div>
       </div>
@@ -583,16 +587,19 @@ footer{
   const orderUrl = window.TOAST_ORDER_URL;
   const mapsUrl = window.GMAPS_DIRECTIONS_URL;
 
+  // Order links
   ["orderTop","orderHero","orderHours"].forEach(id=>{
     const el = document.getElementById(id);
     if(el) el.href = orderUrl;
   });
 
+  // Directions links
   ["directionsTop","directionsHero","directionsHours"].forEach(id=>{
     const el = document.getElementById(id);
     if(el){ el.href = mapsUrl; el.target="_blank"; el.rel="noopener"; }
   });
 
+  // Any element with data-order opens ordering
   document.querySelectorAll("[data-order]").forEach(el=>{
     el.addEventListener("click", (e)=>{
       e.preventDefault();
