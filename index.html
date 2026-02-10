@@ -1,73 +1,31 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <title>Ambridge Italian Villa | Ambridge, PA</title>
-  <meta name="description" content="Ambridge Italian Villa — Italian, Greek, and American favorites including pizza, gyros, wings, salads, and more."/>
+<title>Ambridge Italian Villa | Ambridge, PA</title>
+<meta name="description" content="Ambridge Italian Villa — Italian, Greek, and American favorites including pizza, gyros, wings, salads, and more."/>
 
-  <!-- Typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
-  <style>
-/* ========================================================================== */
-/*  AMBRIDGE ITALIAN VILLA — INDEX.HTML                                        */
-/*  Bullet-proof, professional, sexy landing page                               */
-/*  - Hero uses Santorini background                                            */
-/*  - Menu routes to menu.html                                                  */
-/*  - Category images are placeholders                                          */
-/*  - House Favorites: 6 items w/ placeholders                                  */
-/*  - Food Truck left, Catering right                                           */
-/*  - Simple rating block (not huge empty space)                                */
-/*  - Food Truck nav tab is more noticeable                                     */
-/*  - Toast ordering wired via JS variables                                     */
-/* ========================================================================== */
-
-/* ========================================================================== */
-/*  1) Root variables                                                          */
-/* ========================================================================== */
+<style>
 :root{
-  /* Base */
-  --ink:#0b1220;
   --bg:#ffffff;
+  --ink:#0b1220;
+  --muted:rgba(255,255,255,.85);
 
-  /* Under-hero background requested */
-  --sky:#eaf3ff;           /* light blue under hero */
-  --sky2:#f5f9ff;          /* subtle blend */
-  --section:#f5f6f7;       /* standard soft gray */
-  --footer:#f7f7f8;        /* light grey-white footer */
-
-  /* Brand */
+  /* Italian-flag palette (brand accents) */
   --red:#c1121f;
   --green:#1f7a3a;
   --white:#ffffff;
 
-  /* Layout */
   --max:1180px;
+  --line:rgba(255,255,255,.18);
   --radius:16px;
-  --radius2:18px;
-  --radius3:22px;
-
-  /* Shadows */
-  --shadow-hero:0 18px 60px rgba(0,0,0,.35);
-  --shadow-card:0 18px 60px rgba(2,6,23,.08);
-  --shadow-card-hover:0 22px 70px rgba(2,6,23,.12);
-
-  /* Borders */
-  --line:rgba(11,18,32,.10);
-  --line-soft:rgba(11,18,32,.08);
-
-  /* Type */
-  --oswald:Oswald, system-ui, sans-serif;
-
-  /* Motion */
-  --ease:180ms ease;
+  --shadow:0 18px 60px rgba(0,0,0,.35);
 }
 
-/* ========================================================================== */
-/*  2) Resets & base                                                           */
-/* ========================================================================== */
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
@@ -77,21 +35,11 @@ body{
   background:var(--bg);
 }
 a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
 .wrap{width:min(var(--max),92%);margin:auto}
 
-/* Focus styles (bullet-proof accessibility) */
-:focus-visible{
-  outline:3px solid rgba(31,122,58,.35);
-  outline-offset:3px;
-  border-radius:10px;
-}
-
-/* ========================================================================== */
-/*  3) Header                                                                  */
-/* ========================================================================== */
+/* ===== Header ===== */
 header{
-  position:sticky; top:0; z-index:50;
+  position:sticky; top:0; z-index:20;
   background:rgba(10,12,16,.55);
   backdrop-filter:saturate(140%) blur(10px);
   border-bottom:1px solid rgba(255,255,255,.10);
@@ -103,8 +51,6 @@ header{
   gap:14px;
   padding:14px 0;
 }
-
-/* Brand */
 .brand{
   display:flex;
   align-items:center;
@@ -119,7 +65,7 @@ header{
   filter:drop-shadow(0 12px 30px rgba(0,0,0,.35));
 }
 .brand-name{
-  font-family:var(--oswald);
+  font-family:Oswald, system-ui, sans-serif;
   text-transform:uppercase;
   letter-spacing:.7px;
   font-size:18px;
@@ -132,41 +78,17 @@ header{
   color:rgba(255,255,255,.75);
 }
 
-/* Nav */
-.nav{
-  display:flex;
-  gap:20px;
-  align-items:center;
-}
+.nav{display:flex;gap:22px;align-items:center}
 .nav a{
-  font-family:var(--oswald);
+  font-family:Oswald, system-ui, sans-serif;
   text-transform:uppercase;
   letter-spacing:.6px;
-  font-weight:900;
+  font-weight:800;
   color:rgba(255,255,255,.9);
-  padding:10px 10px;
-  border-radius:999px;
-  transition:var(--ease);
 }
-.nav a:hover{opacity:.9; background:rgba(255,255,255,.06)}
+.nav a:hover{opacity:.8}
 
-/* Make FOOD TRUCK tab more noticeable (your request) */
-.nav a.is-highlight{
-  background:rgba(193,18,31,.22);
-  border:1px solid rgba(193,18,31,.40);
-  box-shadow:0 12px 26px rgba(193,18,31,.16);
-}
-.nav a.is-highlight:hover{
-  background:rgba(193,18,31,.28);
-}
-
-/* Right CTAs */
-.right{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:flex-end;
-}
+.right{display:flex;gap:10px;align-items:center;justify-content:flex-end}
 
 /* Pills / buttons */
 .pill{
@@ -179,8 +101,7 @@ header{
   background:rgba(255,255,255,.06);
   color:#fff;
   font-weight:900;
-  transition:var(--ease);
-  white-space:nowrap;
+  transition:140ms ease;
 }
 .pill:hover{transform:translateY(-1px); background:rgba(255,255,255,.10)}
 .pill.red{background:var(--red); border-color:transparent}
@@ -188,19 +109,7 @@ header{
 .pill.green{background:var(--green); border-color:transparent}
 .pill.green:hover{filter:brightness(1.05)}
 
-/* Secondary button variant (for section CTAs) */
-.pill.dark{
-  background:rgba(11,18,32,.08);
-  border-color:rgba(11,18,32,.12);
-  color:var(--ink);
-}
-.pill.dark:hover{
-  background:rgba(11,18,32,.12);
-}
-
-/* ========================================================================== */
-/*  4) Hero                                                                    */
-/* ========================================================================== */
+/* ===== Hero ===== */
 .hero{
   position:relative;
   min-height:92vh;
@@ -214,12 +123,12 @@ header{
   background-repeat:no-repeat;
 }
 
-/* keep your transparent overlay (you asked you don’t care about tint) */
+/* ✅ Dark tint overlay */
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background:transparent;
+  background: transparent;
 }
 
 /* subtle film grain */
@@ -239,7 +148,6 @@ header{
   padding:86px 0 56px;
   color:#fff;
 }
-
 .flag-bar{
   display:inline-flex;
   border-radius:999px;
@@ -253,20 +161,30 @@ header{
 .flag-bar .r{background:var(--red)}
 
 .hero h1{
-  font-family:var(--oswald);
+  font-family:Oswald, system-ui, sans-serif;
   font-size:clamp(42px, 6vw, 86px);
   margin:14px 0 10px;
   text-transform:uppercase;
   letter-spacing:.4px;
+
+  /* ✅ new: warm ivory that complements the blue */
   color:#f6f7f4;
+
+  /* ✅ new: softer shadow (no heavy dark overlay needed) */
   text-shadow:0 10px 30px rgba(0,0,0,.25);
 }
+
 .hero p{
   margin:0 0 20px;
   max-width:680px;
   font-weight:900;
+
+  /* ✅ new: softer ivory */
   color:rgba(246,247,244,.88);
+
   line-height:1.45;
+
+  /* ✅ new: lighter shadow */
   text-shadow:0 8px 24px rgba(0,0,0,.22);
 }
 
@@ -294,74 +212,67 @@ header{
   font-weight:900;
   color:rgba(255,255,255,.90);
 }
-
-/* ========================================================================== */
-/*  5) Under-hero smooth transition background (your request)                  */
-/* ========================================================================== */
-.page-bg{
-  background:
-    radial-gradient(900px 520px at 20% 0%, rgba(31,122,58,.06), transparent 60%),
-    radial-gradient(900px 520px at 80% 0%, rgba(193,18,31,.06), transparent 60%),
-    linear-gradient(var(--sky), var(--sky2) 38%, #fff 100%);
+/* ===== Menu background (under hero) ===== */
+.menu-bg{
+  position: relative;
+  background-image: url("assets/assetsantorini-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* ========================================================================== */
-/*  6) Sections                                                                */
-/* ========================================================================== */
+/* light black / charcoal tint (airy but grounded) */
+.menu-bg::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    rgba(0,0,0,.18),
+    rgba(0,0,0,.22)
+  );
+}
+
+/* keep menu content above the overlay */
+.menu-bg > .wrap{
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== Sections ===== */
 section{
   padding:72px 0;
+  background:#f5f6f7; /* soft light gray */
 }
 
-/* We’ll set different section backgrounds per section */
-#menu-preview{background:transparent;}
-#favorites{background:transparent;}
-#foodtruck{background:var(--section);}
-#ratings{background:transparent;}
-#contact{background:var(--section);}
-
 .section-title{
-  font-size:40px;
+  font-size:38px;
   font-weight:950;
   margin:0 0 10px;
-  letter-spacing:-.2px;
 }
 .section-sub{
   margin:0 0 18px;
   color:rgba(11,18,32,.70);
-  font-weight:900;
+  font-weight:800;
 }
 
-/* ========================================================================== */
-/*  7) Cards & grids                                                           */
-/* ========================================================================== */
-.grid{display:grid; gap:16px;}
+.grid{
+  display:grid;
+  gap:16px;
+}
 .grid-3{grid-template-columns:repeat(3, 1fr)}
-.grid-2{grid-template-columns:repeat(2, 1fr)}
-
 .card{
-  border:1px solid var(--line);
-  border-radius:var(--radius2);
+  border:1px solid rgba(11,18,32,.10);
+  border-radius:var(--radius);
   padding:18px;
   background:#fff;
-  box-shadow:var(--shadow-card);
-  transition:var(--ease);
+  box-shadow:0 18px 60px rgba(2,6,23,.08);
+  transition:140ms ease;
 }
-.card:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shadow-card-hover);
-}
+.card:hover{transform:translateY(-2px); box-shadow:0 22px 70px rgba(2,6,23,.12)}
 .card b{font-size:18px}
-.card p{
-  margin:8px 0 0;
-  color:rgba(11,18,32,.65);
-  font-weight:800;
-  line-height:1.35
-}
+.card p{margin:8px 0 0; color:rgba(11,18,32,.65); font-weight:800; line-height:1.35}
 
-/* ========================================================================== */
-/*  8) Menu Preview (category grid)                                            */
-/*  - No photos; placeholders only (your request)                              */
-/* ========================================================================== */
+/* ===== CATEGORY GRID (big image cards) ===== */
 .category-shell{
   background:#fff;
   border-radius:18px;
@@ -372,13 +283,9 @@ section{
 .category-head{
   padding:20px 18px;
   border-bottom:1px solid rgba(11,18,32,.10);
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:16px;
 }
 .category-head .title{
-  font-family:var(--oswald);
+  font-family:Oswald, system-ui, sans-serif;
   letter-spacing:.6px;
   text-transform:uppercase;
   font-size:20px;
@@ -390,11 +297,6 @@ section{
   font-weight:800;
   font-size:14px;
   margin:0;
-}
-.category-head .actions{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
 }
 
 .category-grid{
@@ -410,7 +312,7 @@ section{
   background:#fff;
   border:1px solid rgba(11,18,32,.10);
   box-shadow:0 14px 34px rgba(2,6,23,.08);
-  transition:var(--ease);
+  transition:140ms ease;
 }
 .cat-card:hover{
   transform:translateY(-2px);
@@ -418,34 +320,19 @@ section{
   box-shadow:0 18px 44px rgba(2,6,23,.12);
 }
 .cat-card .img{
-  height:220px;
-  background:linear-gradient(135deg, rgba(11,18,32,.06), rgba(11,18,32,.02));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
+  height:240px;
+  background:#f3f4f6;
+  overflow:hidden;
 }
-.cat-card .img::after{
-  content:"Image placeholder";
-  position:absolute;
-  bottom:12px;
-  left:12px;
-  font-size:12px;
-  font-weight:900;
-  color:rgba(11,18,32,.55);
-  background:rgba(255,255,255,.75);
-  padding:6px 10px;
-  border-radius:999px;
-  border:1px solid rgba(11,18,32,.08);
+.cat-card .img img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transform:scale(1.01);
+  transition:transform .45s ease;
 }
-
-/* Placeholder icon */
-.placeholder-icon{
-  width:64px;
-  height:64px;
-  opacity:.55;
-}
-
+.cat-card:hover .img img{transform:scale(1.07)}
 .cat-card .label{
   padding:14px 14px 6px;
   font-size:26px;
@@ -460,277 +347,66 @@ section{
   line-height:1.35;
 }
 
-/* ========================================================================== */
-/*  9) Favorites grid (6 items with photo placeholders)                        */
-/* ========================================================================== */
-.fav-grid{
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:18px;
-}
-
-.fav-card{
-  border:1px solid var(--line);
-  border-radius:18px;
-  overflow:hidden;
-  background:#fff;
-  box-shadow:var(--shadow-card);
-  transition:var(--ease);
-}
-.fav-card:hover{
-  transform:translateY(-2px);
-  box-shadow:var(--shadow-card-hover);
-}
-
-.fav-img{
-  height:180px;
-  background:linear-gradient(135deg, rgba(31,122,58,.08), rgba(193,18,31,.06));
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-}
-.fav-img::after{
-  content:"Photo placeholder";
-  position:absolute;
-  bottom:12px;
-  left:12px;
-  font-size:12px;
-  font-weight:900;
-  color:rgba(11,18,32,.55);
-  background:rgba(255,255,255,.78);
-  padding:6px 10px;
-  border-radius:999px;
-  border:1px solid rgba(11,18,32,.08);
-}
-
-.fav-body{
-  padding:16px;
-}
-.fav-title{
-  font-size:20px;
-  font-weight:950;
-  margin:0 0 6px;
-}
-.fav-desc{
-  margin:0;
-  color:rgba(11,18,32,.66);
-  font-weight:850;
-  line-height:1.35;
-}
-.fav-cta{
-  margin-top:12px;
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-/* ========================================================================== */
-/*  10) Food Truck & Catering section                                          */
-/* ========================================================================== */
 .split{
   display:grid;
-  grid-template-columns: 1.25fr .75fr;
+  grid-template-columns: 1.2fr .8fr;
   gap:18px;
-  align-items:stretch;
+  align-items:start;
 }
-
 .panel{
   border:1px solid rgba(11,18,32,.10);
   border-radius:18px;
-  padding:22px;
+  padding:18px;
   background:#fff;
   box-shadow:0 18px 60px rgba(2,6,23,.08);
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  min-height:340px;
 }
-.panel p{
-  margin:8px 0;
-  color:rgba(11,18,32,.70);
-  font-weight:850;
-  line-height:1.45;
-}
+.panel p{margin:8px 0;color:rgba(11,18,32,.70);font-weight:800;line-height:1.45}
 .kicker{
   display:inline-flex;
   align-items:center;
   gap:10px;
-  font-family:var(--oswald);
+  font-family:Oswald, system-ui, sans-serif;
   text-transform:uppercase;
   letter-spacing:.7px;
   font-weight:900;
   color:rgba(11,18,32,.85);
 }
 
-.service-list{
-  list-style:none;
-  padding:0;
-  margin:14px 0 18px;
-}
-.service-list li{
-  font-weight:850;
-  color:rgba(11,18,32,.75);
-  margin:8px 0;
-}
-.service-actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:10px;
-}
-
-/* ========================================================================== */
-/*  11) Ratings section — simple, tight (your request)                         */
-/* ========================================================================== */
-.rating-strip{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:18px;
-  align-items:stretch;
-}
-
-.rating-card{
-  border:1px solid var(--line);
-  border-radius:18px;
-  padding:22px;
-  background:#fff;
-  box-shadow:var(--shadow-card);
-}
-
-.stars{
-  font-family:var(--oswald);
-  font-weight:900;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-  color:rgba(11,18,32,.85);
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:10px;
-}
-.stars .dot{
-  width:8px;height:8px;border-radius:999px;background:rgba(193,18,31,.50);
-}
-.quote{
-  margin:0;
-  font-weight:900;
-  color:rgba(11,18,32,.78);
-  line-height:1.55;
-}
-.mini{
-  margin-top:12px;
-  color:rgba(11,18,32,.62);
-  font-weight:850;
-}
-
-/* ========================================================================== */
-/*  12) Contact section                                                        */
-/* ========================================================================== */
-#contact .panel{min-height:auto}
-
-.form{
-  display:grid;
-  gap:10px;
-  margin-top:12px;
-}
-.input, select, textarea{
-  width:100%;
-  padding:12px 12px;
-  border-radius:12px;
-  border:1px solid rgba(11,18,32,.12);
-  font-weight:800;
-  font-family:inherit;
-  background:#fff;
-}
-textarea{min-height:120px; resize:vertical}
-
-/* ========================================================================== */
-/*  13) Footer — light grey-white (your request)                               */
-/* ========================================================================== */
+/* ===== Footer ===== */
 footer{
-  background:var(--footer);
   border-top:1px solid rgba(11,18,32,.10);
-  padding:26px 0;
+  padding:40px 0;
   text-align:center;
   color:rgba(11,18,32,.60);
-  font-weight:900;
+  font-weight:800;
 }
-.footer-inner{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  justify-content:center;
-  flex-wrap:wrap;
-  font-weight:900;
-}
-.footer-inner a{
-  color:rgba(11,18,32,.70);
-  border-bottom:1px dashed rgba(11,18,32,.25);
-}
-.footer-inner a:hover{opacity:.85}
 
-/* ========================================================================== */
-/*  14) Utilities                                                              */
-/* ========================================================================== */
-.spacer-8{height:8px}
-.spacer-12{height:12px}
-.spacer-18{height:18px}
-.spacer-24{height:24px}
-.spacer-32{height:32px}
-.spacer-48{height:48px}
-
-/* ========================================================================== */
-/*  15) Mobile                                                                 */
-/* ========================================================================== */
+/* ===== Mobile ===== */
 @media(max-width:980px){
   .nav{display:none}
   .split{grid-template-columns:1fr}
   .grid-3{grid-template-columns:1fr}
-  .grid-2{grid-template-columns:1fr}
   .category-grid{grid-template-columns:1fr}
-  .fav-grid{grid-template-columns:1fr}
-  .rating-strip{grid-template-columns:1fr}
+  .cat-card .label{font-size:24px}
   .brand{min-width:auto}
   .right{min-width:auto}
-  .cat-card .label{font-size:24px}
 }
-
-/* ========================================================================== */
-/*  END CSS                                                                    */
-/* ========================================================================== */
-  </style>
+</style>
 </head>
 
 <body>
 
-<!-- ======================================================================== -->
-<!--  EDIT HERE: Global config (Toast + Maps)                                 -->
-<!-- ======================================================================== -->
+<!-- ✅ Change these once -->
 <script>
-  // ✅ Change these once
   window.TOAST_ORDER_URL = "https://www.toasttab.com/local/order/ambridge-italian-villa-1710-duss-ave";
-  window.TOAST_REWARDS_URL = "https://www.toasttab.com/"; // placeholder (replace with direct loyalty/rewards link if provided)
   window.GMAPS_DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=1710%20Duss%20Avenue%2C%20Ambridge%2C%20PA%2015003";
-
-  // Menu page path (you asked menu gets its own page)
-  window.MENU_PAGE_URL = "menu.html";
-
-  // Optional: food truck booking page path (placeholder)
-  window.FOODTRUCK_PAGE_URL = "foodtruck.html"; // create later if you want
-  window.CATERING_PAGE_URL = "catering.html";   // create later if you want
 </script>
 
-<!-- ======================================================================== -->
-<!--  Header                                                                   -->
-<!-- ======================================================================== -->
 <header>
   <div class="wrap top">
     <a class="brand" href="#top" aria-label="Home">
-      <!-- Logo (you asked to add logo; this is the correct spot) -->
       <img class="logo" src="assets/logo.png" alt="Ambridge Italian Villa"
-        onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22transparent%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22white%22>Ambridge Italian Villa</text></svg>';">
-
+           onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22transparent%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22white%22>Ambridge Italian Villa</text></svg>';">
       <div>
         <div class="brand-name">Ambridge Italian Villa</div>
         <div class="brand-sub">Italian • Greek • American</div>
@@ -738,14 +414,9 @@ footer{
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <a href="#menu-preview">Menu</a>
+      <a href="#menu">Menu</a>
       <a href="#favorites">Favorites</a>
-
-      <!-- Food Truck tab more noticeable -->
-      <a class="is-highlight" href="#foodtruck">Food Truck</a>
-
-      <a href="#contact">Catering</a>
-      <a href="#ratings">Reviews</a>
+      <a href="#hours">Hours</a>
     </nav>
 
     <div class="right">
@@ -755,29 +426,21 @@ footer{
   </div>
 </header>
 
-<!-- ======================================================================== -->
-<!--  Main                                                                     -->
-<!-- ======================================================================== -->
 <main id="top">
-
-  <!-- ====================================================================== -->
-  <!--  HERO (ORIGINAL — no extra strip)                                       -->
-  <!-- ====================================================================== -->
-  <div class="hero" role="img" aria-label="Santorini background">
+  <div class="hero" role="img" aria-label="Greek platter background">
     <div class="wrap hero-inner">
       <div class="flag-bar" aria-hidden="true">
         <span class="g"></span><span class="w"></span><span class="r"></span>
       </div>
 
       <h1>A Taste of the Mediterranean</h1>
-      <p>Greek tradition, Italian classics, and family recipes — made fresh every day.</p>
+<p>
+  Greek tradition, Italian classics, and family recipes — made fresh every day.
+</p>
 
       <div class="hero-actions">
         <a class="pill red" href="#" id="orderHero" target="_blank" rel="noopener">Order Online</a>
-
-        <!-- Menu routes to its own page -->
-        <a class="pill green" href="menu.html" id="menuHero">View Full Menu</a>
-
+        <a class="pill green" href="#menu">View Menu</a>
         <a class="pill" href="#" id="directionsHero">Get Directions</a>
       </div>
 
@@ -789,520 +452,160 @@ footer{
     </div>
   </div>
 
-  <!-- ====================================================================== -->
-  <!--  Under-hero background wrapper (light blue -> white)                    -->
-  <!-- ====================================================================== -->
-  <div class="page-bg">
+  <!-- ✅ CATEGORY SELECT MENU (matches Italian Villa menu) -->
+ <section id="menu" class="menu-bg">
+    <div class="wrap">
+      <h2 class="section-title">Menu</h2>
+      <p class="section-sub">Have a bite of our Mediterranean cuisine.</p>
 
-    <!-- ==================================================================== -->
-    <!--  MENU PREVIEW (placeholders only)                                     -->
-    <!-- ==================================================================== -->
-    <section id="menu-preview">
-      <div class="wrap">
-        <h2 class="section-title">Menu</h2>
-        <p class="section-sub">Browse categories here — then open the full menu page.</p>
-
-        <div class="category-shell">
-          <div class="category-head">
-            <div>
-              <div class="title">Choose a Category</div>
-              <p class="note">Tap a card to order on Toast, or open the full menu page.</p>
-            </div>
-
-            <div class="actions">
-              <a class="pill dark" href="menu.html" id="openMenuTop">Open Full Menu</a>
-              <a class="pill red" href="#" id="orderMenuTop" target="_blank" rel="noopener">Order on Toast</a>
-            </div>
-          </div>
-
-          <div class="category-grid" aria-label="Menu categories">
-            <!-- Category 1 -->
-            <a class="cat-card" href="#" data-order aria-label="Pizza & Calzones">
-              <div class="img">
-                <!-- Placeholder icon -->
-                <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M4 19c4-1 7-1 16 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M6 16c2-6 10-6 12 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M8 13c1-4 7-4 8 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="label">Pizza & Calzones</div>
-              <div class="meta">Sicilian, hand tossed, thick/thin + specialty pies.</div>
-            </a>
-
-            <!-- Category 2 -->
-            <a class="cat-card" href="#" data-order aria-label="Gyros & Greek Specialties">
-              <div class="img">
-                <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M7 18h10" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M8 18c0-5 8-5 8 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M9 10h6" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M10 6h4" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="label">Gyros & Greek</div>
-              <div class="meta">Home of the gyro — souvlaki, platters, Greek favorites.</div>
-            </a>
-
-            <!-- Category 3 -->
-            <a class="cat-card" href="#" data-order aria-label="Hoagies, Sandwiches & Wraps">
-              <div class="img">
-                <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M5 14c4-6 10-6 14 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M6 16c3-2 9-2 12 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M7 18h10" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="label">Hoagies & Wraps</div>
-              <div class="meta">12” hoagies, grilled sandwiches, wraps & more.</div>
-            </a>
-
-            <!-- Category 4 -->
-            <a class="cat-card" href="#" data-order aria-label="Wings, Fries & Finger Foods">
-              <div class="img">
-                <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M7 15c3-2 7-2 10 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M8 18c2-1 6-1 8 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M10 6c2 2 2 10 0 12" stroke="rgba(11,18,32,.30)" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="label">Wings & Finger Foods</div>
-              <div class="meta">Wings, fries, mozzarella sticks, apps.</div>
-            </a>
-
-            <!-- Category 5 -->
-            <a class="cat-card" href="#" data-order aria-label="Salads & Soups">
-              <div class="img">
-                <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M5 12c2 6 12 6 14 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M7 12c1-4 9-4 10 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="label">Salads & Soups</div>
-              <div class="meta">Greek feta salads + soup & chili.</div>
-            </a>
-
-            <!-- Category 6 -->
-            <a class="cat-card" href="#" data-order aria-label="Breakfast & Daily Specials">
-              <div class="img">
-                <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M7 18h10" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M8 16c2-5 6-5 8 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                  <path d="M10 8h4" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-              </div>
-              <div class="label">Breakfast & Specials</div>
-              <div class="meta">Omelets, pancakes + daily specials.</div>
-            </a>
-          </div>
+      <div class="category-shell">
+        <div class="category-head">
+          <div class="title">Choose a Category</div>
+          <p class="note">Tap a card to open online ordering.</p>
         </div>
 
-        <div class="spacer-18"></div>
+        <div class="category-grid" aria-label="Menu categories">
+          <a class="cat-card" href="#" data-order aria-label="Pizza & Calzones">
+            <div class="img">
+              <img src="assets/cat-pizza-calzone.png" alt="Pizza and calzones"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Pizza & Calzones</div>
+            <div class="meta">Sicilian, hand tossed, thick/thin + specialty pies.</div>
+          </a>
 
-        <!-- Menu CTA strip (clean + obvious) -->
-        <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-          <div>
-            <b style="font-size:18px;">Want the full menu?</b>
-            <p style="margin:6px 0 0;">Open the full menu page to view everything at once.</p>
-          </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <a class="pill green" href="menu.html">Open Full Menu</a>
-            <a class="pill red" href="#" id="orderMenuStrip" target="_blank" rel="noopener">Order on Toast</a>
-          </div>
+          <a class="cat-card" href="#" data-order aria-label="Gyros & Greek Specialties">
+            <div class="img">
+              <img src="assets/cat-gyros.png" alt="Gyros and Greek specialties"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Gyros & Greek</div>
+            <div class="meta">Home of the gyro — souvlaki, platters, Greek favorites.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Hoagies, Sandwiches & Wraps">
+            <div class="img">
+              <img src="assets/cat-hoagies-wraps.png" alt="Hoagies and wraps"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Hoagies & Wraps</div>
+            <div class="meta">12” hoagies, grilled sandwiches, wraps & more.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Wings, Fries & Finger Foods">
+            <div class="img">
+              <img src="assets/cat-wings-fries.png" alt="Wings and fries"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Wings & Finger Foods</div>
+            <div class="meta">Wings, fries, loaded fries, mozzarella sticks, apps.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Salads & Soups">
+            <div class="img">
+              <img src="assets/cat-salads-soups.png" alt="Salads and soups"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Salads & Soups</div>
+            <div class="meta">Greek feta, chef/gyro/chicken/steak salads + soup & chili.</div>
+          </a>
+
+          <a class="cat-card" href="#" data-order aria-label="Breakfast & Daily Specials">
+            <div class="img">
+              <img src="assets/cat-breakfast.png" alt="Breakfast and specials"
+                   loading="lazy" decoding="async"
+                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+            </div>
+            <div class="label">Breakfast & Specials</div>
+            <div class="meta">Omelets, pancakes/french toast + daily specials.</div>
+          </a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ==================================================================== -->
-    <!--  HOUSE FAVORITES (6 cards + placeholders)                              -->
-    <!-- ==================================================================== -->
-    <section id="favorites">
-      <div class="wrap">
-        <h2 class="section-title">House Favorites</h2>
-        <p class="section-sub">Best sellers — tap to order on Toast.</p>
+  <section id="favorites">
+    <div class="wrap">
+      <h2 class="section-title">House Favorites</h2>
+      <p class="section-sub">Best sellers — simple, satisfying, always consistent.</p>
 
-        <div class="fav-grid" aria-label="House favorites">
-          <!-- 1 -->
-          <div class="fav-card" data-order role="button" tabindex="0" aria-label="Classic Gyro">
-            <div class="fav-img">
-              <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M7 18h10" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                <path d="M8 18c0-5 8-5 8 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="fav-body">
-              <div class="fav-title">Classic Gyro</div>
-              <p class="fav-desc">Pita, seasoned meat, onions, tomatoes, tzatziki.</p>
-              <div class="fav-cta">
-                <a class="pill red" href="#" data-order>Order</a>
-                <a class="pill dark" href="menu.html">View Menu</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 2 -->
-          <div class="fav-card" data-order role="button" tabindex="0" aria-label="Chicken Souvlaki">
-            <div class="fav-img">
-              <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="6 16c4-6 8-6 12 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                <path d="7 18h10" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="fav-body">
-              <div class="fav-title">Chicken Souvlaki</div>
-              <p class="fav-desc">Grilled chicken, lemony flavor, fresh sides.</p>
-              <div class="fav-cta">
-                <a class="pill red" href="#" data-order>Order</a>
-                <a class="pill dark" href="menu.html">View Menu</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3 -->
-          <div class="fav-card" data-order role="button" tabindex="0" aria-label="Loaded Fries">
-            <div class="fav-img">
-              <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="8 18h8" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                <path d="9 16c2-2 4-2 6 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="fav-body">
-              <div class="fav-title">Loaded Fries</div>
-              <p class="fav-desc">Cheese, seasoning, and add-ons that slap.</p>
-              <div class="fav-cta">
-                <a class="pill red" href="#" data-order>Order</a>
-                <a class="pill dark" href="menu.html">View Menu</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 4 -->
-          <div class="fav-card" data-order role="button" tabindex="0" aria-label="Pepperoni Pizza Slice">
-            <div class="fav-img">
-              <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="12 4l7 16H5l7-16z" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linejoin="round"/>
-              </svg>
-            </div>
-            <div class="fav-body">
-              <div class="fav-title">Pepperoni Pizza</div>
-              <p class="fav-desc">Classic, crispy edges, always hits.</p>
-              <div class="fav-cta">
-                <a class="pill red" href="#" data-order>Order</a>
-                <a class="pill dark" href="menu.html">View Menu</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5 -->
-          <div class="fav-card" data-order role="button" tabindex="0" aria-label="Greek Salad">
-            <div class="fav-img">
-              <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="5 12c2 6 12 6 14 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                <path d="7 12c1-4 9-4 10 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="fav-body">
-              <div class="fav-title">Greek Salad</div>
-              <p class="fav-desc">Feta, olives, crisp veggies, house style.</p>
-              <div class="fav-cta">
-                <a class="pill red" href="#" data-order>Order</a>
-                <a class="pill dark" href="menu.html">View Menu</a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 6 -->
-          <div class="fav-card" data-order role="button" tabindex="0" aria-label="Wings">
-            <div class="fav-img">
-              <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="7 15c3-2 7-2 10 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-                <path d="8 18c2-1 6-1 8 0" stroke="rgba(11,18,32,.55)" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="fav-body">
-              <div class="fav-title">Wings</div>
-              <p class="fav-desc">Crispy, sauced, and built for cravings.</p>
-              <div class="fav-cta">
-                <a class="pill red" href="#" data-order>Order</a>
-                <a class="pill dark" href="menu.html">View Menu</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <div class="grid grid-3">
+        <div class="card"><b>Classic Gyro</b><p>Pita, seasoned meat, onions, tomatoes, tzatziki.</p></div>
+        <div class="card"><b>Chicken Souvlaki</b><p>Grilled chicken, lemony flavor, fresh sides.</p></div>
+        <div class="card"><b>Loaded Fries</b><p>Cheese, seasoning, and add-ons that slap.</p></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ==================================================================== -->
-    <!--  FOOD TRUCK & CATERING (keep; food truck left)                         -->
-    <!-- ==================================================================== -->
-    <section id="foodtruck">
-      <div class="wrap">
-        <h2 class="section-title">Food Truck & Catering</h2>
-        <p class="section-sub">Two easy ways to feed your people — on the road or at your place.</p>
+  <section id="hours">
+    <div class="wrap">
+      <div class="split">
+       <div class="panel">
+  <div class="kicker">★★★★★ Rated</div>
+  <h2 class="section-title" style="margin-top:10px;">Loved by Locals</h2>
 
-        <div class="split">
-          <!-- LEFT: FOOD TRUCK -->
-          <div class="panel">
-            <div>
-              <div class="kicker">On the Road</div>
-              <h3 class="section-title" style="margin-top:10px;">Our Food Truck</h3>
+  <p>
+    “Always fresh, always consistent. The gyros are packed, the pizza never misses,
+    and the portions are more than fair.”
+  </p>
 
-              <p>
-                Bringing our gyros, pizza, and classics on the road —
-                festivals, events, and private catering.
-              </p>
+  <p>
+    Family-owned, community-trusted, and serving Ambridge for years —
+    this is the kind of place people come back to.
+  </p>
+</div>
 
-              <ul class="service-list">
-                <li>✔ Festivals & large events</li>
-                <li>✔ Private parties & corporate bookings</li>
-                <li>✔ Crowd favorites (gyros, pizza, platters)</li>
-              </ul>
-            </div>
 
-            <div class="service-actions">
-              <a class="pill red" href="#contact">Book the Food Truck</a>
-              <a class="pill dark" href="menu.html">Food Truck Menu (PDF)</a>
-              <a class="pill" href="#" id="orderTruck" target="_blank" rel="noopener">Order Online</a>
-            </div>
-          </div>
 
-          <!-- RIGHT: CATERING (kept) -->
-          <div class="panel">
-            <div>
-              <div class="kicker">Group Orders</div>
-              <h3 class="section-title" style="margin-top:10px;">Catering & Family Meals</h3>
-
-              <p>
-                Feeding a group? We offer easy catering options for pickup or delivery —
-                perfect for offices, family events, and special occasions.
-              </p>
-
-              <ul class="service-list">
-                <li>✔ Family-style trays & platters</li>
-                <li>✔ Office lunches & meetings</li>
-                <li>✔ Pickup or local delivery</li>
-              </ul>
-            </div>
-
-            <div class="service-actions">
-              <a class="pill green" href="#contact">Request Catering</a>
-              <a class="pill" href="#" id="directionsCatering">Pickup Directions</a>
-            </div>
-          </div>
+        <div class="panel">
+          <div class="kicker">Greek Vibe</div>
+          <h2 class="section-title" style="margin-top:10px;">Kali Orexi</h2>
+          <p>
+            That means “enjoy your meal.”
+            We keep it simple: fresh ingredients, bold flavor, and food that feels like home.
+          </p>
+          <p>
+            Order online for pickup — or come in and we’ll take care of you.
+          </p>
         </div>
       </div>
-    </section>
-
-    <!-- ==================================================================== -->
-    <!--  RATINGS (simple; no huge empty block)                                 -->
-    <!-- ==================================================================== -->
-    <section id="ratings">
-      <div class="wrap">
-        <h2 class="section-title">Loved by Locals</h2>
-        <p class="section-sub">Simple, consistent, and worth coming back for.</p>
-
-        <div class="rating-strip">
-          <div class="rating-card">
-            <div class="stars">
-              <span class="dot"></span>
-              ★★★★★ Rated
-            </div>
-            <p class="quote">
-              “Always fresh, always consistent. The gyros are packed, the pizza never misses,
-              and the portions are more than fair.”
-            </p>
-            <div class="mini">Family-owned • community-trusted • serving Ambridge for years</div>
-          </div>
-
-          <div class="rating-card">
-            <div class="stars">
-              <span class="dot" style="background:rgba(31,122,58,.45)"></span>
-              Greek Vibe
-            </div>
-            <p class="quote">
-              Kali Orexi — “enjoy your meal.” Fresh ingredients, bold flavor, and food that feels like home.
-            </p>
-            <div class="mini">Order online for pickup — or come in and we’ll take care of you.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================================================================== -->
-    <!--  CONTACT (booking + catering requests)                                 -->
-    <!-- ==================================================================== -->
-    <section id="contact">
-      <div class="wrap">
-        <h2 class="section-title">Booking Requests</h2>
-        <p class="section-sub">Food truck or catering — send details and we’ll get back fast.</p>
-
-        <div class="split">
-          <div class="panel">
-            <div class="kicker">Call Us</div>
-            <h3 style="margin:10px 0 0;font-size:30px; font-weight:950;">(724) 266-1919</h3>
-            <p style="margin-top:10px;">
-              Prefer phone? Call and we’ll help you lock it in.
-            </p>
-            <div class="service-actions">
-              <a class="pill red" href="tel:+17242661919">Call Now</a>
-              <a class="pill" href="#" id="directionsContact">Get Directions</a>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="kicker">Request Form</div>
-            <h3 style="margin:10px 0 0;font-size:30px; font-weight:950;">Send a Request</h3>
-
-            <!-- Mailto form placeholder (works without backend) -->
-            <form class="form" action="mailto:your@email.com" method="post" enctype="text/plain">
-              <select class="input" name="BookingType" required>
-                <option value="" selected disabled>What are you booking?</option>
-                <option>Food Truck</option>
-                <option>Catering / Family Meals</option>
-                <option>Not sure — tell us</option>
-              </select>
-              <input class="input" name="Name" placeholder="Your name" required>
-              <input class="input" name="Phone" placeholder="Best phone number" required>
-              <input class="input" name="Email" placeholder="Email (optional)">
-              <input class="input" name="EventDate" placeholder="Event date / time">
-              <input class="input" name="Headcount" placeholder="Headcount (approx)">
-              <input class="input" name="Address" placeholder="Event address (if food truck)">
-              <textarea class="input" name="Details" placeholder="Tell us what you want (pickup/delivery, menu items, timing, notes)"></textarea>
-              <button class="pill green" type="submit" style="border:none;cursor:pointer;">Send Request</button>
-            </form>
-
-            <p style="margin-top:12px;font-size:13px;color:rgba(11,18,32,.60);font-weight:900;">
-              Tip: replace <b>your@email.com</b> with the restaurant email.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-  </div><!-- /page-bg -->
+    </div>
+  </section>
 </main>
 
-<!-- ======================================================================== -->
-<!--  Footer (simple + clean)                                                  -->
-<!-- ======================================================================== -->
 <footer>
-  <div class="wrap footer-inner">
-    <span>© Ambridge Italian Villa · Ambridge, PA</span>
-    <span>•</span>
-    <a href="#" id="footerDirections">Directions</a>
-    <span>•</span>
-    <a href="#" id="footerOrder" target="_blank" rel="noopener">Order Online</a>
-    <span>•</span>
-    <a href="menu.html">Full Menu</a>
-  </div>
+  © Ambridge Italian Villa · Ambridge, PA
 </footer>
 
-<!-- ======================================================================== -->
-<!--  JavaScript — bullet-proof wiring                                         -->
-<!-- ======================================================================== -->
 <script>
 (function(){
-  "use strict";
+  const orderUrl = window.TOAST_ORDER_URL;
+  const mapsUrl = window.GMAPS_DIRECTIONS_URL;
 
-  const orderUrl = window.TOAST_ORDER_URL || "#";
-  const mapsUrl  = window.GMAPS_DIRECTIONS_URL || "#";
-  const menuUrl  = window.MENU_PAGE_URL || "menu.html";
-  const rewardsUrl = window.TOAST_REWARDS_URL || "#";
-
-  // ---------- Helpers ----------
-  function safeSetHref(id, url, newTab){
+  // Order links
+  ["orderTop","orderHero","orderHours"].forEach(id=>{
     const el = document.getElementById(id);
-    if(!el) return;
-    el.href = url;
-    if(newTab){
-      el.target = "_blank";
-      el.rel = "noopener";
-    }
-  }
+    if(el) el.href = orderUrl;
+  });
 
-  function openNewTab(url){
-    try{
-      window.open(url, "_blank", "noopener");
-    }catch(e){
-      window.location.href = url;
-    }
-  }
+  // Directions links
+  ["directionsTop","directionsHero","directionsHours"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el){ el.href = mapsUrl; el.target="_blank"; el.rel="noopener"; }
+  });
 
-  // ---------- Wire header/hero CTAs ----------
-  safeSetHref("orderTop", orderUrl, true);
-  safeSetHref("orderHero", orderUrl, true);
-  safeSetHref("orderMenuTop", orderUrl, true);
-  safeSetHref("orderMenuStrip", orderUrl, true);
-  safeSetHref("orderTruck", orderUrl, true);
-
-  safeSetHref("directionsTop", mapsUrl, true);
-  safeSetHref("directionsHero", mapsUrl, true);
-  safeSetHref("directionsCatering", mapsUrl, true);
-  safeSetHref("directionsContact", mapsUrl, true);
-  safeSetHref("footerDirections", mapsUrl, true);
-
-  safeSetHref("footerOrder", orderUrl, true);
-
-  // Menu links (menu is its own page)
-  const menuHero = document.getElementById("menuHero");
-  if(menuHero) menuHero.href = menuUrl;
-
-  const openMenuTop = document.getElementById("openMenuTop");
-  if(openMenuTop) openMenuTop.href = menuUrl;
-
-  // ---------- Make any element with [data-order] open Toast ----------
+  // Any element with data-order opens ordering
   document.querySelectorAll("[data-order]").forEach(el=>{
     el.addEventListener("click", (e)=>{
       e.preventDefault();
-      openNewTab(orderUrl);
-    });
-
-    // Keyboard support for div cards
-    if(el.getAttribute("role") === "button"){
-      el.addEventListener("keydown", (ev)=>{
-        if(ev.key === "Enter" || ev.key === " "){
-          ev.preventDefault();
-          openNewTab(orderUrl);
-        }
-      });
-    }
-  });
-
-  // ---------- Optional: Rewards wiring (placeholder) ----------
-  // If you later get a direct Toast loyalty/rewards link, set TOAST_REWARDS_URL.
-  // Example button could be added later without changing JS.
-
-  // ---------- Smooth scroll offset fix for sticky header ----------
-  // (Makes anchor jumps land nicely below sticky header)
-  const header = document.querySelector("header");
-  const headerH = header ? header.offsetHeight : 0;
-
-  function scrollToHash(hash){
-    const id = hash.replace("#", "");
-    const target = document.getElementById(id);
-    if(!target) return;
-    const y = target.getBoundingClientRect().top + window.scrollY - (headerH + 10);
-    window.scrollTo({ top:y, behavior:"smooth" });
-  }
-
-  document.querySelectorAll('a[href^="#"]').forEach(a=>{
-    a.addEventListener("click", (e)=>{
-      const href = a.getAttribute("href");
-      if(!href || href === "#") return;
-      const targetId = href.slice(1);
-      if(!document.getElementById(targetId)) return;
-      e.preventDefault();
-      history.pushState(null, "", href);
-      scrollToHash(href);
+      window.open(orderUrl, "_blank", "noopener");
     });
   });
-
-  // If page loads with hash
-  if(window.location.hash){
-    setTimeout(()=>scrollToHash(window.location.hash), 50);
-  }
-
 })();
 </script>
 
