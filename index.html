@@ -83,31 +83,39 @@ header{
 }
 
 .nav{display:flex;gap:22px;align-items:center}
-.nav a{
-  font-family:Oswald, system-ui, sans-serif;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  font-weight:800;
-  color:rgba(255,255,255,.9);
+.nav{
+  display:flex;
+  gap:22px;
+  align-items:center;
 }
-.nav a:hover{opacity:.8}
-.nav{display:flex;gap:22px;align-items:center}
-.nav a{
-  font-family:Oswald, system-ui, sans-serif;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  font-weight:800;
-  color:rgba(255,255,255,.9);
-  font-size:14px; /* lock base size */
-}
-.nav a:hover{opacity:.8}
 
-/* 🔥 Add this right here */
+.nav a{
+  font-family:Oswald, system-ui, sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  font-weight:800;
+  color:rgba(255,255,255,.9);
+
+  font-size:14px;   /* base size */
+  line-height:1;    /* prevents header height change */
+}
+
+.nav a:hover{
+  opacity:.8;
+}
+
+/* Food Truck only */
 .nav a.foodtruck-link{
-  font-size:16px;  /* slightly bigger */
+  font-size:16px;   /* 2px bigger */
   letter-spacing:.8px;
 }
-.right{display:flex;gap:10px;align-items:center;justify-content:flex-end}
+
+.right{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:flex-end;
+}
 
 /* Pills / buttons */
 .pill{
