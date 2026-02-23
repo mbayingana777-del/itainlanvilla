@@ -216,20 +216,23 @@ header{
   font-weight:900;
   color:rgba(255,255,255,.90);
 }
+
 /* ===== Menu background (under hero) ===== */
 .menu-bg{
   position: relative;
   background:var(--bg-top);
 }
+
 /* light black / charcoal tint (airy but grounded) */
 .menu-bg::before{
   content:"";
   position:absolute;
   inset:0;
- background: linear-gradient(
-  rgba(0,0,0,.10),
-  rgba(0,0,0,.14)
-);
+  background: linear-gradient(
+    rgba(0,0,0,.10),
+    rgba(0,0,0,.14)
+  );
+} /* ✅ THIS was missing */
 
 /* keep menu content above the overlay */
 .menu-bg > .wrap{
@@ -242,7 +245,6 @@ section{
   padding:72px 0;
   background:var(--bg-bottom);
 }
-
 .section-title{
   font-size:38px;
   font-weight:950;
