@@ -450,6 +450,9 @@ section{
   grid-template-columns:repeat(3, 1fr);
   gap:18px;
 }
+.category-grid .featured-card{
+  min-height:300px;
+}
 .cat-card{
   display:block;
   border-radius:16px;
@@ -882,64 +885,70 @@ footer{
         </div>
 
         <div class="category-grid" aria-label="Menu categories">
-          <a class="cat-card" href="#" data-order aria-label="Pizza and Calzones">
+          <a class="featured-card" href="#" data-order aria-label="Pizza and Calzones">
             <div class="img">
-              <img src="assets/cat-pizza-calzone.png" alt="Pizza and calzones"
-                   loading="lazy" decoding="async"
-                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+              <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80" alt="Pizza and calzones" loading="lazy" decoding="async">
             </div>
-            <div class="label">Pizza & Calzones</div>
-            <div class="meta">Sicilian, hand tossed, thick/thin + specialty pies.</div>
+            <div class="featured-copy">
+              <span class="featured-eyebrow">Italian Classic</span>
+              <h3 class="featured-title">Pizza &amp; Calzones</h3>
+              <p class="featured-text">Sicilian, hand tossed, thick/thin and specialty pies.</p>
+            </div>
           </a>
 
-          <a class="cat-card" href="#" data-order aria-label="Gyros and Greek Specialties">
+          <a class="featured-card" href="#" data-order aria-label="Gyros and Greek Specialties">
             <div class="img">
-              <img src="assets/cat-gyros.png" alt="Gyros and Greek specialties"
-                   loading="lazy" decoding="async"
-                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+              <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=80" alt="Gyros and Greek specialties" loading="lazy" decoding="async">
             </div>
-            <div class="label">Gyros & Greek</div>
-            <div class="meta">Home of the gyro — souvlaki, platters, Greek favorites.</div>
+            <div class="featured-copy">
+              <span class="featured-eyebrow">Greek Favorite</span>
+              <h3 class="featured-title">Gyros &amp; Greek</h3>
+              <p class="featured-text">Home of the gyro, plus souvlaki, platters, and Greek favorites.</p>
+            </div>
           </a>
 
-          <a class="cat-card" href="#" data-order aria-label="Hoagies, Sandwiches and Wraps">
+          <a class="featured-card" href="#" data-order aria-label="Hoagies Sandwiches and Wraps">
             <div class="img">
-              <img src="assets/cat-hoagies-wraps.png" alt="Hoagies and wraps"
-                   loading="lazy" decoding="async"
-                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+              <img src="https://images.unsplash.com/photo-1553909489-cd47e0ef937f?auto=format&fit=crop&w=1200&q=80" alt="Hoagies sandwiches and wraps" loading="lazy" decoding="async">
             </div>
-            <div class="label">Hoagies & Wraps</div>
-            <div class="meta">12” hoagies, grilled sandwiches, wraps & more.</div>
+            <div class="featured-copy">
+              <span class="featured-eyebrow">Stacked</span>
+              <h3 class="featured-title">Hoagies &amp; Wraps</h3>
+              <p class="featured-text">12-inch hoagies, grilled sandwiches, wraps, and more.</p>
+            </div>
           </a>
 
-          <a class="cat-card" href="#" data-order aria-label="Wings, Fries and Finger Foods">
+          <a class="featured-card" href="#" data-order aria-label="Wings Fries and Finger Foods">
             <div class="img">
-              <img src="assets/cat-wings-fries.png" alt="Wings and fries"
-                   loading="lazy" decoding="async"
-                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+              <img src="https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=1200&q=80" alt="Wings fries and finger foods" loading="lazy" decoding="async">
             </div>
-            <div class="label">Wings & Finger Foods</div>
-            <div class="meta">Wings, fries, loaded fries, mozzarella sticks, apps.</div>
+            <div class="featured-copy">
+              <span class="featured-eyebrow">Fan Favorite</span>
+              <h3 class="featured-title">Wings &amp; Finger Foods</h3>
+              <p class="featured-text">Wings, fries, loaded fries, mozzarella sticks, and apps.</p>
+            </div>
           </a>
 
-          <a class="cat-card" href="#" data-order aria-label="Salads and Soups">
+          <a class="featured-card" href="#" data-order aria-label="Salads and Soups">
             <div class="img">
-              <img src="assets/cat-salads-soups.png" alt="Salads and soups"
-                   loading="lazy" decoding="async"
-                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+              <img src="https://images.unsplash.com/photo-1546793665-c74683f339c1?auto=format&fit=crop&w=1200&q=80" alt="Salads and soups" loading="lazy" decoding="async">
             </div>
-            <div class="label">Salads & Soups</div>
-            <div class="meta">Greek feta, chef, gyro, chicken, steak salads + soup & chili.</div>
+            <div class="featured-copy">
+              <span class="featured-eyebrow">Fresh</span>
+              <h3 class="featured-title">Salads &amp; Soups</h3>
+              <p class="featured-text">Greek feta, chef, gyro, chicken, steak salads, soup, and chili.</p>
+            </div>
           </a>
 
-          <a class="cat-card" href="#" data-order aria-label="Breakfast and Daily Specials">
+          <a class="featured-card" href="#" data-order aria-label="Breakfast and Daily Specials">
             <div class="img">
-              <img src="assets/cat-breakfast.png" alt="Breakfast and specials"
-                   loading="lazy" decoding="async"
-                   onerror="this.onerror=null;this.src='assets/assetsgreek-platter-bg.png';">
+              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1200&q=80" alt="Breakfast and daily specials" loading="lazy" decoding="async">
             </div>
-            <div class="label">Breakfast & Specials</div>
-            <div class="meta">Omelets, pancakes, french toast + daily specials.</div>
+            <div class="featured-copy">
+              <span class="featured-eyebrow">Morning</span>
+              <h3 class="featured-title">Breakfast &amp; Specials</h3>
+              <p class="featured-text">Omelets, pancakes, french toast, and daily specials.</p>
+            </div>
           </a>
         </div>
       </div>
@@ -1001,10 +1010,11 @@ footer{
     <div class="wrap">
       <div class="split">
         <div class="panel">
-          <div class="kicker">★★★★★ Rated</div>
+          <div class="kicker">★★★★★ Yelp Reviews</div>
           <h2 class="section-title" style="margin-top:10px;">Loved by Locals</h2>
-          <p>“Always fresh, always consistent. The gyros are packed, the pizza never misses, and the portions are more than fair.”</p>
-          <p>Family-owned, community-trusted, and serving Ambridge for years — this is the kind of place people come back to.</p>
+          <p>“People keep calling out the gyros, the big portions, and the kind of consistent comfort food that makes this place a local go-to.”</p>
+          <p>“A lot of the praise centers on homemade flavor, good value, and that longtime family-run feel.”</p>
+          <p><a href="https://www.yelp.com/biz/ambridge-italian-villa-ambridge?start=70" target="_blank" rel="noopener" style="color:#c1121f;font-weight:900;">Read more reviews on Yelp →</a></p>
         </div>
 
         <div class="panel">
