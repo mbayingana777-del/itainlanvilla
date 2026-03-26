@@ -796,13 +796,14 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 /* ===== WATER (FLOWING PLANE) ===== */
-const waterGeometry = new THREE.PlaneGeometry(20, 10, 128, 128);
+const waterGeometry = new THREE.PlaneGeometry(20, 10, 256, 256);
 
 const waterMaterial = new THREE.MeshStandardMaterial({
-  color: 0x1d4f91,
+  color: 0x1e5fa3,
+  roughness: 0.4,
+  metalness: 0.2,
   transparent: true,
-  opacity: 0.35,
-  wireframe: false
+  opacity: 0.45
 });
 
 const water = new THREE.Mesh(waterGeometry, waterMaterial);
