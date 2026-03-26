@@ -894,7 +894,8 @@ positions.needsUpdate = true;
   /* 🧠 PARALLAX FEEL */
   camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.03;
   camera.position.y += (-mouseY * 0.3 - camera.position.y) * 0.03;
-
+water.material.emissiveIntensity =
+  0.15 + Math.sin(time * 2) * 0.05;
   renderer.render(scene, camera);
 }
 
