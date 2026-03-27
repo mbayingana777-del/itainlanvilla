@@ -1,320 +1,1331 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Santorini Living World</title>
-  <style>
-    :root {
-      --ui-bg: rgba(7, 17, 31, 0.42);
-      --ui-border: rgba(255,255,255,0.16);
-      --ui-text: #eef6ff;
-      --ui-muted: rgba(238,246,255,0.72);
-      --glow: rgba(135, 206, 255, 0.22);
-      --shadow: rgba(0, 0, 0, 0.32);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Italian Villa - Ristorante & Pizzeria</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
 
-    * { box-sizing: border-box; }
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            overflow: hidden;
+        }
 
-    html, body {
-      margin: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #07111f;
-      color: var(--ui-text);
-    }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
 
-    body {
-      cursor: default;
-    }
+        /* UI Container */
+        #ui-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
 
-    #world {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      background: linear-gradient(180deg, #7fb4e8 0%, #d6d7db 36%, #0a3f7c 100%);
-    }
+        /* Loading Screen */
+        #loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            pointer-events: all;
+        }
 
-    .layer {
-      position: absolute;
-      inset: -4%;
-      will-change: transform, opacity, filter;
-      pointer-events: none;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
-      transform: translate3d(0,0,0) scale(1.06);
-    }
+        .loader {
+            border: 4px solid rgba(212, 175, 55, 0.2);
+            border-top: 4px solid #d4af37;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
 
-    .base-photo {
-      background-image: url("santorini-bg.png");
-      filter: saturate(1.06) contrast(1.03);
-      transform: translate3d(0,0,0) scale(1.08);
-    }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
 
-    .light-pass {
-      background:
-        radial-gradient(circle at 18% 28%, rgba(255, 224, 169, 0.34), transparent 30%),
-        radial-gradient(circle at 42% 56%, rgba(255,255,255,0.12), transparent 18%),
-        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
-      mix-blend-mode: screen;
-      opacity: 0.8;
-    }
+        #loading-text {
+            color: #d4af37;
+            font-size: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
-    .atmosphere {
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02) 28%, rgba(20, 58, 120, 0.10) 80%, rgba(0,0,0,0.08)),
-        radial-gradient(circle at 52% 46%, rgba(255,255,255,0.10), transparent 38%);
-      mix-blend-mode: screen;
-      opacity: 0.6;
-      filter: blur(2px);
-    }
+        /* Header */
+        #header {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            pointer-events: auto;
+            z-index: 20;
+            animation: slideDown 0.6s ease;
+        }
 
-    .water-shimmer {
-      inset: 28% 8% 15% 8%;
-      background:
-        linear-gradient(90deg,
-          rgba(255,255,255,0.00) 0%,
-          rgba(255,255,255,0.10) 18%,
-          rgba(255,255,255,0.02) 34%,
-          rgba(255,255,255,0.12) 52%,
-          rgba(255,255,255,0.00) 72%,
-          rgba(255,255,255,0.06) 100%);
-      opacity: 0.24;
-      filter: blur(10px);
-      mix-blend-mode: screen;
-      transform: translate3d(0,0,0) skewX(-6deg) scale(1.15);
-    }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
 
-    .water-ripple {
-      inset: 28% 9% 13% 9%;
-      background-image:
-        repeating-linear-gradient(
-          180deg,
-          rgba(255,255,255,0.06) 0px,
-          rgba(255,255,255,0.02) 2px,
-          rgba(255,255,255,0.00) 5px,
-          rgba(255,255,255,0.04) 8px,
-          rgba(255,255,255,0.00) 12px
-        );
-      opacity: 0.14;
-      mix-blend-mode: screen;
-      filter: blur(0.8px);
-    }
+        #restaurant-name {
+            color: #fff;
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            margin-bottom: 5px;
+        }
 
-    .sun-haze {
-      background:
-        radial-gradient(circle at 14% 29%, rgba(255, 224, 175, 0.52), rgba(255, 209, 138, 0.18) 16%, rgba(255,255,255,0.00) 40%);
-      opacity: 0.7;
-      filter: blur(20px);
-      mix-blend-mode: screen;
-    }
+        #restaurant-subtitle {
+            color: #d4af37;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
 
-    .breath-vignette {
-      background: radial-gradient(circle at center, transparent 48%, rgba(0,0,0,0.18) 100%);
-      opacity: 0.5;
-    }
+        /* Instructions */
+        #instructions {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 13px;
+            text-align: center;
+            pointer-events: auto;
+            z-index: 20;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            animation: slideUp 0.6s ease 0.2s both;
+        }
 
-    .grain {
-      inset: -20%;
-      opacity: 0.06;
-      background-image:
-        radial-gradient(circle, rgba(255,255,255,0.7) 0.6px, transparent 0.7px);
-      background-size: 6px 6px;
-      mix-blend-mode: soft-light;
-    }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
 
-    .ui {
-      position: relative;
-      z-index: 20;
-      min-height: 100dvh;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      padding: 28px;
-      gap: 20px;
-    }
+        #instruction-text {
+            display: block;
+            letter-spacing: 0.5px;
+        }
 
-    .panel {
-      width: min(480px, 92vw);
-      padding: 22px 22px 20px;
-      border: 1px solid var(--ui-border);
-      background: var(--ui-bg);
-      backdrop-filter: blur(16px) saturate(1.1);
-      border-radius: 22px;
-      box-shadow: 0 20px 60px var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.04);
-    }
+        /* Action Buttons */
+        #action-buttons {
+            position: fixed;
+            bottom: 40px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            pointer-events: auto;
+            z-index: 20;
+            animation: slideRight 0.6s ease 0.3s both;
+        }
 
-    .eyebrow {
-      font-size: 12px;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--ui-muted);
-      margin-bottom: 12px;
-    }
+        @keyframes slideRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
 
-    h1 {
-      margin: 0 0 10px;
-      font-size: clamp(34px, 5vw, 64px);
-      line-height: 0.95;
-      letter-spacing: -0.04em;
-      text-wrap: balance;
-    }
+        .action-btn {
+            background: linear-gradient(135deg, #d4af37, #e8c547);
+            color: #1a1a1a;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
 
-    p {
-      margin: 0;
-      font-size: clamp(15px, 1.8vw, 18px);
-      line-height: 1.5;
-      color: var(--ui-muted);
-      max-width: 58ch;
-    }
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+        }
 
-    .status {
-      align-self: flex-start;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 999px;
-      border: 1px solid var(--ui-border);
-      background: rgba(8, 20, 38, 0.36);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.22);
-    }
+        .action-btn:active {
+            transform: translateY(0);
+        }
 
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #dff6ff;
-      box-shadow: 0 0 18px rgba(201, 236, 255, 0.9);
-      animation: pulse 2.4s ease-in-out infinite;
-    }
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 0.82; }
-      50% { transform: scale(1.35); opacity: 1; }
-    }
+        /* Menu Panel */
+        #menu-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 0;
+            background: linear-gradient(to top, rgba(15, 15, 25, 0.98), rgba(30, 30, 45, 0.95));
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: auto;
+            z-index: 30;
+            border-top: 3px solid #d4af37;
+            backdrop-filter: blur(10px);
+        }
 
-    .hint {
-      position: absolute;
-      left: 50%;
-      bottom: 18px;
-      transform: translateX(-50%);
-      z-index: 25;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(7,17,31,0.36);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.72);
-      backdrop-filter: blur(10px);
-      font-size: 13px;
-      letter-spacing: 0.02em;
-    }
+        #menu-panel.active {
+            max-height: 65vh;
+        }
 
-    @media (max-width: 760px) {
-      .ui {
-        align-items: flex-end;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 18px;
-      }
+        #menu-panel::-webkit-scrollbar {
+            width: 6px;
+        }
 
-      .status {
-        align-self: stretch;
-        justify-content: center;
-      }
+        #menu-panel::-webkit-scrollbar-track {
+            background: rgba(212, 175, 55, 0.1);
+        }
 
-      .panel {
-        width: 100%;
-      }
-    }
-  </style>
+        #menu-panel::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 3px;
+        }
+
+        #menu-header {
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom: 2px solid #d4af37;
+            position: sticky;
+            top: 0;
+            background: rgba(15, 15, 25, 0.99);
+            z-index: 31;
+        }
+
+        #menu-header h2 {
+            color: #d4af37;
+            font-size: 24px;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+        }
+
+        #menu-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #d4af37;
+            font-size: 32px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto;
+        }
+
+        #menu-close-btn:hover {
+            transform: rotate(90deg);
+        }
+
+        #menu-items {
+            padding: 20px;
+            display: grid;
+            gap: 15px;
+        }
+
+        .menu-item {
+            background: rgba(60, 60, 85, 0.7);
+            padding: 16px 18px;
+            border-radius: 8px;
+            border-left: 4px solid #d4af37;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .menu-item:hover {
+            transform: translateX(8px);
+            background: rgba(80, 80, 105, 0.8);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .menu-item h3 {
+            color: #d4af37;
+            font-size: 16px;
+            margin-bottom: 6px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .menu-item p {
+            color: #bbb;
+            font-size: 12px;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .menu-price {
+            color: #fff;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        /* Progress Indicator */
+        #progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #d4af37, #e8c547);
+            width: 0%;
+            transition: width 0.3s ease;
+            z-index: 50;
+        }
+
+        /* Mobile Specific */
+        @media (max-width: 768px) {
+            #restaurant-name {
+                font-size: 24px;
+                letter-spacing: 2px;
+            }
+
+            #restaurant-subtitle {
+                font-size: 10px;
+            }
+
+            #instructions {
+                font-size: 11px;
+                padding: 10px 18px;
+                bottom: 120px;
+            }
+
+            #action-buttons {
+                bottom: auto;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%);
+                gap: 10px;
+            }
+
+            .action-btn {
+                padding: 10px 16px;
+                font-size: 11px;
+            }
+
+            #header {
+                top: 20px;
+            }
+
+            #menu-panel.active {
+                max-height: 70vh;
+            }
+
+            #menu-items {
+                padding: 15px;
+                gap: 12px;
+            }
+
+            .menu-item {
+                padding: 14px 16px;
+            }
+
+            .menu-item h3 {
+                font-size: 15px;
+            }
+
+            .menu-item p {
+                font-size: 11px;
+            }
+        }
+
+        /* Fade Out Animation */
+        .fade-out {
+            animation: fadeOut 0.3s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
 </head>
 <body>
-  <div id="world">
-    <div class="layer base-photo" id="basePhoto"></div>
-    <div class="layer atmosphere" id="atmosphere"></div>
-    <div class="layer sun-haze" id="sunHaze"></div>
-    <div class="layer water-shimmer" id="waterShimmer"></div>
-    <div class="layer water-ripple" id="waterRipple"></div>
-    <div class="layer light-pass" id="lightPass"></div>
-    <div class="layer grain" id="grain"></div>
-    <div class="layer breath-vignette" id="vignette"></div>
-  </div>
-
-  <main class="ui">
-    <div class="status">
-      <span class="dot"></span>
-      <span>Living world prototype active</span>
+    <div id="loading">
+        <div class="loader"></div>
+        <p id="loading-text">Loading Italian Villa...</p>
     </div>
 
-    <section class="panel">
-      <div class="eyebrow">Phase 1 foundation</div>
-      <h1>Santorini, but alive.</h1>
-      <p>
-        This is the starting world layer: full-screen photo environment, breathing light,
-        subtle camera drift, water shimmer, soft atmosphere, and mouse-based depth.
-        Next step is replacing fake depth with real 3D geometry for domes, walls, water, and horizon.
-      </p>
-    </section>
-  </main>
+    <div id="progress"></div>
 
-  <div class="hint">Move your mouse slowly</div>
+    <div id="ui-container">
+        <div id="header">
+            <div id="restaurant-name">Italian Villa</div>
+            <div id="restaurant-subtitle">Ristorante & Pizzeria</div>
+        </div>
 
-  <script>
-    const mouse = { x: 0, y: 0 };
-    const target = { x: 0, y: 0 };
-    const layers = {
-      basePhoto: document.getElementById('basePhoto'),
-      atmosphere: document.getElementById('atmosphere'),
-      sunHaze: document.getElementById('sunHaze'),
-      waterShimmer: document.getElementById('waterShimmer'),
-      waterRipple: document.getElementById('waterRipple'),
-      lightPass: document.getElementById('lightPass'),
-      grain: document.getElementById('grain'),
-      vignette: document.getElementById('vignette')
-    };
+        <div id="instructions">
+            <span id="instruction-text"></span>
+        </div>
 
-    window.addEventListener('pointermove', (e) => {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      target.x = (e.clientX / w) * 2 - 1;
-      target.y = (e.clientY / h) * 2 - 1;
-    }, { passive: true });
+        <div id="action-buttons">
+            <button class="action-btn" id="enter-btn" style="display: none;">Enter Restaurant</button>
+            <button class="action-btn" id="exit-btn" style="display: none;">Exit</button>
+            <button class="action-btn" id="menu-btn" style="display: none;">Menu</button>
+        </div>
 
-    let start = performance.now();
+        <div id="menu-panel">
+            <div id="menu-header">
+                <button id="menu-close-btn">✕</button>
+                <h2>Our Menu</h2>
+            </div>
+            <div id="menu-items"></div>
+        </div>
+    </div>
 
-    function animate(now) {
-      const t = (now - start) * 0.001;
+    <script>
+        // ==========================================
+        // CONFIGURATION
+        // ==========================================
+        const CONFIG = {
+            performance: {
+                isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
+                targetFPS: 0, // Will be set based on device
+                shadowsEnabled: false,
+                antialias: false,
+                pixelRatio: 1
+            },
+            scene: {
+                fogColor: 0x87ceeb,
+                fogNear: 1,
+                fogFar: 200
+            },
+            camera: {
+                fov: 75,
+                near: 0.1,
+                far: 1000
+            }
+        };
 
-      mouse.x += (target.x - mouse.x) * 0.04;
-      mouse.y += (target.y - mouse.y) * 0.04;
+        // Set performance based on device
+        if (CONFIG.performance.isMobile) {
+            CONFIG.performance.targetFPS = 30;
+            CONFIG.performance.pixelRatio = Math.max(1, window.devicePixelRatio * 0.8);
+        } else {
+            CONFIG.performance.targetFPS = 60;
+            CONFIG.performance.pixelRatio = Math.min(2, window.devicePixelRatio);
+        }
 
-      const driftX = Math.sin(t * 0.18) * 8;
-      const driftY = Math.cos(t * 0.15) * 6;
-      const breath = Math.sin(t * 0.75) * 0.012;
-      const shimmer = Math.sin(t * 0.9) * 16;
-      const ripple = (t * 18) % 20;
-      const sunPulse = 0.65 + Math.sin(t * 0.25) * 0.05;
+        // ==========================================
+        // THREE.JS SETUP
+        // ==========================================
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.Fog(CONFIG.scene.fogColor, CONFIG.scene.fogNear, CONFIG.scene.fogFar);
+        scene.background = new THREE.Color(CONFIG.scene.fogColor);
 
-      layers.basePhoto.style.transform = `translate3d(${mouse.x * -10 + driftX}px, ${mouse.y * -8 + driftY}px, 0) scale(${1.08 + breath})`;
-      layers.atmosphere.style.transform = `translate3d(${mouse.x * -14}px, ${mouse.y * -10}px, 0) scale(${1.06 + breath * 0.7})`;
-      layers.sunHaze.style.transform = `translate3d(${mouse.x * -18 + driftX * 0.4}px, ${mouse.y * -12 + driftY * 0.4}px, 0) scale(${1.04 + breath})`;
-      layers.waterShimmer.style.transform = `translate3d(${mouse.x * -22 + shimmer}px, ${mouse.y * 4}px, 0) skewX(-6deg) scale(1.15)`;
-      layers.waterRipple.style.transform = `translate3d(${mouse.x * -12}px, ${mouse.y * 2 + ripple}px, 0) scale(1.06)`;
-      layers.lightPass.style.transform = `translate3d(${mouse.x * -16 + driftX * 0.5}px, ${mouse.y * -14 + driftY * 0.3}px, 0) scale(${1.04 + breath})`;
-      layers.grain.style.transform = `translate3d(${mouse.x * -6}px, ${mouse.y * -6}px, 0)`;
-      layers.vignette.style.opacity = `${0.48 + Math.sin(t * 0.55) * 0.03}`;
-      layers.sunHaze.style.opacity = `${sunPulse}`;
-      layers.lightPass.style.opacity = `${0.74 + Math.sin(t * 0.38) * 0.05}`;
+        const camera = new THREE.PerspectiveCamera(
+            CONFIG.camera.fov,
+            window.innerWidth / window.innerHeight,
+            CONFIG.camera.near,
+            CONFIG.camera.far
+        );
 
-      requestAnimationFrame(animate);
-    }
+        const renderer = new THREE.WebGLRenderer({
+            antialias: CONFIG.performance.antialias,
+            powerPreference: 'low-power',
+            alpha: true
+        });
 
-    requestAnimationFrame(animate);
-  </script>
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(CONFIG.performance.pixelRatio);
+        renderer.shadowMap.enabled = CONFIG.performance.shadowsEnabled;
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.0;
+        document.body.appendChild(renderer.domElement);
+
+        // ==========================================
+        // LIGHTING
+        // ==========================================
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
+        scene.add(ambientLight);
+
+        // Main directional light (daylight)
+        const sunLight = new THREE.DirectionalLight(0xffffff, 0.9);
+        sunLight.position.set(40, 50, 30);
+        sunLight.castShadow = CONFIG.performance.shadowsEnabled;
+        scene.add(sunLight);
+
+        // Warm fill light
+        const warmLight = new THREE.DirectionalLight(0xffcc88, 0.35);
+        warmLight.position.set(-30, 20, 20);
+        scene.add(warmLight);
+
+        // ==========================================
+        // TEXTURE UTILITY
+        // ==========================================
+        const textureUtils = {
+            createCanvas: function(width, height, drawFn) {
+                const canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                const ctx = canvas.getContext('2d');
+                drawFn(ctx);
+                return new THREE.CanvasTexture(canvas);
+            },
+
+            brickTexture: function() {
+                return this.createCanvas(512, 512, (ctx) => {
+                    // Base brick color
+                    ctx.fillStyle = '#a5825a';
+                    ctx.fillRect(0, 0, 512, 512);
+
+                    // Brick pattern
+                    ctx.fillStyle = '#8b6f47';
+                    const brickWidth = 80;
+                    const brickHeight = 40;
+                    for (let y = 0; y < 512; y += brickHeight) {
+                        for (let x = 0; x < 512; x += brickWidth) {
+                            ctx.fillRect(x, y, brickWidth - 2, brickHeight - 2);
+                            // Mortar lines
+                            ctx.strokeStyle = '#c4a880';
+                            ctx.lineWidth = 2;
+                            ctx.strokeRect(x, y, brickWidth - 2, brickHeight - 2);
+                        }
+                    }
+
+                    // Add subtle texture variation
+                    for (let i = 0; i < 2000; i++) {
+                        ctx.fillStyle = `rgba(0, 0, 0, ${Math.random() * 0.1})`;
+                        ctx.fillRect(
+                            Math.random() * 512,
+                            Math.random() * 512,
+                            Math.random() * 20 + 5,
+                            Math.random() * 20 + 5
+                        );
+                    }
+                });
+            },
+
+            glassTexture: function() {
+                return this.createCanvas(256, 256, (ctx) => {
+                    ctx.fillStyle = '#e8f4f8';
+                    ctx.fillRect(0, 0, 256, 256);
+                    ctx.strokeStyle = '#a0d0e0';
+                    ctx.lineWidth = 2;
+                    for (let i = 0; i < 256; i += 64) {
+                        ctx.beginPath();
+                        ctx.moveTo(i, 0);
+                        ctx.lineTo(i, 256);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(0, i);
+                        ctx.lineTo(256, i);
+                        ctx.stroke();
+                    }
+                });
+            },
+
+            woodTexture: function() {
+                return this.createCanvas(512, 512, (ctx) => {
+                    ctx.fillStyle = '#8b6f47';
+                    ctx.fillRect(0, 0, 512, 512);
+                    for (let i = 0; i < 10; i++) {
+                        ctx.fillStyle = `rgba(0, 0, 0, ${0.05 + Math.random() * 0.1})`;
+                        ctx.fillRect(0, i * 50, 512, 40);
+                    }
+                });
+            },
+
+            concreteTexture: function() {
+                return this.createCanvas(512, 512, (ctx) => {
+                    ctx.fillStyle = '#808080';
+                    ctx.fillRect(0, 0, 512, 512);
+                    for (let i = 0; i < 3000; i++) {
+                        ctx.fillStyle = `rgba(${Math.random() * 100}, ${Math.random() * 100}, ${Math.random() * 100}, ${Math.random() * 0.3})`;
+                        ctx.fillRect(
+                            Math.random() * 512,
+                            Math.random() * 512,
+                            Math.random() * 15 + 2,
+                            Math.random() * 15 + 2
+                        );
+                    }
+                });
+            }
+        };
+
+        // ==========================================
+        // SCENE STATE
+        // ==========================================
+        const appState = {
+            isInside: false,
+            canMove: false,
+            isTransitioning: false,
+            sceneObjects: {
+                exterior: null,
+                interior: null
+            },
+            progress: 0,
+            breatheOffset: 0
+        };
+
+        // ==========================================
+        // CREATE EXTERIOR SCENE
+        // ==========================================
+        function createExterior() {
+            const group = new THREE.Group();
+
+            // Ground/Sidewalk
+            const groundGeo = new THREE.PlaneGeometry(100, 80);
+            const groundMat = new THREE.MeshLambertMaterial({
+                map: textureUtils.concreteTexture()
+            });
+            const ground = new THREE.Mesh(groundGeo, groundMat);
+            ground.rotation.x = -Math.PI / 2;
+            ground.position.y = -0.1;
+            ground.receiveShadow = CONFIG.performance.shadowsEnabled;
+            group.add(ground);
+
+            // Building body (brick)
+            const buildingGeo = new THREE.BoxGeometry(22, 16, 14);
+            const buildingMat = new THREE.MeshPhongMaterial({
+                map: textureUtils.brickTexture(),
+                side: THREE.FrontSide
+            });
+            const building = new THREE.Mesh(buildingGeo, buildingMat);
+            building.position.set(0, 8, -0.5);
+            building.castShadow = CONFIG.performance.shadowsEnabled;
+            building.receiveShadow = CONFIG.performance.shadowsEnabled;
+            group.add(building);
+
+            // Storefront area (dark frame)
+            const storefrontGeo = new THREE.BoxGeometry(20, 8, 0.8);
+            const storefrontMat = new THREE.MeshPhongMaterial({ color: 0x2a2a2a });
+            const storefront = new THREE.Mesh(storefrontGeo, storefrontMat);
+            storefront.position.set(0, 4, 7);
+            storefront.castShadow = CONFIG.performance.shadowsEnabled;
+            group.add(storefront);
+
+            // Storefront frame details
+            const frameMat = new THREE.MeshPhongMaterial({ color: 0x1a1a1a });
+            
+            // Top frame
+            const topFrameGeo = new THREE.BoxGeometry(20, 1.2, 0.5);
+            const topFrame = new THREE.Mesh(topFrameGeo, frameMat);
+            topFrame.position.set(0, 7.8, 7);
+            group.add(topFrame);
+
+            // Bottom frame
+            const bottomFrame = new THREE.Mesh(topFrameGeo, frameMat);
+            bottomFrame.position.set(0, 0.2, 7);
+            group.add(bottomFrame);
+
+            // Left frame
+            const sideFrameGeo = new THREE.BoxGeometry(1.2, 8, 0.5);
+            const leftFrame = new THREE.Mesh(sideFrameGeo, frameMat);
+            leftFrame.position.set(-9.4, 4, 7);
+            group.add(leftFrame);
+
+            // Right frame
+            const rightFrame = new THREE.Mesh(sideFrameGeo, frameMat);
+            rightFrame.position.set(9.4, 4, 7);
+            group.add(rightFrame);
+
+            // Glass windows/doors
+            const glassMat = new THREE.MeshPhongMaterial({
+                map: textureUtils.glassTexture(),
+                transparent: true,
+                opacity: 0.7,
+                shininess: 80
+            });
+
+            // Main door window (left)
+            const doorGeo = new THREE.BoxGeometry(4.5, 7, 0.2);
+            const door = new THREE.Mesh(doorGeo, glassMat);
+            door.position.set(-5.5, 3.5, 7.2);
+            group.add(door);
+
+            // Right window
+            const windowGeo = new THREE.BoxGeometry(4.5, 6, 0.2);
+            const rightWindow = new THREE.Mesh(windowGeo, glassMat);
+            rightWindow.position.set(5.5, 4, 7.2);
+            group.add(rightWindow);
+
+            // Sign - Blue background
+            const signBackGeo = new THREE.BoxGeometry(18, 3.2, 0.5);
+            const signBackMat = new THREE.MeshPhongMaterial({ color: 0x0055cc });
+            const signBack = new THREE.Mesh(signBackGeo, signBackMat);
+            signBack.position.set(0, 13.2, 7.2);
+            signBack.castShadow = CONFIG.performance.shadowsEnabled;
+            group.add(signBack);
+
+            // Sign text (using canvas texture)
+            const signTexture = textureUtils.createCanvas(512, 128, (ctx) => {
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 60px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText('Italian Villa', 256, 80);
+            });
+            const signTextGeo = new THREE.PlaneGeometry(15, 2);
+            const signTextMat = new THREE.MeshPhongMaterial({ map: signTexture });
+            const signText = new THREE.Mesh(signTextGeo, signTextMat);
+            signText.position.set(0, 13.2, 7.5);
+            group.add(signText);
+
+            // Awning (red/maroon)
+            const awningGeo = new THREE.BoxGeometry(20.5, 1.5, 3);
+            const awningMat = new THREE.MeshPhongMaterial({ color: 0x8b1a1a });
+            const awning = new THREE.Mesh(awningGeo, awningMat);
+            awning.position.set(0, 8, 5);
+            awning.castShadow = CONFIG.performance.shadowsEnabled;
+            group.add(awning);
+
+            // Awning border
+            const awningBorderGeo = new THREE.BoxGeometry(20.5, 0.3, 3);
+            const awningBorderMat = new THREE.MeshPhongMaterial({ color: 0xffffff });
+            const awningBorder = new THREE.Mesh(awningBorderGeo, awningBorderMat);
+            awningBorder.position.set(0, 8.8, 5);
+            group.add(awningBorder);
+
+            // Roof (simple peak)
+            const roofGeo = new THREE.ConeGeometry(13, 6, 4);
+            const roofMat = new THREE.MeshPhongMaterial({ color: 0x6b4c3a });
+            const roof = new THREE.Mesh(roofGeo, roofMat);
+            roof.position.set(0, 22, -0.5);
+            roof.rotation.y = Math.PI / 4;
+            roof.castShadow = CONFIG.performance.shadowsEnabled;
+            group.add(roof);
+
+            // Sky
+            const skyGeo = new THREE.SphereGeometry(250, 16, 16);
+            const skyMat = new THREE.MeshBasicMaterial({
+                color: 0x87ceeb,
+                side: THREE.BackSide
+            });
+            const sky = new THREE.Mesh(skyGeo, skyMat);
+            group.add(sky);
+
+            return group;
+        }
+
+        // ==========================================
+        // CREATE INTERIOR SCENE
+        // ==========================================
+        function createInterior() {
+            const group = new THREE.Group();
+
+            // Floor (tile)
+            const floorGeo = new THREE.PlaneGeometry(35, 30);
+            const floorMat = new THREE.MeshLambertMaterial({
+                color: 0xd2b48c,
+                map: textureUtils.createCanvas(512, 512, (ctx) => {
+                    ctx.fillStyle = '#d2b48c';
+                    ctx.fillRect(0, 0, 512, 512);
+                    ctx.strokeStyle = '#9a8870';
+                    ctx.lineWidth = 2;
+                    for (let i = 0; i < 512; i += 64) {
+                        ctx.strokeRect(i, 0, 64, 512);
+                        ctx.strokeRect(0, i, 512, 64);
+                    }
+                })
+            });
+            const floor = new THREE.Mesh(floorGeo, floorMat);
+            floor.rotation.x = -Math.PI / 2;
+            floor.receiveShadow = CONFIG.performance.shadowsEnabled;
+            group.add(floor);
+
+            // Walls
+            const wallMat = new THREE.MeshPhongMaterial({ color: 0xf5ede5 });
+            
+            // Back wall
+            const backWallGeo = new THREE.BoxGeometry(35, 16, 0.5);
+            const backWall = new THREE.Mesh(backWallGeo, wallMat);
+            backWall.position.set(0, 8, -15);
+            backWall.receiveShadow = CONFIG.performance.shadowsEnabled;
+            group.add(backWall);
+
+            // Left wall
+            const leftWallGeo = new THREE.BoxGeometry(0.5, 16, 30);
+            const leftWall = new THREE.Mesh(leftWallGeo, wallMat);
+            leftWall.position.set(-17.5, 8, 0);
+            leftWall.receiveShadow = CONFIG.performance.shadowsEnabled;
+            group.add(leftWall);
+
+            // Right wall
+            const rightWallGeo = new THREE.BoxGeometry(0.5, 16, 30);
+            const rightWall = new THREE.Mesh(rightWallGeo, wallMat);
+            rightWall.position.set(17.5, 8, 0);
+            rightWall.receiveShadow = CONFIG.performance.shadowsEnabled;
+            group.add(rightWall);
+
+            // Ceiling
+            const ceilingGeo = new THREE.PlaneGeometry(35, 30);
+            const ceilingMat = new THREE.MeshPhongMaterial({ color: 0xfffacd });
+            const ceiling = new THREE.Mesh(ceilingGeo, ceilingMat);
+            ceiling.rotation.x = Math.PI / 2;
+            ceiling.position.y = 16;
+            group.add(ceiling);
+
+            // ========== COUNTER AREA ==========
+            // Counter top (granite-like)
+            const counterTopGeo = new THREE.BoxGeometry(10, 0.4, 1.2);
+            const counterTopMat = new THREE.MeshPhongMaterial({ color: 0x4a4a4a });
+            const counterTop = new THREE.Mesh(counterTopGeo, counterTopMat);
+            counterTop.position.set(0, 1.2, -13);
+            counterTop.castShadow = CONFIG.performance.shadowsEnabled;
+            counterTop.receiveShadow = CONFIG.performance.shadowsEnabled;
+            group.add(counterTop);
+
+            // Counter base (white)
+            const counterBaseGeo = new THREE.BoxGeometry(10, 1, 1);
+            const counterBaseMat = new THREE.MeshPhongMaterial({ color: 0xf5f5f5 });
+            const counterBase = new THREE.Mesh(counterBaseGeo, counterBaseMat);
+            counterBase.position.set(0, 0.5, -13);
+            counterBase.castShadow = CONFIG.performance.shadowsEnabled;
+            group.add(counterBase);
+
+            // Dessert display case (curved front glass)
+            const caseBodyGeo = new THREE.BoxGeometry(8, 2.2, 1.5);
+            const caseBodyMat = new THREE.MeshPhongMaterial({ color: 0x1a1a1a });
+            const caseBody = new THREE.Mesh(caseBodyGeo, caseBodyMat);
+            caseBody.position.set(0, 1.3, -12.2);
+            caseBody.castShadow = CONFIG.performance.shadowsEnabled;
+            group.add(caseBody);
+
+            // Case glass front
+            const caseGlassGeo = new THREE.BoxGeometry(7.8, 1.8, 0.3);
+            const caseGlassMat = new THREE.MeshPhongMaterial({
+                color: 0xb0e0e6,
+                transparent: true,
+                opacity: 0.6,
+                shininess: 100
+            });
+            const caseGlass = new THREE.Mesh(caseGlassGeo, caseGlassMat);
+            caseGlass.position.set(0, 1.4, -11.5);
+            caseGlass.receiveShadow = CONFIG.performance.shadowsEnabled;
+            group.add(caseGlass);
+
+            // Case interior lighting
+            const caseLight = new THREE.PointLight(0xffcc99, 0.8, 15);
+            caseLight.position.set(0, 1.3, -12);
+            group.add(caseLight);
+
+            // Display items (simplified pastries/cakes)
+            const itemGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.5, 8);
+            const itemMat = new THREE.MeshPhongMaterial({ color: 0xd4a574 });
+            
+            const itemPositions = [
+                { x: -2.5, z: -12.2 },
+                { x: -1, z: -12.2 },
+                { x: 1, z: -12.2 },
+                { x: 2.5, z: -12.2 },
+                { x: -1.75, z: -11.8 },
+                { x: 0.75, z: -11.8 }
+            ];
+
+            itemPositions.forEach(pos => {
+                const item = new THREE.Mesh(itemGeo, itemMat);
+                item.position.set(pos.x, 1.1, pos.z);
+                item.castShadow = CONFIG.performance.shadowsEnabled;
+                item.receiveShadow = CONFIG.performance.shadowsEnabled;
+                group.add(item);
+            });
+
+            // Counter back wall with shelves
+            const backPanelGeo = new THREE.BoxGeometry(9, 5, 0.4);
+            const backPanelMat = new THREE.MeshPhongMaterial({ color: 0x2a2a2a });
+            const backPanel = new THREE.Mesh(backPanelGeo, backPanelMat);
+            backPanel.position.set(0, 3.5, -13.5);
+            group.add(backPanel);
+
+            // Shelves on back wall
+            const shelfGeo = new THREE.BoxGeometry(8.5, 0.3, 0.8);
+            const shelfMat = new THREE.MeshPhongMaterial({ color: 0x8b6f47 });
+            for (let i = 0; i < 3; i++) {
+                const shelf = new THREE.Mesh(shelfGeo, shelfMat);
+                shelf.position.set(0, 1.5 + i * 1.3, -13.2);
+                shelf.castShadow = CONFIG.performance.shadowsEnabled;
+                group.add(shelf);
+            }
+
+            // ========== DINING AREA ==========
+            // Tables
+            const tableLegGeo = new THREE.BoxGeometry(0.4, 2.5, 0.4);
+            const tableLegMat = new THREE.MeshPhongMaterial({ color: 0x1a1a1a });
+            const tableTopGeo = new THREE.BoxGeometry(3.2, 0.4, 3.2);
+            const tableTopMat = new THREE.MeshPhongMaterial({ color: 0x8b6f47 });
+
+            const tablePositions = [
+                { x: -10, z: -6 },
+                { x: -3, z: -6 },
+                { x: 4, z: -6 },
+                { x: -10, z: 0 },
+                { x: -3, z: 0 },
+                { x: 4, z: 0 },
+                { x: -10, z: 6 },
+                { x: -3, z: 6 },
+                { x: 4, z: 6 }
+            ];
+
+            tablePositions.forEach(pos => {
+                // Table top
+                const top = new THREE.Mesh(tableTopGeo, tableTopMat);
+                top.position.set(pos.x, 2.5, pos.z);
+                top.castShadow = CONFIG.performance.shadowsEnabled;
+                top.receiveShadow = CONFIG.performance.shadowsEnabled;
+                group.add(top);
+
+                // Table legs
+                for (let i = 0; i < 4; i++) {
+                    const leg = new THREE.Mesh(tableLegGeo, tableLegMat);
+                    leg.position.set(
+                        pos.x + (i % 2 === 0 ? 1.3 : -1.3),
+                        1.25,
+                        pos.z + (i < 2 ? 1.3 : -1.3)
+                    );
+                    leg.castShadow = CONFIG.performance.shadowsEnabled;
+                    leg.receiveShadow = CONFIG.performance.shadowsEnabled;
+                    group.add(leg);
+                }
+            });
+
+            // Chairs
+            const chairGeo = new THREE.BoxGeometry(1.1, 1.8, 1.1);
+            const chairMat = new THREE.MeshPhongMaterial({ color: 0x1a3a52 });
+            
+            tablePositions.forEach((pos, idx) => {
+                for (let i = 0; i < 2; i++) {
+                    const chair = new THREE.Mesh(chairGeo, chairMat);
+                    chair.position.set(
+                        pos.x + (i === 0 ? -2.2 : 2.2),
+                        0.9,
+                        pos.z
+                    );
+                    chair.castShadow = CONFIG.performance.shadowsEnabled;
+                    chair.receiveShadow = CONFIG.performance.shadowsEnabled;
+                    group.add(chair);
+                }
+            });
+
+            // ========== LIGHTING & AMBIANCE ==========
+            // Ceiling lights (warm)
+            const lightPositions = [
+                { x: -9, z: -5 },
+                { x: -9, z: 2 },
+                { x: 0, z: -5 },
+                { x: 0, z: 2 },
+                { x: 9, z: -5 },
+                { x: 9, z: 2 }
+            ];
+
+            lightPositions.forEach(pos => {
+                // Light fixture (physical)
+                const fixtureGeo = new THREE.CylinderGeometry(0.3, 0.3, 0.4, 8);
+                const fixtureMat = new THREE.MeshPhongMaterial({ color: 0xc0a080 });
+                const fixture = new THREE.Mesh(fixtureGeo, fixtureMat);
+                fixture.position.set(pos.x, 14.8, pos.z);
+                group.add(fixture);
+
+                // Actual light
+                const light = new THREE.PointLight(0xffd699, 0.6, 25);
+                light.position.set(pos.x, 14, pos.z);
+                light.castShadow = CONFIG.performance.shadowsEnabled;
+                group.add(light);
+            });
+
+            return group;
+        }
+
+        // ==========================================
+        // MENU DATA
+        // ==========================================
+        const menuData = [
+            { category: 'PIZZAS', items: [
+                { name: 'Margherita', description: 'Fresh mozzarella, basil, tomato sauce', price: '$14.99' },
+                { name: 'Pepperoni', description: 'Classic pepperoni with mozzarella cheese', price: '$15.99' },
+                { name: 'Quattro Formaggi', description: 'Four blend of Italian cheeses', price: '$16.99' },
+                { name: 'Spinaci & Ricotta', description: 'Fresh spinach with creamy ricotta', price: '$15.99' },
+                { name: 'Vegetariana', description: 'Seasonal vegetables & mozzarella', price: '$14.99' }
+            ]},
+            { category: 'PASTA', items: [
+                { name: 'Carbonara', description: 'Creamy egg sauce with pancetta & pecorino', price: '$13.99' },
+                { name: 'Lasagna', description: 'Layers of pasta, sauce, and ricotta cheese', price: '$12.99' },
+                { name: 'Ravioli Ricotta', description: 'Tender pasta pockets with ricotta filling', price: '$14.99' },
+                { name: 'Penne Marinara', description: 'Penne in fresh tomato sauce with basil', price: '$11.99' },
+                { name: 'Fettuccine Alfredo', description: 'Creamy Parmesan sauce with fettuccine', price: '$12.99' }
+            ]},
+            { category: 'APPETIZERS', items: [
+                { name: 'Bruschetta', description: 'Toasted bread with fresh tomatoes & garlic', price: '$8.99' },
+                { name: 'Calamari Fritti', description: 'Crispy fried squid with marinara', price: '$11.99' },
+                { name: 'Mozzarella Sticks', description: 'Golden fried mozzarella with marinara', price: '$8.99' },
+                { name: 'Caprese Salad', description: 'Tomatoes, mozzarella, basil, olive oil', price: '$9.99' }
+            ]},
+            { category: 'DESSERTS', items: [
+                { name: 'Tiramisu', description: 'Classic Italian mascarpone dessert', price: '$6.99' },
+                { name: 'Panna Cotta', description: 'Smooth vanilla cream with berry sauce', price: '$6.99' },
+                { name: 'Cannoli', description: 'Crispy shells filled with sweet ricotta', price: '$5.99' },
+                { name: 'Gelato', description: 'Creamy Italian ice cream - ask for flavors', price: '$4.99' }
+            ]}
+        ];
+
+        // ==========================================
+        // UI FUNCTIONS
+        // ==========================================
+        function populateMenu() {
+            const container = document.getElementById('menu-items');
+            container.innerHTML = '';
+
+            menuData.forEach(category => {
+                const categoryTitle = document.createElement('div');
+                categoryTitle.style.cssText = `
+                    color: #d4af37;
+                    font-size: 14px;
+                    font-weight: bold;
+                    letter-spacing: 2px;
+                    margin-top: 15px;
+                    margin-bottom: 10px;
+                    padding: 10px 0;
+                    border-bottom: 2px solid #d4af37;
+                    text-transform: uppercase;
+                `;
+                categoryTitle.textContent = category.category;
+                container.appendChild(categoryTitle);
+
+                category.items.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'menu-item';
+                    itemDiv.innerHTML = `
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
+                        <div class="menu-price">${item.price}</div>
+                    `;
+                    container.appendChild(itemDiv);
+                });
+            });
+        }
+
+        function updateProgress(value) {
+            appState.progress = value;
+            document.getElementById('progress').style.width = (value * 100) + '%';
+        }
+
+        function updateInstructions() {
+            const text = document.getElementById('instruction-text');
+            if (appState.isInside) {
+                if (CONFIG.performance.isMobile) {
+                    text.textContent = '📱 Drag to look around • Tap forward to move to counter';
+                } else {
+                    text.textContent = '🖱 Move: WASD • Look: Mouse • Press M for Menu';
+                }
+            } else {
+                if (CONFIG.performance.isMobile) {
+                    text.textContent = '📱 Drag to look around • Tap to enter';
+                } else {
+                    text.textContent = '🖱 Move: WASD • Look: Mouse • Press E to Enter';
+                }
+            }
+        }
+
+        function updateButtons() {
+            const enterBtn = document.getElementById('enter-btn');
+            const exitBtn = document.getElementById('exit-btn');
+            const menuBtn = document.getElementById('menu-btn');
+            
+            if (appState.isInside) {
+                enterBtn.style.display = 'none';
+                exitBtn.style.display = 'block';
+                menuBtn.style.display = 'block';
+            } else {
+                enterBtn.style.display = 'block';
+                exitBtn.style.display = 'none';
+                menuBtn.style.display = 'none';
+            }
+        }
+
+        function toggleMenu() {
+            const panel = document.getElementById('menu-panel');
+            panel.classList.toggle('active');
+        }
+
+        // ==========================================
+        // SCENE TRANSITIONS
+        // ==========================================
+        async function enterRestaurant() {
+            if (appState.isTransitioning) return;
+            appState.isTransitioning = true;
+
+            // Smooth transition to interior
+            for (let i = 0; i <= 1; i += 0.02) {
+                camera.position.z = 25 - (i * 15);
+                updateProgress(i);
+                await new Promise(r => setTimeout(r, 10));
+            }
+
+            // Switch scenes
+            if (appState.sceneObjects.exterior) {
+                scene.remove(appState.sceneObjects.exterior);
+            }
+
+            appState.isInside = true;
+            if (!appState.sceneObjects.interior) {
+                appState.sceneObjects.interior = createInterior();
+            }
+            scene.add(appState.sceneObjects.interior);
+
+            // Reset camera for interior
+            camera.position.set(0, 1.7, 10);
+            camera.rotation.set(0, 0, 0);
+
+            updateButtons();
+            updateInstructions();
+            updateProgress(1);
+
+            appState.isTransitioning = false;
+            appState.canMove = true;
+
+            setTimeout(() => updateProgress(0), 500);
+        }
+
+        function exitRestaurant() {
+            if (appState.isTransitioning) return;
+            appState.isTransitioning = true;
+
+            // Close menu
+            document.getElementById('menu-panel').classList.remove('active');
+
+            // Switch scenes
+            if (appState.sceneObjects.interior) {
+                scene.remove(appState.sceneObjects.interior);
+            }
+
+            appState.isInside = false;
+            if (!appState.sceneObjects.exterior) {
+                appState.sceneObjects.exterior = createExterior();
+            }
+            scene.add(appState.sceneObjects.exterior);
+
+            // Reset camera for exterior
+            camera.position.set(0, 1.7, 25);
+            camera.rotation.set(0, 0, 0);
+
+            updateButtons();
+            updateInstructions();
+
+            appState.isTransitioning = false;
+            appState.canMove = true;
+        }
+
+        // ==========================================
+        // CAMERA & MOVEMENT CONTROLS
+        // ==========================================
+        camera.position.set(0, 1.7, 25);
+        camera.lookAt(0, 1.7, 0);
+
+        const controls = {
+            moveForward: false,
+            moveBackward: false,
+            moveLeft: false,
+            moveRight: false,
+            touchStartX: 0,
+            touchStartY: 0
+        };
+
+        const velocity = new THREE.Vector3();
+        const moveSpeed = 0.12;
+        const rotateSpeed = CONFIG.performance.isMobile ? 0.003 : 0.002;
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') controls.moveForward = true;
+            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') controls.moveBackward = true;
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') controls.moveLeft = true;
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') controls.moveRight = true;
+            if (e.key === 'm' || e.key === 'M') toggleMenu();
+            if ((e.key === 'e' || e.key === 'E') && !appState.isInside) enterRestaurant();
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') controls.moveForward = false;
+            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') controls.moveBackward = false;
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') controls.moveLeft = false;
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') controls.moveRight = false;
+        });
+
+        // Mouse look (desktop)
+        document.addEventListener('mousemove', (e) => {
+            if (!CONFIG.performance.isMobile) {
+                const deltaX = e.movementX * rotateSpeed;
+                const deltaY = e.movementY * rotateSpeed;
+                
+                camera.rotation.order = 'YXZ';
+                camera.rotation.y -= deltaX;
+                camera.rotation.x -= deltaY;
+                
+                camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
+            }
+        });
+
+        // Touch controls (mobile)
+        document.addEventListener('touchstart', (e) => {
+            controls.touchStartX = e.touches[0].clientX;
+            controls.touchStartY = e.touches[0].clientY;
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            const deltaX = (e.touches[0].clientX - controls.touchStartX) * rotateSpeed;
+            const deltaY = (e.touches[0].clientY - controls.touchStartY) * rotateSpeed;
+            
+            camera.rotation.order = 'YXZ';
+            camera.rotation.y -= deltaX;
+            camera.rotation.x -= deltaY;
+            
+            camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
+            
+            controls.touchStartX = e.touches[0].clientX;
+            controls.touchStartY = e.touches[0].clientY;
+        });
+
+        // Button controls
+        document.getElementById('enter-btn').addEventListener('click', enterRestaurant);
+        document.getElementById('exit-btn').addEventListener('click', exitRestaurant);
+        document.getElementById('menu-btn').addEventListener('click', toggleMenu);
+        document.getElementById('menu-close-btn').addEventListener('click', toggleMenu);
+
+        // ==========================================
+        // RESPONSIVE CANVAS
+        // ==========================================
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ==========================================
+        // ANIMATION LOOP
+        // ==========================================
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Breathing effect
+            appState.breatheOffset += 0.004;
+            const breathAmount = Math.sin(appState.breatheOffset) * 0.5;
+            camera.position.y = 1.7 + breathAmount * 0.01;
+
+            // Movement
+            if (appState.canMove) {
+                const direction = new THREE.Vector3();
+                direction.z = Number(controls.moveForward) - Number(controls.moveBackward);
+                direction.x = Number(controls.moveLeft) - Number(controls.moveRight);
+                direction.normalize();
+
+                velocity.copy(direction).multiplyScalar(moveSpeed);
+
+                // Move forward/backward
+                const forward = new THREE.Vector3();
+                camera.getWorldDirection(forward);
+                forward.y = 0;
+                forward.normalize();
+                camera.position.addScaledVector(forward, velocity.z);
+
+                // Move left/right
+                const right = new THREE.Vector3();
+                camera.getWorldDirection(right);
+                right.cross(camera.up).normalize();
+                right.y = 0;
+                camera.position.addScaledVector(right, velocity.x);
+
+                // Limit movement bounds
+                if (appState.isInside) {
+                    camera.position.x = Math.max(-15, Math.min(15, camera.position.x));
+                    camera.position.z = Math.max(-12, Math.min(8, camera.position.z));
+                } else {
+                    camera.position.x = Math.max(-10, Math.min(10, camera.position.x));
+                    camera.position.z = Math.max(-20, Math.min(28, camera.position.z));
+                }
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // ==========================================
+        // INITIALIZATION
+        // ==========================================
+        function init() {
+            // Create exterior scene
+            appState.sceneObjects.exterior = createExterior();
+            scene.add(appState.sceneObjects.exterior);
+
+            // Setup menu
+            populateMenu();
+
+            // Setup UI
+            updateButtons();
+            updateInstructions();
+            appState.canMove = true;
+
+            // Hide loading
+            document.getElementById('loading').style.display = 'none';
+
+            // Start animation
+            animate();
+        }
+
+        // Start when ready
+        if (document.readyState === 'loading') {
+            window.addEventListener('load', init);
+        } else {
+            init();
+        }
+    </script>
 </body>
 </html>
