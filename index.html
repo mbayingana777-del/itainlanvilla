@@ -1,1292 +1,320 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-<title>Ambridge Italian Villa | Ambridge, PA</title>
-<meta name="description" content="Ambridge Italian Villa — Italian, Greek, and American favorites including pizza, gyros, wings, salads, and more."/>
-
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --bg:#ffffff;
-
-  /* Section backgrounds */
-  --bg-top:#0d1b2f;
---bg-bottom:#1d3a5f;
---bg-featured:#f3f8fd;
-  --bg-signup:#11161d;
-
-  --ink:#0b1220;
-  --muted:rgba(255,255,255,.85);
-
-  /* Italian-flag palette */
-  --red:#c1121f;
-  --green:#1f7a3a;
-  --white:#ffffff;
-  --gold:#e3b341;
-
-  --max:1180px;
-  --line:rgba(255,255,255,.18);
-  --radius:16px;
-  --shadow:0 18px 60px rgba(0,0,0,.35);
-  --soft-shadow:0 18px 60px rgba(2,6,23,.08);
-}
-
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  color:var(--ink);
- background:
-  linear-gradient(
-    180deg,
-    #0d1b2f 0%,
-    #1d3a5f 25%,
-    #5f84b8 50%,
-    #cfe2f6 75%,
-    #ffffff 100%
-  );
-}
-a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
-.wrap{width:min(var(--max),92%);margin:auto}
-
-/* ===== Header ===== */
-header{
-  position:sticky; top:0; z-index:20;
-  background:rgba(10,12,16,.55);
-  backdrop-filter:saturate(140%) blur(10px);
-  border-bottom:1px solid rgba(255,255,255,.10);
-}
-.top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:14px;
-  padding:14px 0;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  min-width:220px;
-  color:#fff;
-}
-.logo{
-  height:44px;
-  width:auto;
-  display:block;
-  filter:drop-shadow(0 12px 30px rgba(0,0,0,.35));
-}
-.brand-name{
-  font-family:Oswald, system-ui, sans-serif;
-  text-transform:uppercase;
-  letter-spacing:.7px;
-  font-size:18px;
-  font-weight:800;
-  line-height:1.1;
-}
-.brand-sub{
-  font-size:12px;
-  font-weight:800;
-  color:rgba(255,255,255,.75);
-}
-
-.nav{
-  display:flex;
-  gap:22px;
-  align-items:center;
-}
-.nav a{
-  font-family:Oswald, system-ui, sans-serif;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  font-weight:800;
-  color:rgba(255,255,255,.9);
-  font-size:14px;
-  line-height:1;
-  position:relative;
-}
-.nav a:hover{opacity:.8}
-
-.nav a.foodtruck-link{
-  font-size:16px;
-  letter-spacing:.8px;
-}
-
-.right{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:flex-end;
-}
-
-/* ===== Buttons / pills ===== */
-.pill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 14px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(255,255,255,.06);
-  color:#fff;
-  font-weight:900;
-  transition:140ms ease;
-  cursor:pointer;
-}
-.pill:hover{transform:translateY(-1px); background:rgba(255,255,255,.10)}
-.pill.red{background:var(--red); border-color:transparent}
-.pill.red:hover{filter:brightness(1.05)}
-.pill.green{background:var(--green); border-color:transparent}
-.pill.green:hover{filter:brightness(1.05)}
-.pill.dark{
-  background:var(--ink);
-  color:#fff;
-  border-color:transparent;
-}
-.pill.dark:hover{filter:brightness(1.06)}
-
-/* ===== Hero ===== */
-.hero{
-  position:relative;
-  min-height:92vh;
-  display:flex;
-  align-items:center;
- 
-  background-size:cover;
-  background-position:center;
-  background-repeat:no-repeat;
-}
-  #three-bg{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  z-index:0;
-}
-
-.hero-inner{
-  position:relative;
-  z-index:2;
-}
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(90deg, rgba(8,12,18,.68) 0%, rgba(8,12,18,.44) 40%, rgba(8,12,18,.24) 100%);
-}
-.hero::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(111,147,187,0) 0%,
-      rgba(143,176,209,0) 45%,
-      rgba(183,204,226,.18) 68%,
-      rgba(215,226,239,.62) 82%,
-      rgba(232,225,216,.96) 94%,
-      #e8e1d8 100%
-    );
-  pointer-events:none;
-}
-.hero-noise{
-  position:absolute;
-  inset:0;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='.18'/></svg>");
-  opacity:.16;
-  mix-blend-mode:overlay;
-  pointer-events:none;
-}
-.hero-inner{
-  position:relative;
-  z-index:2;
-  padding:86px 0 56px;
-  color:#fff;
-}
-.flag-bar{
-  display:inline-flex;
-  border-radius:999px;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.14);
-  box-shadow:0 14px 40px rgba(0,0,0,.25);
-}
-.flag-bar span{display:block; width:18px; height:10px;}
-.flag-bar .g{background:var(--green)}
-.flag-bar .w{background:#fff}
-.flag-bar .r{background:var(--red)}
-
-.hero h1{
-  font-family:Oswald, system-ui, sans-serif;
-  font-size:clamp(42px, 6vw, 86px);
-  margin:14px 0 10px;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-  color:#f6f7f4;
-  text-shadow:0 10px 30px rgba(0,0,0,.25);
-}
-.hero p{
-  margin:0 0 20px;
-  max-width:680px;
-  font-weight:900;
-  color:rgba(246,247,244,.88);
-  line-height:1.45;
-  text-shadow:0 8px 24px rgba(0,0,0,.22);
-}
-.hero-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  align-items:center;
-  margin-top:16px;
-}
-.hero-badges{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:18px;
-}
-.hero-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 12px;
-  border-radius:999px;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.14);
-  color:#fff;
-  font-weight:900;
-  font-size:13px;
-  box-shadow:0 12px 30px rgba(0,0,0,.16);
-}
-
-/* ===== Generic sections ===== */
-section{
-  padding:72px 0;
-  background:transparent;
-}
-.section-title{
-  font-size:38px;
-  font-weight:950;
-  margin:0 0 10px;
-}
-.section-sub{
-  margin:0 0 18px;
-  color:rgba(11,18,32,.70);
-  font-weight:800;
-}
-
-.grid{display:grid;gap:16px}
-.grid-3{grid-template-columns:repeat(3, 1fr)}
-.card{
-  border:1px solid rgba(11,18,32,.10);
-  border-radius:var(--radius);
-  padding:18px;
-  background:#fff;
-  box-shadow:var(--soft-shadow);
-  transition:140ms ease;
-}
-.card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 22px 70px rgba(2,6,23,.12)
-}
-.card b{font-size:18px}
-.card p{
-  margin:8px 0 0;
-  color:rgba(11,18,32,.65);
-  font-weight:800;
-  line-height:1.35
-}
-
-/* ===== Featured Menu ===== */
-.featured{
-  position:relative;
-  background:
-    linear-gradient(180deg, rgba(238,243,248,.82) 0%, rgba(243,248,253,.94) 100%);
-}
-.featured-grid{
-  display:grid;
-  grid-template-columns:repeat(4, 1fr);
-  gap:18px;
-  margin-top:24px;
-}
-.featured-card{
-  position:relative;
-  display:block;
-  border-radius:18px;
-  overflow:hidden;
-  min-height:330px;
-  background:#ddd;
-  border:1px solid rgba(11,18,32,.08);
-  box-shadow:0 16px 40px rgba(2,6,23,.10);
-  transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-}
-.featured-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(180deg, rgba(7,10,15,.04) 0%, rgba(7,10,15,.16) 45%, rgba(7,10,15,.72) 100%);
-  z-index:1;
-}
-.featured-card::after{
-  content:"";
-  position:absolute;
-  inset:-1px;
-  border-radius:18px;
-  box-shadow:0 0 0 0 rgba(227,179,65,0);
-  transition:box-shadow .25s ease;
-  pointer-events:none;
-  z-index:3;
-}
-.featured-card:hover{
-  transform:translateY(-6px) scale(1.015);
-  box-shadow:0 28px 70px rgba(2,6,23,.16);
-  border-color:rgba(193,18,31,.18);
-}
-.featured-card:hover::after{
-  box-shadow:
-    0 0 0 1px rgba(227,179,65,.55),
-    0 0 24px rgba(227,179,65,.35),
-    0 0 48px rgba(193,18,31,.18);
-}
-.featured-card .img{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-}
-.featured-card .img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  transition:transform .5s ease, filter .35s ease;
-}
-.featured-card:hover .img img{
-  transform:scale(1.08);
-  filter:saturate(1.05) contrast(1.04);
-}
-.featured-copy{
-  position:absolute;
-  left:0;
-  right:0;
-  bottom:0;
-  z-index:2;
-  padding:18px;
-  color:#fff;
-}
-.featured-eyebrow{
-  display:inline-block;
-  margin-bottom:8px;
-  padding:6px 10px;
-  border-radius:999px;
-  background:rgba(255,255,255,.14);
-  border:1px solid rgba(255,255,255,.16);
-  font-size:12px;
-  font-weight:900;
-  letter-spacing:.4px;
-  text-transform:uppercase;
-}
-.featured-title{
-  margin:0 0 6px;
-  font-family:Oswald, system-ui, sans-serif;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-  font-size:30px;
-  line-height:1;
-}
-.featured-text{
-  margin:0;
-  color:rgba(255,255,255,.90);
-  font-weight:800;
-  line-height:1.4;
-  font-size:14px;
-}
-
-/* ===== Menu background ===== */
-.menu-bg{
-  position:relative;
-  background:transparent;
-}
-.menu-bg::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    180deg,
-    rgba(215,226,239,.35) 0%,
-    rgba(215,226,239,.6) 30%,
-    rgba(241,235,227,.78) 100%
-  );
-}
-.menu-bg > .wrap{
-  position:relative;
-  z-index:2;
-}
-
-/* ===== Category Grid ===== */
-.category-shell{
-  background:#fff;
-  border-radius:18px;
-  box-shadow:0 18px 60px rgba(2,6,23,.10);
-  overflow:hidden;
-  border:1px solid rgba(11,18,32,.10);
-}
-.category-head{
-  padding:20px 18px;
-  border-bottom:1px solid rgba(11,18,32,.10);
-}
-.category-head .title{
-  font-family:Oswald, system-ui, sans-serif;
-  letter-spacing:.6px;
-  text-transform:uppercase;
-  font-size:20px;
-  font-weight:900;
-  margin:0 0 6px;
-}
-.category-head .note{
-  color:rgba(11,18,32,.65);
-  font-weight:800;
-  font-size:14px;
-  margin:0;
-}
-.category-grid{
-  padding:18px;
-  display:grid;
-  grid-template-columns:repeat(3, 1fr);
-  gap:18px;
-}
-.category-grid .featured-card{
-  min-height:300px;
-}
-.cat-card{
-  display:block;
-  border-radius:16px;
-  overflow:hidden;
-  background:#fff;
-  border:1px solid rgba(11,18,32,.10);
-  box-shadow:0 14px 34px rgba(2,6,23,.08);
-  transition:140ms ease;
-}
-.cat-card:hover{
-  transform:translateY(-2px);
-  border-color:rgba(193,18,31,.25);
-  box-shadow:0 18px 44px rgba(2,6,23,.12);
-}
-.cat-card .img{
-  height:240px;
-  background:#f3f4f6;
-  overflow:hidden;
-}
-.cat-card .img img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-  transform:scale(1.01);
-  transition:transform .45s ease;
-}
-.cat-card:hover .img img{transform:scale(1.07)}
-.cat-card .label{
-  padding:14px 14px 6px;
-  font-size:26px;
-  font-weight:950;
-  color:var(--ink);
-}
-.cat-card .meta{
-  padding:0 14px 16px;
-  color:rgba(11,18,32,.65);
-  font-weight:800;
-  font-size:13px;
-  line-height:1.35;
-}
-
-/* ===== Full menu CTA ===== */
-.full-menu{
-  background:transparent;
-}
-.full-menu-shell{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:22px;
-  padding:28px;
-  border-radius:22px;
-  background:#fff;
-  border:1px solid rgba(11,18,32,.08);
-  box-shadow:0 18px 60px rgba(2,6,23,.08);
-}
-.full-menu-copy h2{
-  margin:0 0 8px;
-  font-family:Oswald, system-ui, sans-serif;
-  font-size:34px;
-  line-height:1;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-}
-.full-menu-copy p{
-  margin:0;
-  color:rgba(11,18,32,.70);
-  font-weight:800;
-  line-height:1.5;
-  max-width:720px;
-}
-
-/* ===== Food Truck ===== */
-.foodtruck-card{
-  display:flex;
-  gap:18px;
-  align-items:center;
-  padding:18px;
-  background:#fff;
-  border:1px solid rgba(11,18,32,.10);
-  border-radius:18px;
-  box-shadow:0 18px 60px rgba(2,6,23,.08);
-  max-width:900px;
-  margin:14px auto 0;
-}
-.foodtruck-logo{
-  width:220px;
-  height:auto;
-  display:block;
-}
-.foodtruck-fallback{
-  width:220px;
-  height:120px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:14px;
-  background:#f3f4f6;
-  border:1px solid rgba(11,18,32,.10);
-  font-weight:900;
-  color:rgba(11,18,32,.60);
-}
-.foodtruck-copy b{font-size:18px}
-.foodtruck-copy p{
-  margin:8px 0 0;
-  color:rgba(11,18,32,.70);
-  font-weight:800;
-  line-height:1.45;
-}
-
-/* ===== Split panels ===== */
-.split{
-  display:grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap:18px;
-  align-items:start;
-}
-.panel{
-  border:1px solid rgba(11,18,32,.10);
-  border-radius:18px;
-  padding:18px;
-  background:#fff;
-  box-shadow:0 18px 60px rgba(2,6,23,.08);
-}
-.panel p{
-  margin:8px 0;
-  color:rgba(11,18,32,.70);
-  font-weight:800;
-  line-height:1.45
-}
-.kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  font-family:Oswald, system-ui, sans-serif;
-  text-transform:uppercase;
-  letter-spacing:.7px;
-  font-weight:900;
-  color:rgba(11,18,32,.85);
-}
-
-/* ===== Signup ===== */
-.signup{
-  background:
-    radial-gradient(circle at top right, rgba(193,18,31,.18), transparent 30%),
-    radial-gradient(circle at bottom left, rgba(31,122,58,.18), transparent 28%),
-    var(--bg-signup);
-  color:#fff;
-}
-.signup-shell{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  gap:20px;
-  align-items:center;
-  padding:30px;
-  border-radius:24px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  box-shadow:0 30px 80px rgba(0,0,0,.28);
-}
-.signup-kicker{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  margin-bottom:10px;
-  padding:7px 11px;
-  border-radius:999px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.10);
-  color:rgba(255,255,255,.92);
-  font-size:12px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.45px;
-}
-.signup h2{
-  margin:0 0 10px;
-  font-family:Oswald, system-ui, sans-serif;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  font-size:42px;
-  line-height:1;
-  color:#fff;
-}
-.signup p{
-  margin:0;
-  color:rgba(255,255,255,.84);
-  font-weight:800;
-  line-height:1.55;
-}
-.signup-form{
-  display:grid;
-  gap:12px;
-}
-.signup-row{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:10px;
-}
-.signup input{
-  width:100%;
-  min-height:52px;
-  border:none;
-  outline:none;
-  padding:0 16px;
-  border-radius:14px;
-  background:#fff;
-  color:var(--ink);
-  font-size:15px;
-  font-weight:700;
-}
-.signup button{
-  min-height:52px;
-  padding:0 18px;
-  border:none;
-  outline:none;
-}
-.form-note{
-  font-size:12px;
-  color:rgba(255,255,255,.66);
-  font-weight:700;
-}
-.form-status{
-  min-height:20px;
-  font-size:13px;
-  font-weight:900;
-  color:#fff;
-}
-.form-status.success{color:#9bf2b2}
-.form-status.error{color:#ffb7b7}
-
-/* ===== Footer ===== */
-footer{
-  border-top:1px solid rgba(11,18,32,.10);
-  padding:40px 0;
-  text-align:center;
-  color:rgba(11,18,32,.60);
-  font-weight:800;
-  background:#fff;
-}
-
-/* ===== Mobile ===== */
-@media(max-width:1100px){
-  .featured-grid{grid-template-columns:repeat(2, 1fr)}
-}
-@media(max-width:980px){
-  .nav{display:none}
-  .split{grid-template-columns:1fr}
-  .grid-3{grid-template-columns:1fr}
-  .category-grid{grid-template-columns:1fr}
-  .cat-card .label{font-size:24px}
-  .brand{min-width:auto}
-  .right{min-width:auto}
-  .foodtruck-card{flex-direction:column; align-items:flex-start;}
-  .foodtruck-logo{width:min(260px, 100%);}
-  .foodtruck-fallback{width:min(260px, 100%);}
-  .full-menu-shell{flex-direction:column; align-items:flex-start}
-  .signup-shell{grid-template-columns:1fr}
-}
-@media(max-width:720px){
-  .top{
-    flex-wrap:wrap;
-    justify-content:space-between;
-  }
-  .right{
-    width:100%;
-    justify-content:flex-start;
-    flex-wrap:wrap;
-  }
-  .hero{
-    min-height:88vh;
-    background-position:center;
-  }
-  .hero-inner{
-    padding:82px 0 48px;
-  }
-  .section-title{
-    font-size:32px;
-  }
-  .featured-grid{
-    grid-template-columns:1fr;
-  }
-  .featured-card{
-    min-height:300px;
-  }
-  .featured-title{
-    font-size:26px;
-  }
-  .signup-row{
-    grid-template-columns:1fr;
-  }
-  .signup h2{
-    font-size:34px;
-  }
-}
-</style>
-</head>
-
-<body>
-
-<script>
-  window.TOAST_ORDER_URL = "https://www.toasttab.com/local/order/ambridge-italian-villa-1710-duss-ave";
-  window.GMAPS_DIRECTIONS_URL = "https://www.google.com/maps/dir/?api=1&destination=1710%20Duss%20Avenue%2C%20Ambridge%2C%20PA%2015003";
-  window.FULL_MENU_URL = "https://www.ambridgeitalianvilla.com/our-menu/";
-</script>
-<script type="module">
-import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
-
-/* ===== SCENE SETUP ===== */
-const canvas = document.getElementById("three-bg");
-
-const scene = new THREE.Scene();
-
-const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-);
-camera.position.z = 5;
-
-const renderer = new THREE.WebGLRenderer({
-  canvas,
-  alpha: true,
-  antialias: true
-});
-
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-/* ===== WATER (FLOWING PLANE) ===== */
-const waterGeometry = new THREE.PlaneGeometry(20, 10, 128, 128);
-
-const waterMaterial = new THREE.MeshStandardMaterial({
-  color: 0x1d4f91,
-  transparent: true,
-  opacity: 0.35,
-  wireframe: false
-});
-
-const water = new THREE.Mesh(waterGeometry, waterMaterial);
-water.rotation.x = -Math.PI / 2;
-water.position.y = -1.5;
-scene.add(water);
-
-/* ===== LIGHT (SUN SWEEP) ===== */
-const light = new THREE.DirectionalLight(0xffffff, 2);
-light.position.set(5, 5, 5);
-scene.add(light);
-
-const ambient = new THREE.AmbientLight(0xffffff, 0.6);
-scene.add(ambient);
-
-/* ===== PARTICLES (AIR / ATMOSPHERE) ===== */
-const particleCount = 600;
-const particlesGeometry = new THREE.BufferGeometry();
-
-const positions = new Float32Array(particleCount * 3);
-
-for(let i = 0; i < particleCount; i++){
-  positions[i * 3] = (Math.random() - 0.5) * 20;
-  positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
-  positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-}
-
-particlesGeometry.setAttribute(
-  "position",
-  new THREE.BufferAttribute(positions, 3)
-);
-
-const particlesMaterial = new THREE.PointsMaterial({
-  size: 0.02,
-  color: 0xffffff,
-  transparent: true,
-  opacity: 0.4
-});
-
-const particles = new THREE.Points(particlesGeometry, particlesMaterial);
-scene.add(particles);
-
-/* ===== MOUSE REACTION ===== */
-let mouseX = 0;
-let mouseY = 0;
-
-window.addEventListener("mousemove", (e)=>{
-  mouseX = (e.clientX / window.innerWidth - 0.5);
-  mouseY = (e.clientY / window.innerHeight - 0.5);
-});
-
-/* ===== ANIMATION LOOP ===== */
-let time = 0;
-
-function animate(){
-  requestAnimationFrame(animate);
-
-  time += 0.02;
-
-  /* 🌊 WATER FLOW */
-  const positions = water.geometry.attributes.position;
-
-  for(let i = 0; i < positions.count; i++){
-    const x = positions.getX(i);
-    const y = positions.getY(i);
-
-    const wave =
-      Math.sin(x * 1.5 + time) * 0.1 +
-      Math.cos(y * 1.5 + time) * 0.1;
-
-    positions.setZ(i, wave);
-  }
-
-  positions.needsUpdate = true;
-
-  /* ☀️ SUN SWEEP */
-  light.position.x = Math.sin(time * 0.3) * 5;
-
-  /* 🌬️ AIR DRIFT */
-  particles.rotation.y += 0.0005;
-  particles.rotation.x += 0.0002;
-
-  /* 🧠 PARALLAX FEEL */
-  camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.03;
-  camera.position.y += (-mouseY * 0.3 - camera.position.y) * 0.03;
-
-  renderer.render(scene, camera);
-}
-
-animate();
-
-/* ===== RESIZE ===== */
-window.addEventListener("resize", ()=>{
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
-</script>
-<header>
-  <div class="wrap top">
-    <a class="brand" href="#top" aria-label="Home">
-      <img class="logo" src="assets/logo.png" alt="Ambridge Italian Villa"
-           onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22220%22 height=%2244%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22transparent%22/><text x=%2250%25%22 y=%2258%25%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2216%22 fill=%22white%22>Ambridge Italian Villa</text></svg>';">
-      <div>
-        <div class="brand-name">Ambridge Italian Villa</div>
-        <div class="brand-sub">Italian • Greek • American</div>
-      </div>
-    </a>
-
-    <nav class="nav" aria-label="Primary">
-      <a href="#featured">Featured</a>
-      <a href="#menu">Menu</a>
-      <a href="#foodtruck" class="foodtruck-link">Food Truck</a>
-      <a href="#favorites">Favorites</a>
-      <a href="#signup">Sign Up</a>
-    </nav>
-
-    <div class="right">
-      <a class="pill" href="#" id="directionsTop">Directions</a>
-      <a class="pill red" href="#" id="orderTop" target="_blank" rel="noopener">Order Online</a>
-    </div>
-  </div>
-</header>
-
-<main id="top">
-  <div class="hero" role="img" aria-label="Greek platter background">
-  <canvas id="three-bg"></canvas>
-    <div class="hero-noise" aria-hidden="true"></div>
-
-    <div class="wrap hero-inner">
-      <div class="flag-bar" aria-hidden="true">
-        <span class="g"></span><span class="w"></span><span class="r"></span>
-      </div>
-
-      <h1>A Taste of the Mediterranean</h1>
-      <p>Greek tradition, Italian classics, and family recipes — made fresh every day in Ambridge.</p>
-
-      <div class="hero-actions">
-        <a class="pill red" href="#" id="orderHero" target="_blank" rel="noopener">Order Online</a>
-        <a class="pill green" href="#menu">View Menu</a>
-        <a class="pill" href="#" id="directionsHero">Get Directions</a>
-      </div>
-
-      <div class="hero-badges" aria-label="Highlights">
-        <div class="hero-badge">Fresh Pizza</div>
-        <div class="hero-badge">Greek Favorites</div>
-        <div class="hero-badge">Family-Owned Flavor</div>
-      </div>
-    </div>
-  </div>
-
-  <section id="featured" class="featured">
-    <div class="wrap">
-      <h2 class="section-title">Featured Menu</h2>
-      <p class="section-sub">A few favorites that hit every time. Hover the cards for that extra glow.</p>
-
-      <div class="featured-grid" aria-label="Featured menu items">
-        <a class="featured-card" href="#" data-order aria-label="Signature Pizza">
-          <div class="img">
-            <img src="assets/featured-pizza.png" alt="Signature pizza"
-                 loading="lazy" decoding="async"
-                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80';">
-          </div>
-          <div class="featured-copy">
-            <span class="featured-eyebrow">Best Seller</span>
-            <h3 class="featured-title">Signature Pizza</h3>
-            <p class="featured-text">Hand-tossed, loaded with flavor, and built for pizza nights done right.</p>
-          </div>
-        </a>
-
-        <a class="featured-card" href="#" data-order aria-label="Greek Gyro">
-          <div class="img">
-            <img src="assets/featured-gyro.png" alt="Greek gyro"
-                 loading="lazy" decoding="async"
-                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=1200&q=80';">
-          </div>
-          <div class="featured-copy">
-            <span class="featured-eyebrow">Villa Classic</span>
-            <h3 class="featured-title">Greek Gyro</h3>
-            <p class="featured-text">Warm pita, seasoned meat, tomatoes, onions, and cool tzatziki.</p>
-          </div>
-        </a>
-
-        <a class="featured-card" href="#" data-order aria-label="Loaded Fries">
-          <div class="img">
-            <img src="assets/featured-fries.png" alt="Loaded fries"
-                 loading="lazy" decoding="async"
-                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1576107232684-1279f390859f?auto=format&fit=crop&w=1200&q=80';">
-          </div>
-          <div class="featured-copy">
-            <span class="featured-eyebrow">Snack Favorite</span>
-            <h3 class="featured-title">Loaded Fries</h3>
-            <p class="featured-text">Crispy, cheesy, seasoned, and way too easy to keep eating.</p>
-          </div>
-        </a>
-
-        <a class="featured-card" href="#" data-order aria-label="Chicken Souvlaki">
-          <div class="img">
-            <img src="assets/featured-souvlaki.png" alt="Chicken souvlaki"
-                 loading="lazy" decoding="async"
-                 onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80';">
-          </div>
-          <div class="featured-copy">
-            <span class="featured-eyebrow">Mediterranean</span>
-            <h3 class="featured-title">Chicken Souvlaki</h3>
-            <p class="featured-text">Fresh, savory, and built around that clean grilled flavor people come back for.</p>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section id="menu" class="menu-bg">
-    <div class="wrap">
-      <h2 class="section-title">Menu</h2>
-      <p class="section-sub">Have a bite of our Mediterranean cuisine.</p>
-
-      <div class="category-shell">
-        <div class="category-head">
-          <div class="title">Choose a Category</div>
-          <p class="note">Tap a card to open online ordering.</p>
-        </div>
-
-        <div class="category-grid" aria-label="Menu categories">
-          <a class="featured-card" href="#" data-order aria-label="Pizza and Calzones">
-            <div class="img">
-              <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1200&q=80" alt="Pizza and calzones" loading="lazy" decoding="async">
-            </div>
-            <div class="featured-copy">
-              <span class="featured-eyebrow">Italian Classic</span>
-              <h3 class="featured-title">Pizza &amp; Calzones</h3>
-              <p class="featured-text">Sicilian, hand tossed, thick/thin and specialty pies.</p>
-            </div>
-          </a>
-
-          <a class="featured-card" href="#" data-order aria-label="Gyros and Greek Specialties">
-            <div class="img">
-              <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=80" alt="Gyros and Greek specialties" loading="lazy" decoding="async">
-            </div>
-            <div class="featured-copy">
-              <span class="featured-eyebrow">Greek Favorite</span>
-              <h3 class="featured-title">Gyros &amp; Greek</h3>
-              <p class="featured-text">Home of the gyro, plus souvlaki, platters, and Greek favorites.</p>
-            </div>
-          </a>
-
-          <a class="featured-card" href="#" data-order aria-label="Hoagies Sandwiches and Wraps">
-            <div class="img">
-              <img src="https://images.unsplash.com/photo-1553909489-cd47e0ef937f?auto=format&fit=crop&w=1200&q=80" alt="Hoagies sandwiches and wraps" loading="lazy" decoding="async">
-            </div>
-            <div class="featured-copy">
-              <span class="featured-eyebrow">Stacked</span>
-              <h3 class="featured-title">Hoagies &amp; Wraps</h3>
-              <p class="featured-text">12-inch hoagies, grilled sandwiches, wraps, and more.</p>
-            </div>
-          </a>
-
-          <a class="featured-card" href="#" data-order aria-label="Wings Fries and Finger Foods">
-            <div class="img">
-              <img src="https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=1200&q=80" alt="Wings fries and finger foods" loading="lazy" decoding="async">
-            </div>
-            <div class="featured-copy">
-              <span class="featured-eyebrow">Fan Favorite</span>
-              <h3 class="featured-title">Wings &amp; Finger Foods</h3>
-              <p class="featured-text">Wings, fries, loaded fries, mozzarella sticks, and apps.</p>
-            </div>
-          </a>
-
-          <a class="featured-card" href="#" data-order aria-label="Salads and Soups">
-            <div class="img">
-              <img src="https://images.unsplash.com/photo-1546793665-c74683f339c1?auto=format&fit=crop&w=1200&q=80" alt="Salads and soups" loading="lazy" decoding="async">
-            </div>
-            <div class="featured-copy">
-              <span class="featured-eyebrow">Fresh</span>
-              <h3 class="featured-title">Salads &amp; Soups</h3>
-              <p class="featured-text">Greek feta, chef, gyro, chicken, steak salads, soup, and chili.</p>
-            </div>
-          </a>
-
-          <a class="featured-card" href="#" data-order aria-label="Breakfast and Daily Specials">
-            <div class="img">
-              <img src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1200&q=80" alt="Breakfast and daily specials" loading="lazy" decoding="async">
-            </div>
-            <div class="featured-copy">
-              <span class="featured-eyebrow">Morning</span>
-              <h3 class="featured-title">Breakfast &amp; Specials</h3>
-              <p class="featured-text">Omelets, pancakes, french toast, and daily specials.</p>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="full-menu" id="fullmenu">
-    <div class="wrap">
-      <div class="full-menu-shell">
-        <div class="full-menu-copy">
-          <h2>View the Full Menu</h2>
-          <p>Want everything in one place? Open the full menu and browse the entire lineup of pizzas, gyros, hoagies, wings, salads, breakfast, and more.</p>
-        </div>
-        <a class="pill red" href="#" id="fullMenuBtn" target="_blank" rel="noopener">Open Full Menu</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="foodtruck">
-    <div class="wrap">
-      <h2 class="section-title">Food Truck</h2>
-      <p class="section-sub">Catch us around town — same villa flavor on wheels.</p>
-
-      <div class="foodtruck-card">
-        <img
-          class="foodtruck-logo"
-          src="assets/foodtruck-logo.png"
-          alt="Ambridge Italian Villa Food Truck logo"
-          loading="lazy"
-          decoding="async"
-          onerror="this.style.display='none'; document.getElementById('ftFallback').style.display='flex';"
-        >
-        <div id="ftFallback" class="foodtruck-fallback" style="display:none;">
-          Food Truck Logo
-        </div>
-
-        <div class="foodtruck-copy">
-          <b>Book / Schedule</b>
-          <p>Events, catering, and pop-ups. Follow us for weekly locations.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="favorites">
-    <div class="wrap">
-      <h2 class="section-title">House Favorites</h2>
-      <p class="section-sub">Best sellers — simple, satisfying, always consistent.</p>
-
-      <div class="grid grid-3">
-        <div class="card"><b>Classic Gyro</b><p>Pita, seasoned meat, onions, tomatoes, tzatziki.</p></div>
-        <div class="card"><b>Chicken Souvlaki</b><p>Grilled chicken, lemony flavor, fresh sides.</p></div>
-        <div class="card"><b>Loaded Fries</b><p>Cheese, seasoning, and add-ons that slap.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="hours">
-    <div class="wrap">
-      <div class="split">
-        <div class="panel">
-          <div class="kicker">★★★★★ Yelp Reviews</div>
-          <h2 class="section-title" style="margin-top:10px;">Loved by Locals</h2>
-          <p>“People keep calling out the gyros, the big portions, and the kind of consistent comfort food that makes this place a local go-to.”</p>
-          <p>“A lot of the praise centers on homemade flavor, good value, and that longtime family-run feel.”</p>
-          <p><a href="https://www.yelp.com/biz/ambridge-italian-villa-ambridge?start=70" target="_blank" rel="noopener" style="color:#c1121f;font-weight:900;">Read more reviews on Yelp →</a></p>
-        </div>
-
-        <div class="panel">
-          <div class="kicker">Greek Vibe</div>
-          <h2 class="section-title" style="margin-top:10px;">Kali Orexi</h2>
-          <p>That means “enjoy your meal.” We keep it simple: fresh ingredients, bold flavor, and food that feels like home.</p>
-          <p>Order online for pickup — or come in and we’ll take care of you.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="signup" class="signup">
-    <div class="wrap">
-      <div class="signup-shell">
-        <div>
-          <div class="signup-kicker">Deals • Specials • Updates</div>
-          <h2>Sign Up for Villa Specials</h2>
-          <p>Get first dibs on promos, featured items, and local updates. Simple, clean, and easy — just drop your email below.</p>
-        </div>
-
-        <form class="signup-form" id="signupForm" novalidate>
-          <div class="signup-row">
-            <input
-              type="email"
-              id="emailInput"
-              name="email"
-              placeholder="Enter your email address"
-              autocomplete="email"
-              required
-            >
-            <button class="pill green" type="submit">Sign Up</button>
-          </div>
-          <div class="form-note">This demo stores signups in the browser for now. Later you can connect it to Google Sheets, Formspree, or your own backend.</div>
-          <div class="form-status" id="formStatus" aria-live="polite"></div>
-        </form>
-      </div>
-    </div>
-  </section>
-</main>
-
-<footer>
-  © Ambridge Italian Villa · Ambridge, PA
-</footer>
-
-<script>
-(function(){
-  const orderUrl = window.TOAST_ORDER_URL;
-  const mapsUrl = window.GMAPS_DIRECTIONS_URL;
-  const fullMenuUrl = window.FULL_MENU_URL;
-
-  ["orderTop","orderHero","orderHours"].forEach(id=>{
-    const el = document.getElementById(id);
-    if(el) el.href = orderUrl;
-  });
-
-  ["directionsTop","directionsHero","directionsHours"].forEach(id=>{
-    const el = document.getElementById(id);
-    if(el){
-      el.href = mapsUrl;
-      el.target = "_blank";
-      el.rel = "noopener";
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Santorini Living World</title>
+  <style>
+    :root {
+      --ui-bg: rgba(7, 17, 31, 0.42);
+      --ui-border: rgba(255,255,255,0.16);
+      --ui-text: #eef6ff;
+      --ui-muted: rgba(238,246,255,0.72);
+      --glow: rgba(135, 206, 255, 0.22);
+      --shadow: rgba(0, 0, 0, 0.32);
     }
-  });
 
-  const fullMenuBtn = document.getElementById("fullMenuBtn");
-  if(fullMenuBtn){
-    fullMenuBtn.href = fullMenuUrl;
-  }
+    * { box-sizing: border-box; }
 
-  document.querySelectorAll("[data-order]").forEach(el=>{
-    el.addEventListener("click", (e)=>{
-      e.preventDefault();
-      window.open(orderUrl, "_blank", "noopener");
-    });
-  });
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #07111f;
+      color: var(--ui-text);
+    }
 
-  const form = document.getElementById("signupForm");
-  const emailInput = document.getElementById("emailInput");
-  const formStatus = document.getElementById("formStatus");
+    body {
+      cursor: default;
+    }
 
-  function setStatus(message, type){
-    formStatus.textContent = message;
-    formStatus.className = "form-status" + (type ? " " + type : "");
-  }
+    #world {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      background: linear-gradient(180deg, #7fb4e8 0%, #d6d7db 36%, #0a3f7c 100%);
+    }
 
-  function isValidEmail(email){
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
+    .layer {
+      position: absolute;
+      inset: -4%;
+      will-change: transform, opacity, filter;
+      pointer-events: none;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      transform: translate3d(0,0,0) scale(1.06);
+    }
 
-  if(form){
-    form.addEventListener("submit", function(e){
-      e.preventDefault();
+    .base-photo {
+      background-image: url("/mnt/data/santorini-bg.png");
+      filter: saturate(1.06) contrast(1.03);
+      transform: translate3d(0,0,0) scale(1.08);
+    }
 
-      const email = emailInput.value.trim().toLowerCase();
+    .light-pass {
+      background:
+        radial-gradient(circle at 18% 28%, rgba(255, 224, 169, 0.34), transparent 30%),
+        radial-gradient(circle at 42% 56%, rgba(255,255,255,0.12), transparent 18%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
+      mix-blend-mode: screen;
+      opacity: 0.8;
+    }
 
-      if(!email){
-        setStatus("Please enter your email address.", "error");
-        emailInput.focus();
-        return;
+    .atmosphere {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.02) 28%, rgba(20, 58, 120, 0.10) 80%, rgba(0,0,0,0.08)),
+        radial-gradient(circle at 52% 46%, rgba(255,255,255,0.10), transparent 38%);
+      mix-blend-mode: screen;
+      opacity: 0.6;
+      filter: blur(2px);
+    }
+
+    .water-shimmer {
+      inset: 28% 8% 15% 8%;
+      background:
+        linear-gradient(90deg,
+          rgba(255,255,255,0.00) 0%,
+          rgba(255,255,255,0.10) 18%,
+          rgba(255,255,255,0.02) 34%,
+          rgba(255,255,255,0.12) 52%,
+          rgba(255,255,255,0.00) 72%,
+          rgba(255,255,255,0.06) 100%);
+      opacity: 0.24;
+      filter: blur(10px);
+      mix-blend-mode: screen;
+      transform: translate3d(0,0,0) skewX(-6deg) scale(1.15);
+    }
+
+    .water-ripple {
+      inset: 28% 9% 13% 9%;
+      background-image:
+        repeating-linear-gradient(
+          180deg,
+          rgba(255,255,255,0.06) 0px,
+          rgba(255,255,255,0.02) 2px,
+          rgba(255,255,255,0.00) 5px,
+          rgba(255,255,255,0.04) 8px,
+          rgba(255,255,255,0.00) 12px
+        );
+      opacity: 0.14;
+      mix-blend-mode: screen;
+      filter: blur(0.8px);
+    }
+
+    .sun-haze {
+      background:
+        radial-gradient(circle at 14% 29%, rgba(255, 224, 175, 0.52), rgba(255, 209, 138, 0.18) 16%, rgba(255,255,255,0.00) 40%);
+      opacity: 0.7;
+      filter: blur(20px);
+      mix-blend-mode: screen;
+    }
+
+    .breath-vignette {
+      background: radial-gradient(circle at center, transparent 48%, rgba(0,0,0,0.18) 100%);
+      opacity: 0.5;
+    }
+
+    .grain {
+      inset: -20%;
+      opacity: 0.06;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.7) 0.6px, transparent 0.7px);
+      background-size: 6px 6px;
+      mix-blend-mode: soft-light;
+    }
+
+    .ui {
+      position: relative;
+      z-index: 20;
+      min-height: 100dvh;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 28px;
+      gap: 20px;
+    }
+
+    .panel {
+      width: min(480px, 92vw);
+      padding: 22px 22px 20px;
+      border: 1px solid var(--ui-border);
+      background: var(--ui-bg);
+      backdrop-filter: blur(16px) saturate(1.1);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ui-muted);
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      text-wrap: balance;
+    }
+
+    p {
+      margin: 0;
+      font-size: clamp(15px, 1.8vw, 18px);
+      line-height: 1.5;
+      color: var(--ui-muted);
+      max-width: 58ch;
+    }
+
+    .status {
+      align-self: flex-start;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--ui-border);
+      background: rgba(8, 20, 38, 0.36);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.22);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #dff6ff;
+      box-shadow: 0 0 18px rgba(201, 236, 255, 0.9);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.82; }
+      50% { transform: scale(1.35); opacity: 1; }
+    }
+
+    .hint {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 25;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(7,17,31,0.36);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.72);
+      backdrop-filter: blur(10px);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    @media (max-width: 760px) {
+      .ui {
+        align-items: flex-end;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 18px;
       }
 
-      if(!isValidEmail(email)){
-        setStatus("Please enter a valid email address.", "error");
-        emailInput.focus();
-        return;
+      .status {
+        align-self: stretch;
+        justify-content: center;
       }
 
-      try{
-        const key = "villa_signup_emails";
-        const existing = JSON.parse(localStorage.getItem(key) || "[]");
-
-        if(existing.includes(email)){
-          setStatus("You're already signed up.", "success");
-          return;
-        }
-
-        existing.push(email);
-        localStorage.setItem(key, JSON.stringify(existing));
-
-        form.reset();
-        setStatus("You're in. Thanks for signing up.", "success");
-      }catch(err){
-        setStatus("Signup worked visually, but local storage is unavailable here.", "error");
+      .panel {
+        width: 100%;
       }
-    });
-  }
-})();
-</script>
+    }
+  </style>
+</head>
+<body>
+  <div id="world">
+    <div class="layer base-photo" id="basePhoto"></div>
+    <div class="layer atmosphere" id="atmosphere"></div>
+    <div class="layer sun-haze" id="sunHaze"></div>
+    <div class="layer water-shimmer" id="waterShimmer"></div>
+    <div class="layer water-ripple" id="waterRipple"></div>
+    <div class="layer light-pass" id="lightPass"></div>
+    <div class="layer grain" id="grain"></div>
+    <div class="layer breath-vignette" id="vignette"></div>
+  </div>
 
+  <main class="ui">
+    <div class="status">
+      <span class="dot"></span>
+      <span>Living world prototype active</span>
+    </div>
+
+    <section class="panel">
+      <div class="eyebrow">Phase 1 foundation</div>
+      <h1>Santorini, but alive.</h1>
+      <p>
+        This is the starting world layer: full-screen photo environment, breathing light,
+        subtle camera drift, water shimmer, soft atmosphere, and mouse-based depth.
+        Next step is replacing fake depth with real 3D geometry for domes, walls, water, and horizon.
+      </p>
+    </section>
+  </main>
+
+  <div class="hint">Move your mouse slowly</div>
+
+  <script>
+    const mouse = { x: 0, y: 0 };
+    const target = { x: 0, y: 0 };
+    const layers = {
+      basePhoto: document.getElementById('basePhoto'),
+      atmosphere: document.getElementById('atmosphere'),
+      sunHaze: document.getElementById('sunHaze'),
+      waterShimmer: document.getElementById('waterShimmer'),
+      waterRipple: document.getElementById('waterRipple'),
+      lightPass: document.getElementById('lightPass'),
+      grain: document.getElementById('grain'),
+      vignette: document.getElementById('vignette')
+    };
+
+    window.addEventListener('pointermove', (e) => {
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      target.x = (e.clientX / w) * 2 - 1;
+      target.y = (e.clientY / h) * 2 - 1;
+    }, { passive: true });
+
+    let start = performance.now();
+
+    function animate(now) {
+      const t = (now - start) * 0.001;
+
+      mouse.x += (target.x - mouse.x) * 0.04;
+      mouse.y += (target.y - mouse.y) * 0.04;
+
+      const driftX = Math.sin(t * 0.18) * 8;
+      const driftY = Math.cos(t * 0.15) * 6;
+      const breath = Math.sin(t * 0.75) * 0.012;
+      const shimmer = Math.sin(t * 0.9) * 16;
+      const ripple = (t * 18) % 20;
+      const sunPulse = 0.65 + Math.sin(t * 0.25) * 0.05;
+
+      layers.basePhoto.style.transform = `translate3d(${mouse.x * -10 + driftX}px, ${mouse.y * -8 + driftY}px, 0) scale(${1.08 + breath})`;
+      layers.atmosphere.style.transform = `translate3d(${mouse.x * -14}px, ${mouse.y * -10}px, 0) scale(${1.06 + breath * 0.7})`;
+      layers.sunHaze.style.transform = `translate3d(${mouse.x * -18 + driftX * 0.4}px, ${mouse.y * -12 + driftY * 0.4}px, 0) scale(${1.04 + breath})`;
+      layers.waterShimmer.style.transform = `translate3d(${mouse.x * -22 + shimmer}px, ${mouse.y * 4}px, 0) skewX(-6deg) scale(1.15)`;
+      layers.waterRipple.style.transform = `translate3d(${mouse.x * -12}px, ${mouse.y * 2 + ripple}px, 0) scale(1.06)`;
+      layers.lightPass.style.transform = `translate3d(${mouse.x * -16 + driftX * 0.5}px, ${mouse.y * -14 + driftY * 0.3}px, 0) scale(${1.04 + breath})`;
+      layers.grain.style.transform = `translate3d(${mouse.x * -6}px, ${mouse.y * -6}px, 0)`;
+      layers.vignette.style.opacity = `${0.48 + Math.sin(t * 0.55) * 0.03}`;
+      layers.sunHaze.style.opacity = `${sunPulse}`;
+      layers.lightPass.style.opacity = `${0.74 + Math.sin(t * 0.38) * 0.05}`;
+
+      requestAnimationFrame(animate);
+    }
+
+    requestAnimationFrame(animate);
+  </script>
 </body>
 </html>
