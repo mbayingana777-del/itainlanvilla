@@ -3,249 +3,529 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
 <title>Book Catering or Food Truck | Ambridge Italian Villa</title>
-<meta name="description" content="Request catering or book our food truck. We’ll confirm details and help you place your order."/>
-
+<meta name="description" content="Request catering or book our food truck. We'll confirm details and help you place your order."/>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&display=swap" rel="stylesheet">
-
 <style>
 :root{
   --bg:#f5f6f7;
   --ink:#0b1220;
-
   --red:#c1121f;
   --green:#1f7a3a;
-  --max:900px;
-
-  --radius:22px;
+  --gold:#d4af37;
+  --max:960px;
+  --radius:18px;
   --shadow:0 22px 70px rgba(2,6,23,.12);
 }
-
 *{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  color:var(--ink);
-  background:var(--bg);
-}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);}
 a{text-decoration:none;color:inherit}
 .wrap{width:min(var(--max),92%);margin:auto}
 
+/* HEADER */
 header{
-  position:sticky; top:0; z-index:10;
-  background:rgba(10,12,16,.70);
-  backdrop-filter:saturate(140%) blur(10px);
-  border-bottom:1px solid rgba(255,255,255,.12);
+  position:sticky;top:0;z-index:10;
+  background:rgba(10,12,16,.88);
+  backdrop-filter:saturate(140%) blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.10);
 }
-.top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:14px 0;
-  gap:14px;
-  color:#fff;
-}
-.brand{
-  display:flex; flex-direction:column;
-  gap:2px;
-}
-.brand b{
-  font-family:Oswald, system-ui, sans-serif;
-  letter-spacing:.7px;
-  text-transform:uppercase;
-  font-size:18px;
-}
-.brand span{
-  font-size:12px;
-  font-weight:800;
-  color:rgba(255,255,255,.75);
-}
+.top{display:flex;align-items:center;justify-content:space-between;padding:14px 0;gap:14px;color:#fff;}
+.brand{display:flex;flex-direction:column;gap:2px}
+.brand b{font-family:Oswald,system-ui,sans-serif;letter-spacing:.7px;text-transform:uppercase;font-size:18px;}
+.brand span{font-size:12px;font-weight:700;color:rgba(255,255,255,.65)}
 .pill{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 14px;
-  border-radius:999px;
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:9px 16px;border-radius:999px;
   border:1px solid rgba(255,255,255,.18);
   background:rgba(255,255,255,.06);
-  color:#fff;
-  font-weight:900;
-  transition:140ms ease;
+  color:#fff;font-weight:700;font-size:13px;
+  transition:140ms ease;cursor:pointer;
 }
-.pill:hover{transform:translateY(-1px); background:rgba(255,255,255,.10)}
-.pill.red{background:var(--red); border-color:transparent}
-.pill.green{background:var(--green); border-color:transparent}
+.pill:hover{transform:translateY(-1px);background:rgba(255,255,255,.12)}
+.pill.red{background:var(--red);border-color:transparent}
+.pill.green{background:var(--green);border-color:transparent}
+.pill.gold{background:var(--gold);border-color:transparent;color:#1a1a1a}
 
-main{padding:44px 0 70px}
+/* HERO BANNER */
+.booking-hero{
+  background:linear-gradient(135deg,rgba(10,12,16,.93),rgba(20,12,4,.90));
+  padding:52px 0 44px;
+  text-align:center;
+  color:#fff;
+  border-bottom:3px solid var(--gold);
+}
+.booking-hero h1{
+  font-family:Oswald,system-ui,sans-serif;
+  font-size:clamp(26px,5vw,46px);
+  letter-spacing:1px;text-transform:uppercase;
+  margin:0 0 10px;
+}
+.booking-hero h1 span{color:var(--gold)}
+.booking-hero p{color:rgba(255,255,255,.68);font-size:15px;max-width:520px;margin:0 auto;line-height:1.65;}
 
+/* LAYOUT */
+main{padding:40px 0 80px}
+.layout{display:grid;grid-template-columns:1fr 340px;gap:28px;align-items:start;}
+@media(max-width:780px){.layout{grid-template-columns:1fr}}
+
+/* CARD */
 .card{
-  background:rgba(255,255,255,.94);
-  border:1px solid rgba(11,18,32,.10);
+  background:rgba(255,255,255,.97);
+  border:1px solid rgba(11,18,32,.08);
   border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding:26px;
-  overflow:hidden;
-  position:relative;
+  padding:28px 28px 24px;
+  position:relative;overflow:hidden;
 }
 .card::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  background:radial-gradient(900px 220px at 20% 0%, rgba(31,122,58,.10), transparent 60%),
-             radial-gradient(900px 220px at 80% 0%, rgba(193,18,31,.10), transparent 60%);
+  content:"";position:absolute;inset:-2px;
+  background:radial-gradient(800px 180px at 20% 0%,rgba(31,122,58,.07),transparent 60%),
+             radial-gradient(800px 180px at 80% 0%,rgba(193,18,31,.07),transparent 60%);
   pointer-events:none;
 }
-.card > *{position:relative; z-index:1}
+.card>*{position:relative;z-index:1}
+.card-title{font-family:Oswald,system-ui,sans-serif;font-size:22px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 4px;}
+.card-sub{color:rgba(11,18,32,.58);font-size:13px;font-weight:600;margin:0 0 22px;line-height:1.5;}
 
-h1{
-  margin:0 0 8px;
-  font-family:Oswald, system-ui, sans-serif;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-  font-size:34px;
+/* FORM */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:5px}
+.field.full{grid-column:1/-1}
+label.lbl{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:rgba(11,18,32,.50)}
+input,select,textarea{
+  width:100%;padding:11px 13px;
+  border-radius:10px;border:1.5px solid rgba(11,18,32,.12);
+  background:#fff;font-weight:600;font-size:14px;
+  font-family:inherit;color:var(--ink);
+  transition:border-color .2s;-webkit-appearance:none;
 }
-.sub{
-  margin:0 0 18px;
-  color:rgba(11,18,32,.70);
-  font-weight:800;
-  line-height:1.5;
+input:focus,select:focus,textarea:focus{
+  outline:none;border-color:var(--gold);
+  box-shadow:0 0 0 3px rgba(212,175,55,.12);
 }
-.grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  margin:18px 0;
-}
-.input, select, textarea{
-  width:100%;
-  padding:12px 12px;
-  border-radius:12px;
-  border:1px solid rgba(11,18,32,.12);
-  background:#fff;
-  font-weight:700;
-  font-family:inherit;
-}
-textarea{min-height:120px; resize:vertical}
+textarea{min-height:110px;resize:vertical}
 
-.actions{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  margin-top:14px;
+/* Checkboxes */
+.checkbox-group{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;margin-top:4px;}
+.check-item{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 12px;border-radius:9px;
+  border:1.5px solid rgba(11,18,32,.10);
+  background:#fff;cursor:pointer;
+  transition:all .2s;font-size:13px;font-weight:700;
 }
+.check-item:hover{border-color:var(--gold);background:rgba(212,175,55,.05)}
+.check-item input[type=checkbox]{
+  width:16px;height:16px;padding:0;
+  accent-color:var(--gold);cursor:pointer;
+  border:none;box-shadow:none;flex-shrink:0;
+}
+.hr{height:1px;background:rgba(11,18,32,.08);margin:20px 0}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.note{margin-top:16px;font-size:12px;color:rgba(11,18,32,.48);font-weight:700;line-height:1.5;}
+.note a{color:var(--red)}
 
-.note{
-  margin-top:14px;
-  font-size:13px;
-  color:rgba(11,18,32,.60);
-  font-weight:800;
-  line-height:1.45;
-}
+/* SUCCESS */
+#success-state{display:none;text-align:center;padding:40px 20px}
+.success-icon{font-size:56px;margin-bottom:16px}
+.success-title{font-family:Oswald,system-ui,sans-serif;font-size:26px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 10px;}
+.success-sub{color:rgba(11,18,32,.58);font-size:14px;line-height:1.6;max-width:400px;margin:0 auto 16px}
 
-.hr{
-  height:1px;
-  background:rgba(11,18,32,.10);
-  margin:18px 0;
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:20px}
+.info-card{
+  background:rgba(255,255,255,.97);
+  border:1px solid rgba(11,18,32,.08);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:22px;
 }
+.info-card-title{
+  font-family:Oswald,system-ui,sans-serif;
+  font-size:13px;text-transform:uppercase;letter-spacing:1px;
+  color:rgba(11,18,32,.45);
+  margin:0 0 14px;padding-bottom:10px;
+  border-bottom:2px solid var(--gold);
+}
+.contact-row{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;font-size:14px;font-weight:600;}
+.contact-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+.contact-label{font-size:10px;font-weight:800;text-transform:uppercase;color:rgba(11,18,32,.40);letter-spacing:.5px}
+.contact-value{color:var(--ink);line-height:1.4}
+.contact-value a{color:var(--red);font-weight:700}
+.services-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.services-list li{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:700;
+  padding:8px 10px;border-radius:8px;
+  background:rgba(212,175,55,.06);
+  border:1px solid rgba(212,175,55,.15);
+}
+.services-list li::before{content:"✓";color:var(--green);font-weight:900}
+.steps{display:flex;flex-direction:column;gap:12px}
+.step{display:flex;align-items:flex-start;gap:12px}
+.step-num{
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),#e8c547);
+  color:#1a1a1a;font-weight:900;font-size:13px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.step-text{font-size:13px;font-weight:600;line-height:1.5;padding-top:3px}
+.step-text strong{display:block;font-weight:800;margin-bottom:1px}
 
-@media(max-width:760px){
-  .grid{grid-template-columns:1fr}
+/* FOOTER */
+footer{
+  background:rgba(10,12,16,.96);color:rgba(255,255,255,.45);
+  text-align:center;padding:22px;
+  font-size:12px;font-weight:700;letter-spacing:.5px;
 }
+footer a{color:var(--gold);font-weight:700}
 </style>
 </head>
-
 <body>
 
 <script>
-  // Same globals as your main page (easy to keep consistent)
   window.TOAST_ORDER_URL = "https://www.toasttab.com/local/order/ambridge-italian-villa-1710-duss-ave";
+  window.RESTAURANT_EMAIL = "ambridgeitalianvilla@gmail.com";
 </script>
 
 <header>
   <div class="wrap top">
     <div class="brand">
       <b>Ambridge Italian Villa</b>
-      <span>Food Truck • Catering • Family Meals</span>
+      <span>Food Truck &bull; Catering &bull; Family Meals</span>
     </div>
-    <div style="display:flex; gap:10px; align-items:center;">
-      <a class="pill" href="index.html">Home</a>
-      <a class="pill red" href="#" id="orderTop" target="_blank" rel="noopener">Order Online</a>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <a class="pill" href="index.html">&#8592; Back</a>
+      <a class="pill gold" href="tel:+17242663700">(724) 266-3700</a>
+      <a class="pill red" id="orderTop" href="#" target="_blank" rel="noopener">Order Online</a>
     </div>
   </div>
 </header>
 
+<div class="booking-hero">
+  <div class="wrap">
+    <h1>Catering &amp; <span>Food Truck</span> Booking</h1>
+    <p>Bring the authentic flavors of Ambridge Italian Villa to your next event. Fill out the form and we'll be in touch within 24 hours to confirm details and pricing.</p>
+  </div>
+</div>
+
 <main>
   <div class="wrap">
-    <div class="card">
-      <h1>Booking Request</h1>
-      <p class="sub">
-        Submit details below. We’ll confirm availability and the best options.
-        Once you have Toast catering/payment enabled, this page can route to Toast checkout.
-      </p>
+    <div class="layout">
 
-      <!-- Placeholder form (no backend needed yet) -->
-      <form action="mailto:your@email.com" method="post" enctype="text/plain">
-        <div class="grid">
-          <select name="Service" required>
-            <option value="" disabled selected>Food Truck or Catering?</option>
-            <option>Food Truck Booking</option>
-            <option>Catering / Family Meals</option>
-          </select>
+      <!-- FORM CARD -->
+      <div class="card">
+        <div id="form-state">
+          <h2 class="card-title">Booking Request</h2>
+          <p class="card-sub">Submit details below. We'll confirm availability and the best options for your event. No payment required now.</p>
 
-          <select name="Fulfillment">
-            <option value="" disabled selected>Pickup or Delivery?</option>
-            <option>Pickup</option>
-            <option>Delivery</option>
-            <option>Not sure yet</option>
-          </select>
+          <form id="booking-form" novalidate>
+            <div class="grid">
+              <div class="field">
+                <label class="lbl" for="f-service">Service Type *</label>
+                <select id="f-service" name="Service" required>
+                  <option value="" disabled selected>Select service...</option>
+                  <option>Catering — Drop-off</option>
+                  <option>Catering — Full Service</option>
+                  <option>Food Truck Booking</option>
+                  <option>Family Meal Package</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+              <div class="field">
+                <label class="lbl" for="f-fulfillment">Pickup or Delivery?</label>
+                <select id="f-fulfillment" name="Fulfillment">
+                  <option value="" disabled selected>Select...</option>
+                  <option>Pickup</option>
+                  <option>Delivery</option>
+                  <option>On-site (Food Truck)</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
 
-          <input class="input" name="Name" placeholder="Your name" required>
-          <input class="input" name="Phone" placeholder="Best phone number" required>
+              <div class="field">
+                <label class="lbl" for="f-name">Your Name *</label>
+                <input id="f-name" name="Name" type="text" placeholder="Full name" required>
+              </div>
+              <div class="field">
+                <label class="lbl" for="f-phone">Best Phone Number *</label>
+                <input id="f-phone" name="Phone" type="tel" placeholder="(xxx) xxx-xxxx" required>
+              </div>
 
-          <input class="input" name="EventDate" placeholder="Event date / time (optional)">
-          <input class="input" name="Headcount" placeholder="Headcount (approx)">
+              <div class="field">
+                <label class="lbl" for="f-email">Email Address</label>
+                <input id="f-email" name="Email" type="email" placeholder="your@email.com">
+              </div>
+              <div class="field">
+                <label class="lbl" for="f-event-type">Event Type</label>
+                <select id="f-event-type" name="EventType">
+                  <option value="" disabled selected>Select event...</option>
+                  <option>Birthday Party</option>
+                  <option>Wedding / Reception</option>
+                  <option>Corporate Event</option>
+                  <option>Graduation Party</option>
+                  <option>Family Reunion</option>
+                  <option>Community Event</option>
+                  <option>Holiday Party</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label class="lbl" for="f-date">Event Date</label>
+                <input id="f-date" name="EventDate" type="date">
+              </div>
+              <div class="field">
+                <label class="lbl" for="f-time">Preferred Time</label>
+                <input id="f-time" name="EventTime" type="time">
+              </div>
+
+              <div class="field">
+                <label class="lbl" for="f-headcount">Estimated Headcount</label>
+                <input id="f-headcount" name="Headcount" type="number" placeholder="e.g. 50" min="1">
+              </div>
+              <div class="field">
+                <label class="lbl" for="f-budget">Approximate Budget</label>
+                <select id="f-budget" name="Budget">
+                  <option value="" disabled selected>Select range...</option>
+                  <option>Under $200</option>
+                  <option>$200 – $500</option>
+                  <option>$500 – $1,000</option>
+                  <option>$1,000 – $2,500</option>
+                  <option>$2,500+</option>
+                  <option>Flexible / Not sure</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="field full">
+              <label class="lbl">Menu Interests (check all that apply)</label>
+              <div class="checkbox-group">
+                <label class="check-item"><input type="checkbox" name="menu" value="Pizza"> &#127829; Pizza</label>
+                <label class="check-item"><input type="checkbox" name="menu" value="Gyros"> &#129369; Gyros</label>
+                <label class="check-item"><input type="checkbox" name="menu" value="Pasta"> &#127837; Pasta</label>
+                <label class="check-item"><input type="checkbox" name="menu" value="Wings"> &#127831; Wings</label>
+                <label class="check-item"><input type="checkbox" name="menu" value="Calzones"> &#129360; Calzones</label>
+                <label class="check-item"><input type="checkbox" name="menu" value="Salads"> &#129367; Salads</label>
+                <label class="check-item"><input type="checkbox" name="menu" value="Soup"> &#127842; Soup</label>
+                <label class="check-item"><input type="checkbox" name="menu" value="Desserts"> &#127856; Desserts</label>
+                <label class="check-item"><input type="checkbox" name="menu" value="Breakfast"> &#9749; Breakfast</label>
+                <label class="check-item"><input type="checkbox" name="menu" value="Sandwiches"> &#129362; Sandwiches</label>
+              </div>
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="field full">
+              <label class="lbl" for="f-details">Additional Details</label>
+              <textarea id="f-details" name="Details" placeholder="Tell us anything else — location, dietary needs, special requests, timing, theme, etc."></textarea>
+            </div>
+
+            <div class="actions">
+              <button class="pill green" type="submit" style="border:none;cursor:pointer;font-size:14px;padding:12px 28px;">
+                &#10003; Send Booking Request
+              </button>
+              <a class="pill red" id="toastPay" href="#" target="_blank" rel="noopener" style="font-size:14px;padding:12px 28px;">
+                Order Online via Toast &#8599;
+              </a>
+            </div>
+
+            <p class="note">
+              &#128274; Your information is private and only used to follow up on your request.<br>
+              We typically respond within 24 hours. For urgent requests, call <a href="tel:+17242663700">(724) 266-3700</a>.
+            </p>
+          </form>
         </div>
 
-        <textarea class="input" name="Details" placeholder="Tell us what you need (menu ideas, timing, location, preferences, etc.)"></textarea>
+        <!-- SUCCESS STATE -->
+        <div id="success-state">
+          <div class="success-icon">&#127881;</div>
+          <h2 class="success-title">Request Sent!</h2>
+          <p class="success-sub">
+            Thank you! Your booking request has been submitted. We'll review your details and reach out within <strong>24 hours</strong> to confirm availability and pricing.
+          </p>
+          <p class="success-sub" style="font-size:13px;">
+            For faster service, call us directly:<br>
+            <a href="tel:+17242663700" style="color:var(--red);font-weight:900;font-size:17px;">(724) 266-3700</a>
+          </p>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px;">
+            <a class="pill gold" href="index.html">&#8592; Back to Restaurant</a>
+            <a class="pill red" id="orderSuccess" href="#" target="_blank" rel="noopener">Order Online Now &#8599;</a>
+          </div>
+        </div>
+      </div>
 
-        <div class="actions">
-          <button class="pill green" type="submit" style="border:none;cursor:pointer;">Send Request</button>
+      <!-- SIDEBAR -->
+      <div class="sidebar">
 
-          <!-- Placeholder “Continue to Payment” -->
-          <a class="pill red" href="#" id="toastPay">Continue to Toast Payment</a>
+        <div class="info-card">
+          <div class="info-card-title">Contact Us Directly</div>
+          <div class="contact-row">
+            <span class="contact-icon">&#128222;</span>
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-value"><a href="tel:+17242663700">(724) 266-3700</a></div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon">&#128205;</span>
+            <div>
+              <div class="contact-label">Address</div>
+              <div class="contact-value">1710 Duss Ave<br>Ambridge, PA 15003</div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <span class="contact-icon">&#128336;</span>
+            <div>
+              <div class="contact-label">Hours</div>
+              <div class="contact-value">Mon–Sat: 9am – 9pm<br>Sunday: 10am – 8pm</div>
+            </div>
+          </div>
         </div>
 
-        <div class="note">
-          <div class="hr"></div>
-          <b>Owner note:</b> Replace <b>your@email.com</b> with the restaurant email.
-          <br>
-          <b>Toast payment placeholder:</b> Right now the red button opens the Toast ordering page.
-          When you get Toast admin access + catering enabled, we can update it to a catering checkout flow.
+        <div class="info-card">
+          <div class="info-card-title">Catering Services</div>
+          <ul class="services-list">
+            <li>Pizza &amp; Calzone Trays</li>
+            <li>Gyro &amp; Greek Platters</li>
+            <li>Pasta Buffet Packages</li>
+            <li>Wing Platters</li>
+            <li>Salad &amp; Soup Packages</li>
+            <li>Food Truck On-Site</li>
+            <li>Family Meal Bundles</li>
+            <li>Custom Menu Options</li>
+          </ul>
         </div>
-      </form>
+
+        <div class="info-card">
+          <div class="info-card-title">How It Works</div>
+          <div class="steps">
+            <div class="step">
+              <div class="step-num">1</div>
+              <div class="step-text"><strong>Submit Request</strong>Fill out the form with your event details.</div>
+            </div>
+            <div class="step">
+              <div class="step-num">2</div>
+              <div class="step-text"><strong>We Confirm</strong>We call or email within 24 hours to confirm availability.</div>
+            </div>
+            <div class="step">
+              <div class="step-num">3</div>
+              <div class="step-text"><strong>Finalize Menu</strong>We work with you to customize the perfect menu.</div>
+            </div>
+            <div class="step">
+              <div class="step-num">4</div>
+              <div class="step-text"><strong>Enjoy!</strong>We handle the food so you can enjoy your event.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card" style="background:linear-gradient(135deg,rgba(193,18,31,.05),rgba(212,175,55,.05));border-color:rgba(212,175,55,.22);">
+          <div class="info-card-title" style="color:var(--red)">Order Online Now</div>
+          <p style="font-size:13px;font-weight:600;color:rgba(11,18,32,.60);margin:0 0 14px;line-height:1.5;">
+            Want to place a regular order for pickup or delivery right now? Use our Toast online ordering system.
+          </p>
+          <a class="pill red" id="toastSidebar" href="#" target="_blank" rel="noopener" style="width:100%;justify-content:center;font-size:13px;">
+            Order via Toast &#8599;
+          </a>
+        </div>
+
+      </div>
     </div>
   </div>
 </main>
 
+<footer>
+  <p>&copy; 2025 Ambridge Italian Villa &bull; 1710 Duss Ave, Ambridge PA 15003 &bull; <a href="tel:+17242663700">(724) 266-3700</a> &bull; <a href="index.html">Home</a></p>
+</footer>
+
 <script>
 (function(){
-  const orderUrl = window.TOAST_ORDER_URL;
+  var orderUrl = window.TOAST_ORDER_URL;
+  var restaurantEmail = window.RESTAURANT_EMAIL;
 
-  const orderTop = document.getElementById("orderTop");
-  if(orderTop) orderTop.href = orderUrl;
+  // Wire all order/toast buttons
+  ['orderTop','toastPay','toastSidebar','orderSuccess'].forEach(function(id){
+    var el = document.getElementById(id);
+    if(el){ el.href = orderUrl; }
+  });
 
-  // Placeholder: routes to Toast ordering for now
-  const toastPay = document.getElementById("toastPay");
-  if(toastPay){
-    toastPay.addEventListener("click", (e)=>{
-      e.preventDefault();
-      window.open(orderUrl, "_blank", "noopener");
-    });
-  }
+  // Form submission
+  var form = document.getElementById('booking-form');
+  var formState = document.getElementById('form-state');
+  var successState = document.getElementById('success-state');
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    var name = form.querySelector('[name="Name"]').value.trim();
+    var phone = form.querySelector('[name="Phone"]').value.trim();
+    var service = form.querySelector('[name="Service"]').value;
+
+    if(!name || !phone || !service){
+      alert('Please fill in your name, phone number, and service type to continue.');
+      return;
+    }
+
+    // Collect form data
+    var data = {
+      Service: form.querySelector('[name="Service"]').value || '—',
+      Fulfillment: form.querySelector('[name="Fulfillment"]').value || '—',
+      Name: name,
+      Phone: phone,
+      Email: form.querySelector('[name="Email"]').value || '—',
+      EventType: form.querySelector('[name="EventType"]').value || '—',
+      EventDate: form.querySelector('[name="EventDate"]').value || '—',
+      EventTime: form.querySelector('[name="EventTime"]').value || '—',
+      Headcount: form.querySelector('[name="Headcount"]').value || '—',
+      Budget: form.querySelector('[name="Budget"]').value || '—',
+      Details: form.querySelector('[name="Details"]').value || '—'
+    };
+
+    var menuItems = Array.from(form.querySelectorAll('[name="menu"]:checked')).map(function(c){ return c.value; });
+
+    var lines = [
+      '=== AMBRIDGE ITALIAN VILLA — CATERING REQUEST ===',
+      '',
+      'SERVICE TYPE: ' + data.Service,
+      'FULFILLMENT: ' + data.Fulfillment,
+      '',
+      'NAME: ' + data.Name,
+      'PHONE: ' + data.Phone,
+      'EMAIL: ' + data.Email,
+      '',
+      'EVENT TYPE: ' + data.EventType,
+      'EVENT DATE: ' + data.EventDate,
+      'EVENT TIME: ' + data.EventTime,
+      'HEADCOUNT: ' + data.Headcount,
+      'BUDGET: ' + data.Budget,
+      '',
+      'MENU INTERESTS: ' + (menuItems.length ? menuItems.join(', ') : '—'),
+      '',
+      'ADDITIONAL DETAILS:',
+      data.Details,
+      '',
+      '================================================'
+    ];
+
+    var subject = encodeURIComponent('Catering Request — ' + data.Name + ' (' + data.EventDate + ')');
+    var body = encodeURIComponent(lines.join('\n'));
+    var mailtoLink = 'mailto:' + restaurantEmail + '?subject=' + subject + '&body=' + body;
+
+    // Show success
+    formState.style.display = 'none';
+    successState.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Open email client
+    setTimeout(function(){
+      window.location.href = mailtoLink;
+    }, 700);
+  });
 })();
 </script>
 
 </body>
 </html>
-
