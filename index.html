@@ -93,14 +93,8 @@
         }
 
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
+            from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+            to   { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
         #restaurant-name {
@@ -108,7 +102,7 @@
             font-size: 32px;
             font-weight: 300;
             letter-spacing: 3px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
             margin-bottom: 5px;
         }
 
@@ -125,7 +119,7 @@
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0,0,0,0.8);
             color: #fff;
             padding: 12px 24px;
             border-radius: 6px;
@@ -133,19 +127,13 @@
             text-align: center;
             pointer-events: auto;
             z-index: 20;
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            border: 1px solid rgba(212,175,55,0.3);
             animation: slideUp 0.6s ease 0.2s both;
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to   { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
         #instruction-text {
@@ -167,14 +155,8 @@
         }
 
         @keyframes slideRight {
-            from {
-                opacity: 0;
-                transform: translateX(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(20px); }
+            to   { opacity: 1; transform: translateX(0); }
         }
 
         .action-btn {
@@ -189,31 +171,36 @@
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 15px rgba(212,175,55,0.3);
         }
 
         .action-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 6px 20px rgba(212,175,55,0.5);
         }
 
-        .action-btn:active {
-            transform: translateY(0);
+        .action-btn:active { transform: translateY(0); }
+        .action-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .action-btn.red-btn {
+            background: linear-gradient(135deg, #c1121f, #9b0e18);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(193,18,31,0.3);
+        }
+        .action-btn.red-btn:hover {
+            box-shadow: 0 6px 20px rgba(193,18,31,0.5);
         }
 
-        .action-btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* Menu Panel */
+        /* ==========================================
+           MENU PANEL
+        ========================================== */
         #menu-panel {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             max-height: 0;
-            background: linear-gradient(to top, rgba(15, 15, 25, 0.98), rgba(30, 30, 45, 0.95));
+            background: linear-gradient(to top, rgba(10,10,18,0.99), rgba(20,20,35,0.97));
             overflow-y: auto;
             overflow-x: hidden;
             transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -223,38 +210,35 @@
             backdrop-filter: blur(10px);
         }
 
-        #menu-panel.active {
-            max-height: 65vh;
-        }
+        #menu-panel.active { max-height: 70vh; }
 
-        #menu-panel::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        #menu-panel::-webkit-scrollbar-track {
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        #menu-panel::-webkit-scrollbar-thumb {
-            background: #d4af37;
-            border-radius: 3px;
-        }
+        #menu-panel::-webkit-scrollbar { width: 6px; }
+        #menu-panel::-webkit-scrollbar-track { background: rgba(212,175,55,0.1); }
+        #menu-panel::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 3px; }
 
         #menu-header {
-            padding: 25px 20px;
+            padding: 22px 20px 16px;
             text-align: center;
-            border-bottom: 2px solid #d4af37;
+            border-bottom: 2px solid rgba(212,175,55,0.4);
             position: sticky;
             top: 0;
-            background: rgba(15, 15, 25, 0.99);
+            background: rgba(10,10,18,0.99);
             z-index: 31;
         }
 
         #menu-header h2 {
             color: #d4af37;
-            font-size: 24px;
-            letter-spacing: 2px;
-            margin-bottom: 8px;
+            font-size: 22px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        #menu-header p {
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
         }
 
         #menu-close-btn {
@@ -264,7 +248,7 @@
             background: none;
             border: none;
             color: #d4af37;
-            font-size: 32px;
+            font-size: 28px;
             cursor: pointer;
             transition: transform 0.3s;
             width: 40px;
@@ -275,50 +259,287 @@
             pointer-events: auto;
         }
 
-        #menu-close-btn:hover {
-            transform: rotate(90deg);
+        #menu-close-btn:hover { transform: rotate(90deg); }
+
+        /* Menu Tabs */
+        #menu-tabs {
+            display: flex;
+            gap: 8px;
+            padding: 14px 20px;
+            overflow-x: auto;
+            background: rgba(10,10,18,0.95);
+            border-bottom: 1px solid rgba(212,175,55,0.15);
+            position: sticky;
+            top: 73px;
+            z-index: 30;
+            scrollbar-width: none;
+        }
+        #menu-tabs::-webkit-scrollbar { display: none; }
+
+        .menu-tab-btn {
+            background: rgba(212,175,55,0.08);
+            border: 1px solid rgba(212,175,55,0.25);
+            color: rgba(255,255,255,0.65);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.25s ease;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .menu-tab-btn:hover,
+        .menu-tab-btn.active {
+            background: #d4af37;
+            border-color: #d4af37;
+            color: #1a1a1a;
+            box-shadow: 0 2px 12px rgba(212,175,55,0.4);
         }
 
         #menu-items {
             padding: 20px;
             display: grid;
-            gap: 15px;
+            gap: 12px;
+        }
+
+        .menu-category-title {
+            color: #d4af37;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-top: 10px;
+            margin-bottom: 6px;
+            padding: 8px 0 8px;
+            border-bottom: 1px solid rgba(212,175,55,0.3);
+            text-transform: uppercase;
         }
 
         .menu-item {
-            background: rgba(60, 60, 85, 0.7);
-            padding: 16px 18px;
+            background: rgba(55,55,80,0.65);
+            padding: 14px 16px;
             border-radius: 8px;
-            border-left: 4px solid #d4af37;
-            transition: all 0.3s ease;
+            border-left: 3px solid #d4af37;
+            transition: all 0.25s ease;
             backdrop-filter: blur(5px);
         }
 
         .menu-item:hover {
-            transform: translateX(8px);
-            background: rgba(80, 80, 105, 0.8);
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            transform: translateX(6px);
+            background: rgba(75,75,105,0.8);
+            box-shadow: 0 4px 15px rgba(212,175,55,0.15);
         }
 
         .menu-item h3 {
             color: #d4af37;
-            font-size: 16px;
-            margin-bottom: 6px;
+            font-size: 15px;
+            margin-bottom: 4px;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.4px;
         }
 
         .menu-item p {
             color: #bbb;
             font-size: 12px;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             line-height: 1.4;
         }
 
         .menu-price {
             color: #fff;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 14px;
+        }
+
+        .menu-tag {
+            display: inline-block;
+            background: rgba(212,175,55,0.15);
+            color: #d4af37;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* ==========================================
+           REVIEWS PANEL
+        ========================================== */
+        #reviews-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            max-height: 0;
+            background: linear-gradient(to top, rgba(10,10,18,0.99), rgba(20,20,35,0.97));
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: max-height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: auto;
+            z-index: 30;
+            border-top: 3px solid #d4af37;
+            backdrop-filter: blur(10px);
+        }
+
+        #reviews-panel.active { max-height: 70vh; }
+        #reviews-panel::-webkit-scrollbar { width: 6px; }
+        #reviews-panel::-webkit-scrollbar-track { background: rgba(212,175,55,0.1); }
+        #reviews-panel::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 3px; }
+
+        #reviews-header {
+            padding: 22px 20px 16px;
+            text-align: center;
+            border-bottom: 2px solid rgba(212,175,55,0.4);
+            position: sticky;
+            top: 0;
+            background: rgba(10,10,18,0.99);
+            z-index: 31;
+        }
+
+        #reviews-header h2 {
+            color: #d4af37;
+            font-size: 22px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        #reviews-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #d4af37;
+            font-size: 28px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: auto;
+        }
+        #reviews-close-btn:hover { transform: rotate(90deg); }
+
+        .reviews-summary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            padding: 16px 20px;
+            background: rgba(212,175,55,0.05);
+            border-bottom: 1px solid rgba(212,175,55,0.15);
+        }
+
+        .reviews-score-big {
+            font-size: 48px;
+            font-weight: 900;
+            color: #d4af37;
+            line-height: 1;
+        }
+
+        .reviews-stars { color: #d4af37; font-size: 18px; margin: 4px 0; }
+
+        .reviews-meta-text {
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .reviews-meta-text strong { color: #fff; }
+
+        .reviews-meta-text a {
+            color: #e8c547;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        #reviews-list {
+            padding: 20px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .review-card {
+            background: rgba(55,55,80,0.65);
+            padding: 18px 18px 14px;
+            border-radius: 8px;
+            border-left: 3px solid #d4af37;
+            backdrop-filter: blur(5px);
+            transition: all 0.25s ease;
+        }
+
+        .review-card:hover {
+            background: rgba(75,75,105,0.8);
+            transform: translateX(4px);
+        }
+
+        .review-card-stars { color: #d4af37; font-size: 14px; margin-bottom: 8px; }
+
+        .review-card-text {
+            color: #ccc;
+            font-size: 13px;
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .review-card-author {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .review-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4af37, #e8c547);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: #1a1a1a;
+            flex-shrink: 0;
+        }
+
+        .review-author-name {
+            color: #fff;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .review-author-meta {
+            color: rgba(255,255,255,0.45);
+            font-size: 11px;
+        }
+
+        .review-yelp-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #e8c547;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            text-decoration: underline;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        .reviews-yelp-cta {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(212,175,55,0.15);
         }
 
         /* Progress Indicator */
@@ -335,68 +556,22 @@
 
         /* Mobile Specific */
         @media (max-width: 768px) {
-            #restaurant-name {
-                font-size: 24px;
-                letter-spacing: 2px;
-            }
-
-            #restaurant-subtitle {
-                font-size: 10px;
-            }
-
-            #instructions {
-                font-size: 11px;
-                padding: 10px 18px;
-                bottom: 120px;
-            }
-
-            #action-buttons {
-                bottom: auto;
-                top: 50%;
-                right: 15px;
-                transform: translateY(-50%);
-                gap: 10px;
-            }
-
-            .action-btn {
-                padding: 10px 16px;
-                font-size: 11px;
-            }
-
-            #header {
-                top: 20px;
-            }
-
-            #menu-panel.active {
-                max-height: 70vh;
-            }
-
-            #menu-items {
-                padding: 15px;
-                gap: 12px;
-            }
-
-            .menu-item {
-                padding: 14px 16px;
-            }
-
-            .menu-item h3 {
-                font-size: 15px;
-            }
-
-            .menu-item p {
-                font-size: 11px;
-            }
+            #restaurant-name { font-size: 24px; letter-spacing: 2px; }
+            #restaurant-subtitle { font-size: 10px; }
+            #instructions { font-size: 11px; padding: 10px 18px; bottom: 130px; }
+            #action-buttons { bottom: auto; top: 50%; right: 15px; transform: translateY(-50%); gap: 10px; }
+            .action-btn { padding: 10px 16px; font-size: 11px; }
+            #header { top: 20px; }
+            #menu-panel.active, #reviews-panel.active { max-height: 75vh; }
         }
 
-        /* Fade Out Animation */
         .fade-out {
             animation: fadeOut 0.3s ease forwards;
         }
 
         @keyframes fadeOut {
             from { opacity: 1; }
-            to { opacity: 0; }
+            to   { opacity: 0; }
         }
     </style>
 </head>
@@ -411,7 +586,7 @@
     <div id="ui-container">
         <div id="header">
             <div id="restaurant-name">Italian Villa</div>
-            <div id="restaurant-subtitle">Ristorante & Pizzeria</div>
+            <div id="restaurant-subtitle">Ristorante &amp; Pizzeria &nbsp;·&nbsp; Ambridge, PA</div>
         </div>
 
         <div id="instructions">
@@ -419,17 +594,48 @@
         </div>
 
         <div id="action-buttons">
-            <button class="action-btn" id="enter-btn" style="display: none;">Enter Restaurant</button>
-            <button class="action-btn" id="exit-btn" style="display: none;">Exit</button>
-            <button class="action-btn" id="menu-btn" style="display: none;">Menu</button>
+            <button class="action-btn" id="enter-btn" style="display:none;">Enter Restaurant</button>
+            <button class="action-btn" id="exit-btn" style="display:none;">Exit</button>
+            <button class="action-btn" id="menu-btn" style="display:none;">📋 Menu</button>
+            <button class="action-btn" id="reviews-btn" style="display:none;">⭐ Reviews</button>
+            <a href="booking.html" class="action-btn red-btn" id="catering-btn" style="display:none;text-align:center;text-decoration:none;">🍽 Catering</a>
+            <a href="https://www.toasttab.com/local/order/ambridge-italian-villa-1710-duss-ave" target="_blank" rel="noopener" class="action-btn" id="order-btn" style="display:none;text-align:center;text-decoration:none;">Order Online</a>
         </div>
 
+        <!-- MENU PANEL -->
         <div id="menu-panel">
             <div id="menu-header">
                 <button id="menu-close-btn">✕</button>
                 <h2>Our Menu</h2>
+                <p>Authentic Italian · Greek · American</p>
             </div>
+            <div id="menu-tabs"></div>
             <div id="menu-items"></div>
+        </div>
+
+        <!-- REVIEWS PANEL -->
+        <div id="reviews-panel">
+            <div id="reviews-header">
+                <button id="reviews-close-btn">✕</button>
+                <h2>Guest Reviews</h2>
+            </div>
+            <div class="reviews-summary">
+                <div>
+                    <div class="reviews-score-big">4.5</div>
+                    <div class="reviews-stars">★★★★☆</div>
+                    <div style="color:rgba(255,255,255,0.5);font-size:11px;letter-spacing:1px;text-transform:uppercase;">On Yelp</div>
+                </div>
+                <div class="reviews-meta-text">
+                    <strong>77 Reviews</strong> on Yelp<br>
+                    Serving Ambridge &amp; Beaver County<br>
+                    for over 30 years<br>
+                    <a href="https://www.yelp.com/biz/ambridge-italian-villa-ambridge" target="_blank" rel="noopener">Read all on Yelp ↗</a>
+                </div>
+            </div>
+            <div id="reviews-list"></div>
+            <div class="reviews-yelp-cta">
+                <a href="https://www.yelp.com/biz/ambridge-italian-villa-ambridge" target="_blank" rel="noopener" class="action-btn red-btn" style="display:inline-block;text-decoration:none;padding:12px 28px;">Read All Reviews on Yelp ↗</a>
+            </div>
         </div>
     </div>
 
@@ -440,7 +646,7 @@
         const CONFIG = {
             performance: {
                 isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent),
-                targetFPS: 0, // Will be set based on device
+                targetFPS: 0,
                 shadowsEnabled: false,
                 antialias: false,
                 pixelRatio: 1
@@ -457,7 +663,6 @@
             }
         };
 
-        // Set performance based on device
         if (CONFIG.performance.isMobile) {
             CONFIG.performance.targetFPS = 30;
             CONFIG.performance.pixelRatio = Math.max(1, window.devicePixelRatio * 0.8);
@@ -500,13 +705,11 @@
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.65);
         scene.add(ambientLight);
 
-        // Main directional light (daylight)
         const sunLight = new THREE.DirectionalLight(0xffffff, 0.9);
         sunLight.position.set(40, 50, 30);
         sunLight.castShadow = CONFIG.performance.shadowsEnabled;
         scene.add(sunLight);
 
-        // Warm fill light
         const warmLight = new THREE.DirectionalLight(0xffcc88, 0.35);
         warmLight.position.set(-30, 20, 20);
         scene.add(warmLight);
@@ -526,33 +729,22 @@
 
             brickTexture: function() {
                 return this.createCanvas(512, 512, (ctx) => {
-                    // Base brick color
                     ctx.fillStyle = '#a5825a';
                     ctx.fillRect(0, 0, 512, 512);
-
-                    // Brick pattern
                     ctx.fillStyle = '#8b6f47';
                     const brickWidth = 80;
                     const brickHeight = 40;
                     for (let y = 0; y < 512; y += brickHeight) {
                         for (let x = 0; x < 512; x += brickWidth) {
                             ctx.fillRect(x, y, brickWidth - 2, brickHeight - 2);
-                            // Mortar lines
                             ctx.strokeStyle = '#c4a880';
                             ctx.lineWidth = 2;
                             ctx.strokeRect(x, y, brickWidth - 2, brickHeight - 2);
                         }
                     }
-
-                    // Add subtle texture variation
                     for (let i = 0; i < 2000; i++) {
-                        ctx.fillStyle = `rgba(0, 0, 0, ${Math.random() * 0.1})`;
-                        ctx.fillRect(
-                            Math.random() * 512,
-                            Math.random() * 512,
-                            Math.random() * 20 + 5,
-                            Math.random() * 20 + 5
-                        );
+                        ctx.fillStyle = `rgba(0,0,0,${Math.random() * 0.1})`;
+                        ctx.fillRect(Math.random()*512, Math.random()*512, Math.random()*20+5, Math.random()*20+5);
                     }
                 });
             },
@@ -564,14 +756,8 @@
                     ctx.strokeStyle = '#a0d0e0';
                     ctx.lineWidth = 2;
                     for (let i = 0; i < 256; i += 64) {
-                        ctx.beginPath();
-                        ctx.moveTo(i, 0);
-                        ctx.lineTo(i, 256);
-                        ctx.stroke();
-                        ctx.beginPath();
-                        ctx.moveTo(0, i);
-                        ctx.lineTo(256, i);
-                        ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 256); ctx.stroke();
+                        ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(256, i); ctx.stroke();
                     }
                 });
             },
@@ -581,7 +767,7 @@
                     ctx.fillStyle = '#8b6f47';
                     ctx.fillRect(0, 0, 512, 512);
                     for (let i = 0; i < 10; i++) {
-                        ctx.fillStyle = `rgba(0, 0, 0, ${0.05 + Math.random() * 0.1})`;
+                        ctx.fillStyle = `rgba(0,0,0,${0.05 + Math.random() * 0.1})`;
                         ctx.fillRect(0, i * 50, 512, 40);
                     }
                 });
@@ -592,13 +778,8 @@
                     ctx.fillStyle = '#808080';
                     ctx.fillRect(0, 0, 512, 512);
                     for (let i = 0; i < 3000; i++) {
-                        ctx.fillStyle = `rgba(${Math.random() * 100}, ${Math.random() * 100}, ${Math.random() * 100}, ${Math.random() * 0.3})`;
-                        ctx.fillRect(
-                            Math.random() * 512,
-                            Math.random() * 512,
-                            Math.random() * 15 + 2,
-                            Math.random() * 15 + 2
-                        );
+                        ctx.fillStyle = `rgba(${Math.random()*100},${Math.random()*100},${Math.random()*100},${Math.random()*0.3})`;
+                        ctx.fillRect(Math.random()*512, Math.random()*512, Math.random()*15+2, Math.random()*15+2);
                     }
                 });
             }
@@ -611,10 +792,7 @@
             isInside: false,
             canMove: false,
             isTransitioning: false,
-            sceneObjects: {
-                exterior: null,
-                interior: null
-            },
+            sceneObjects: { exterior: null, interior: null },
             progress: 0,
             breatheOffset: 0
         };
@@ -625,91 +803,57 @@
         function createExterior() {
             const group = new THREE.Group();
 
-            // Ground/Sidewalk
             const groundGeo = new THREE.PlaneGeometry(100, 80);
-            const groundMat = new THREE.MeshLambertMaterial({
-                map: textureUtils.concreteTexture()
-            });
+            const groundMat = new THREE.MeshLambertMaterial({ map: textureUtils.concreteTexture() });
             const ground = new THREE.Mesh(groundGeo, groundMat);
             ground.rotation.x = -Math.PI / 2;
             ground.position.y = -0.1;
-            ground.receiveShadow = CONFIG.performance.shadowsEnabled;
             group.add(ground);
 
-            // Building body (brick)
             const buildingGeo = new THREE.BoxGeometry(22, 16, 14);
-            const buildingMat = new THREE.MeshPhongMaterial({
-                map: textureUtils.brickTexture(),
-                side: THREE.FrontSide
-            });
+            const buildingMat = new THREE.MeshPhongMaterial({ map: textureUtils.brickTexture(), side: THREE.FrontSide });
             const building = new THREE.Mesh(buildingGeo, buildingMat);
             building.position.set(0, 8, -0.5);
-            building.castShadow = CONFIG.performance.shadowsEnabled;
-            building.receiveShadow = CONFIG.performance.shadowsEnabled;
             group.add(building);
 
-            // Storefront area (dark frame)
             const storefrontGeo = new THREE.BoxGeometry(20, 8, 0.8);
             const storefrontMat = new THREE.MeshPhongMaterial({ color: 0x2a2a2a });
             const storefront = new THREE.Mesh(storefrontGeo, storefrontMat);
             storefront.position.set(0, 4, 7);
-            storefront.castShadow = CONFIG.performance.shadowsEnabled;
             group.add(storefront);
 
-            // Storefront frame details
             const frameMat = new THREE.MeshPhongMaterial({ color: 0x1a1a1a });
-            
-            // Top frame
             const topFrameGeo = new THREE.BoxGeometry(20, 1.2, 0.5);
             const topFrame = new THREE.Mesh(topFrameGeo, frameMat);
             topFrame.position.set(0, 7.8, 7);
             group.add(topFrame);
-
-            // Bottom frame
             const bottomFrame = new THREE.Mesh(topFrameGeo, frameMat);
             bottomFrame.position.set(0, 0.2, 7);
             group.add(bottomFrame);
-
-            // Left frame
             const sideFrameGeo = new THREE.BoxGeometry(1.2, 8, 0.5);
             const leftFrame = new THREE.Mesh(sideFrameGeo, frameMat);
             leftFrame.position.set(-9.4, 4, 7);
             group.add(leftFrame);
-
-            // Right frame
             const rightFrame = new THREE.Mesh(sideFrameGeo, frameMat);
             rightFrame.position.set(9.4, 4, 7);
             group.add(rightFrame);
 
-            // Glass windows/doors
-            const glassMat = new THREE.MeshPhongMaterial({
-                map: textureUtils.glassTexture(),
-                transparent: true,
-                opacity: 0.7,
-                shininess: 80
-            });
-
-            // Main door window (left)
+            const glassMat = new THREE.MeshPhongMaterial({ map: textureUtils.glassTexture(), transparent: true, opacity: 0.7, shininess: 80 });
             const doorGeo = new THREE.BoxGeometry(4.5, 7, 0.2);
             const door = new THREE.Mesh(doorGeo, glassMat);
             door.position.set(-5.5, 3.5, 7.2);
             group.add(door);
-
-            // Right window
             const windowGeo = new THREE.BoxGeometry(4.5, 6, 0.2);
             const rightWindow = new THREE.Mesh(windowGeo, glassMat);
             rightWindow.position.set(5.5, 4, 7.2);
             group.add(rightWindow);
 
-            // Sign - Blue background
             const signBackGeo = new THREE.BoxGeometry(18, 3.2, 0.5);
             const signBackMat = new THREE.MeshPhongMaterial({ color: 0x0055cc });
             const signBack = new THREE.Mesh(signBackGeo, signBackMat);
             signBack.position.set(0, 13.2, 7.2);
-            signBack.castShadow = CONFIG.performance.shadowsEnabled;
             group.add(signBack);
 
-            // Sign text (using canvas texture)
             const signTexture = textureUtils.createCanvas(512, 128, (ctx) => {
                 ctx.fillStyle = '#ffffff';
                 ctx.font = 'bold 60px Arial';
@@ -722,36 +866,26 @@
             signText.position.set(0, 13.2, 7.5);
             group.add(signText);
 
-            // Awning (red/maroon)
             const awningGeo = new THREE.BoxGeometry(20.5, 1.5, 3);
             const awningMat = new THREE.MeshPhongMaterial({ color: 0x8b1a1a });
             const awning = new THREE.Mesh(awningGeo, awningMat);
             awning.position.set(0, 8, 5);
-            awning.castShadow = CONFIG.performance.shadowsEnabled;
             group.add(awning);
-
-            // Awning border
             const awningBorderGeo = new THREE.BoxGeometry(20.5, 0.3, 3);
             const awningBorderMat = new THREE.MeshPhongMaterial({ color: 0xffffff });
             const awningBorder = new THREE.Mesh(awningBorderGeo, awningBorderMat);
             awningBorder.position.set(0, 8.8, 5);
             group.add(awningBorder);
 
-            // Roof (simple peak)
             const roofGeo = new THREE.ConeGeometry(13, 6, 4);
             const roofMat = new THREE.MeshPhongMaterial({ color: 0x6b4c3a });
             const roof = new THREE.Mesh(roofGeo, roofMat);
             roof.position.set(0, 22, -0.5);
             roof.rotation.y = Math.PI / 4;
-            roof.castShadow = CONFIG.performance.shadowsEnabled;
             group.add(roof);
 
-            // Sky
             const skyGeo = new THREE.SphereGeometry(250, 16, 16);
-            const skyMat = new THREE.MeshBasicMaterial({
-                color: 0x87ceeb,
-                side: THREE.BackSide
-            });
+            const skyMat = new THREE.MeshBasicMaterial({ color: 0x87ceeb, side: THREE.BackSide });
             const sky = new THREE.Mesh(skyGeo, skyMat);
             group.add(sky);
 
@@ -764,7 +898,6 @@
         function createInterior() {
             const group = new THREE.Group();
 
-            // Floor (tile)
             const floorGeo = new THREE.PlaneGeometry(35, 30);
             const floorMat = new THREE.MeshLambertMaterial({
                 color: 0xd2b48c,
@@ -781,205 +914,97 @@
             });
             const floor = new THREE.Mesh(floorGeo, floorMat);
             floor.rotation.x = -Math.PI / 2;
-            floor.receiveShadow = CONFIG.performance.shadowsEnabled;
             group.add(floor);
 
-            // Walls
             const wallMat = new THREE.MeshPhongMaterial({ color: 0xf5ede5 });
-            
-            // Back wall
-            const backWallGeo = new THREE.BoxGeometry(35, 16, 0.5);
-            const backWall = new THREE.Mesh(backWallGeo, wallMat);
+            const backWall = new THREE.Mesh(new THREE.BoxGeometry(35, 16, 0.5), wallMat);
             backWall.position.set(0, 8, -15);
-            backWall.receiveShadow = CONFIG.performance.shadowsEnabled;
             group.add(backWall);
-
-            // Left wall
-            const leftWallGeo = new THREE.BoxGeometry(0.5, 16, 30);
-            const leftWall = new THREE.Mesh(leftWallGeo, wallMat);
+            const leftWall = new THREE.Mesh(new THREE.BoxGeometry(0.5, 16, 30), wallMat);
             leftWall.position.set(-17.5, 8, 0);
-            leftWall.receiveShadow = CONFIG.performance.shadowsEnabled;
             group.add(leftWall);
-
-            // Right wall
-            const rightWallGeo = new THREE.BoxGeometry(0.5, 16, 30);
-            const rightWall = new THREE.Mesh(rightWallGeo, wallMat);
+            const rightWall = new THREE.Mesh(new THREE.BoxGeometry(0.5, 16, 30), wallMat);
             rightWall.position.set(17.5, 8, 0);
-            rightWall.receiveShadow = CONFIG.performance.shadowsEnabled;
             group.add(rightWall);
-
-            // Ceiling
-            const ceilingGeo = new THREE.PlaneGeometry(35, 30);
-            const ceilingMat = new THREE.MeshPhongMaterial({ color: 0xfffacd });
-            const ceiling = new THREE.Mesh(ceilingGeo, ceilingMat);
+            const ceiling = new THREE.Mesh(new THREE.PlaneGeometry(35, 30), new THREE.MeshPhongMaterial({ color: 0xfffacd }));
             ceiling.rotation.x = Math.PI / 2;
             ceiling.position.y = 16;
             group.add(ceiling);
 
-            // ========== COUNTER AREA ==========
-            // Counter top (granite-like)
-            const counterTopGeo = new THREE.BoxGeometry(10, 0.4, 1.2);
-            const counterTopMat = new THREE.MeshPhongMaterial({ color: 0x4a4a4a });
-            const counterTop = new THREE.Mesh(counterTopGeo, counterTopMat);
+            // Counter
+            const counterTop = new THREE.Mesh(new THREE.BoxGeometry(10, 0.4, 1.2), new THREE.MeshPhongMaterial({ color: 0x4a4a4a }));
             counterTop.position.set(0, 1.2, -13);
-            counterTop.castShadow = CONFIG.performance.shadowsEnabled;
-            counterTop.receiveShadow = CONFIG.performance.shadowsEnabled;
             group.add(counterTop);
-
-            // Counter base (white)
-            const counterBaseGeo = new THREE.BoxGeometry(10, 1, 1);
-            const counterBaseMat = new THREE.MeshPhongMaterial({ color: 0xf5f5f5 });
-            const counterBase = new THREE.Mesh(counterBaseGeo, counterBaseMat);
+            const counterBase = new THREE.Mesh(new THREE.BoxGeometry(10, 1, 1), new THREE.MeshPhongMaterial({ color: 0xf5f5f5 }));
             counterBase.position.set(0, 0.5, -13);
-            counterBase.castShadow = CONFIG.performance.shadowsEnabled;
             group.add(counterBase);
 
-            // Dessert display case (curved front glass)
-            const caseBodyGeo = new THREE.BoxGeometry(8, 2.2, 1.5);
-            const caseBodyMat = new THREE.MeshPhongMaterial({ color: 0x1a1a1a });
-            const caseBody = new THREE.Mesh(caseBodyGeo, caseBodyMat);
+            const caseBody = new THREE.Mesh(new THREE.BoxGeometry(8, 2.2, 1.5), new THREE.MeshPhongMaterial({ color: 0x1a1a1a }));
             caseBody.position.set(0, 1.3, -12.2);
-            caseBody.castShadow = CONFIG.performance.shadowsEnabled;
             group.add(caseBody);
-
-            // Case glass front
-            const caseGlassGeo = new THREE.BoxGeometry(7.8, 1.8, 0.3);
-            const caseGlassMat = new THREE.MeshPhongMaterial({
-                color: 0xb0e0e6,
-                transparent: true,
-                opacity: 0.6,
-                shininess: 100
-            });
-            const caseGlass = new THREE.Mesh(caseGlassGeo, caseGlassMat);
+            const caseGlass = new THREE.Mesh(new THREE.BoxGeometry(7.8, 1.8, 0.3), new THREE.MeshPhongMaterial({ color: 0xb0e0e6, transparent: true, opacity: 0.6, shininess: 100 }));
             caseGlass.position.set(0, 1.4, -11.5);
-            caseGlass.receiveShadow = CONFIG.performance.shadowsEnabled;
             group.add(caseGlass);
-
-            // Case interior lighting
             const caseLight = new THREE.PointLight(0xffcc99, 0.8, 15);
             caseLight.position.set(0, 1.3, -12);
             group.add(caseLight);
 
-            // Display items (simplified pastries/cakes)
             const itemGeo = new THREE.CylinderGeometry(0.4, 0.4, 0.5, 8);
             const itemMat = new THREE.MeshPhongMaterial({ color: 0xd4a574 });
-            
-            const itemPositions = [
-                { x: -2.5, z: -12.2 },
-                { x: -1, z: -12.2 },
-                { x: 1, z: -12.2 },
-                { x: 2.5, z: -12.2 },
-                { x: -1.75, z: -11.8 },
-                { x: 0.75, z: -11.8 }
-            ];
-
-            itemPositions.forEach(pos => {
+            [{ x:-2.5,z:-12.2 },{ x:-1,z:-12.2 },{ x:1,z:-12.2 },{ x:2.5,z:-12.2 },{ x:-1.75,z:-11.8 },{ x:0.75,z:-11.8 }].forEach(pos => {
                 const item = new THREE.Mesh(itemGeo, itemMat);
                 item.position.set(pos.x, 1.1, pos.z);
-                item.castShadow = CONFIG.performance.shadowsEnabled;
-                item.receiveShadow = CONFIG.performance.shadowsEnabled;
                 group.add(item);
             });
 
-            // Counter back wall with shelves
-            const backPanelGeo = new THREE.BoxGeometry(9, 5, 0.4);
-            const backPanelMat = new THREE.MeshPhongMaterial({ color: 0x2a2a2a });
-            const backPanel = new THREE.Mesh(backPanelGeo, backPanelMat);
+            const backPanel = new THREE.Mesh(new THREE.BoxGeometry(9, 5, 0.4), new THREE.MeshPhongMaterial({ color: 0x2a2a2a }));
             backPanel.position.set(0, 3.5, -13.5);
             group.add(backPanel);
-
-            // Shelves on back wall
             const shelfGeo = new THREE.BoxGeometry(8.5, 0.3, 0.8);
             const shelfMat = new THREE.MeshPhongMaterial({ color: 0x8b6f47 });
             for (let i = 0; i < 3; i++) {
                 const shelf = new THREE.Mesh(shelfGeo, shelfMat);
                 shelf.position.set(0, 1.5 + i * 1.3, -13.2);
-                shelf.castShadow = CONFIG.performance.shadowsEnabled;
                 group.add(shelf);
             }
 
-            // ========== DINING AREA ==========
-            // Tables
+            // Tables & chairs
             const tableLegGeo = new THREE.BoxGeometry(0.4, 2.5, 0.4);
             const tableLegMat = new THREE.MeshPhongMaterial({ color: 0x1a1a1a });
             const tableTopGeo = new THREE.BoxGeometry(3.2, 0.4, 3.2);
             const tableTopMat = new THREE.MeshPhongMaterial({ color: 0x8b6f47 });
-
             const tablePositions = [
-                { x: -10, z: -6 },
-                { x: -3, z: -6 },
-                { x: 4, z: -6 },
-                { x: -10, z: 0 },
-                { x: -3, z: 0 },
-                { x: 4, z: 0 },
-                { x: -10, z: 6 },
-                { x: -3, z: 6 },
-                { x: 4, z: 6 }
+                {x:-10,z:-6},{x:-3,z:-6},{x:4,z:-6},
+                {x:-10,z:0},{x:-3,z:0},{x:4,z:0},
+                {x:-10,z:6},{x:-3,z:6},{x:4,z:6}
             ];
-
             tablePositions.forEach(pos => {
-                // Table top
                 const top = new THREE.Mesh(tableTopGeo, tableTopMat);
                 top.position.set(pos.x, 2.5, pos.z);
-                top.castShadow = CONFIG.performance.shadowsEnabled;
-                top.receiveShadow = CONFIG.performance.shadowsEnabled;
                 group.add(top);
-
-                // Table legs
                 for (let i = 0; i < 4; i++) {
                     const leg = new THREE.Mesh(tableLegGeo, tableLegMat);
-                    leg.position.set(
-                        pos.x + (i % 2 === 0 ? 1.3 : -1.3),
-                        1.25,
-                        pos.z + (i < 2 ? 1.3 : -1.3)
-                    );
-                    leg.castShadow = CONFIG.performance.shadowsEnabled;
-                    leg.receiveShadow = CONFIG.performance.shadowsEnabled;
+                    leg.position.set(pos.x+(i%2===0?1.3:-1.3), 1.25, pos.z+(i<2?1.3:-1.3));
                     group.add(leg);
                 }
             });
-
-            // Chairs
             const chairGeo = new THREE.BoxGeometry(1.1, 1.8, 1.1);
             const chairMat = new THREE.MeshPhongMaterial({ color: 0x1a3a52 });
-            
-            tablePositions.forEach((pos, idx) => {
+            tablePositions.forEach(pos => {
                 for (let i = 0; i < 2; i++) {
                     const chair = new THREE.Mesh(chairGeo, chairMat);
-                    chair.position.set(
-                        pos.x + (i === 0 ? -2.2 : 2.2),
-                        0.9,
-                        pos.z
-                    );
-                    chair.castShadow = CONFIG.performance.shadowsEnabled;
-                    chair.receiveShadow = CONFIG.performance.shadowsEnabled;
+                    chair.position.set(pos.x+(i===0?-2.2:2.2), 0.9, pos.z);
                     group.add(chair);
                 }
             });
 
-            // ========== LIGHTING & AMBIANCE ==========
-            // Ceiling lights (warm)
-            const lightPositions = [
-                { x: -9, z: -5 },
-                { x: -9, z: 2 },
-                { x: 0, z: -5 },
-                { x: 0, z: 2 },
-                { x: 9, z: -5 },
-                { x: 9, z: 2 }
-            ];
-
-            lightPositions.forEach(pos => {
-                // Light fixture (physical)
-                const fixtureGeo = new THREE.CylinderGeometry(0.3, 0.3, 0.4, 8);
-                const fixtureMat = new THREE.MeshPhongMaterial({ color: 0xc0a080 });
-                const fixture = new THREE.Mesh(fixtureGeo, fixtureMat);
+            // Ceiling lights
+            [{ x:-9,z:-5 },{ x:-9,z:2 },{ x:0,z:-5 },{ x:0,z:2 },{ x:9,z:-5 },{ x:9,z:2 }].forEach(pos => {
+                const fixture = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.4, 8), new THREE.MeshPhongMaterial({ color: 0xc0a080 }));
                 fixture.position.set(pos.x, 14.8, pos.z);
                 group.add(fixture);
-
-                // Actual light
                 const light = new THREE.PointLight(0xffd699, 0.6, 25);
                 light.position.set(pos.x, 14, pos.z);
-                light.castShadow = CONFIG.performance.shadowsEnabled;
                 group.add(light);
             });
 
@@ -987,70 +1012,190 @@
         }
 
         // ==========================================
-        // MENU DATA
+        // FULL MENU DATA
         // ==========================================
         const menuData = [
-            { category: 'PIZZAS', items: [
-                { name: 'Margherita', description: 'Fresh mozzarella, basil, tomato sauce', price: '$14.99' },
-                { name: 'Pepperoni', description: 'Classic pepperoni with mozzarella cheese', price: '$15.99' },
-                { name: 'Quattro Formaggi', description: 'Four blend of Italian cheeses', price: '$16.99' },
-                { name: 'Spinaci & Ricotta', description: 'Fresh spinach with creamy ricotta', price: '$15.99' },
-                { name: 'Vegetariana', description: 'Seasonal vegetables & mozzarella', price: '$14.99' }
+            { category: 'PIZZAS', emoji: '🍕', items: [
+                { name: 'Cheese Pizza', description: 'Classic tomato sauce with melted mozzarella', price: 'From $10.99', tag: 'Classic' },
+                { name: 'Pepperoni Pizza', description: 'Loaded with premium pepperoni and mozzarella', price: 'From $12.99', tag: 'Popular' },
+                { name: 'Meat Lovers', description: 'Pepperoni, sausage, ham, and bacon', price: 'From $15.99', tag: 'Hearty' },
+                { name: 'Veggie Supreme', description: 'Peppers, onions, mushrooms, olives, tomatoes', price: 'From $13.99', tag: 'Veggie' },
+                { name: 'BBQ Chicken Pizza', description: 'Smoky BBQ sauce, grilled chicken, red onion', price: 'From $14.99', tag: 'Fan Fav' },
+                { name: 'White Pizza', description: 'Olive oil, garlic, ricotta, and mozzarella', price: 'From $13.99', tag: 'Specialty' },
+                { name: 'Grandma Sicilian', description: 'Thick-crust Sicilian style with rich tomato sauce', price: 'From $14.99', tag: 'Specialty' },
+                { name: 'Build Your Own', description: 'Choose your sauce, cheese, and toppings', price: 'From $10.99', tag: 'Custom' }
             ]},
-            { category: 'PASTA', items: [
-                { name: 'Carbonara', description: 'Creamy egg sauce with pancetta & pecorino', price: '$13.99' },
-                { name: 'Lasagna', description: 'Layers of pasta, sauce, and ricotta cheese', price: '$12.99' },
-                { name: 'Ravioli Ricotta', description: 'Tender pasta pockets with ricotta filling', price: '$14.99' },
-                { name: 'Penne Marinara', description: 'Penne in fresh tomato sauce with basil', price: '$11.99' },
-                { name: 'Fettuccine Alfredo', description: 'Creamy Parmesan sauce with fettuccine', price: '$12.99' }
+            { category: 'CALZONES & STROMBOLI', emoji: '🥗', items: [
+                { name: 'Classic Calzone', description: 'Ricotta, mozzarella, and your choice of fillings', price: 'From $11.99', tag: 'Classic' },
+                { name: 'Meat Calzone', description: 'Pepperoni, sausage, ham, ricotta, mozzarella', price: 'From $13.99', tag: 'Hearty' },
+                { name: 'Veggie Calzone', description: 'Spinach, mushrooms, peppers, ricotta, mozzarella', price: 'From $12.99', tag: 'Veggie' },
+                { name: 'Spinach Calzone', description: 'Fresh spinach, ricotta, garlic, and mozzarella', price: 'From $12.99', tag: 'Fresh' },
+                { name: 'Stromboli', description: 'Rolled dough stuffed with meats, cheese and veggies', price: 'From $12.99', tag: 'Popular' },
+                { name: 'Build Your Own Calzone', description: 'Customize with your favorite fillings', price: 'From $11.99', tag: 'Custom' }
             ]},
-            { category: 'APPETIZERS', items: [
-                { name: 'Bruschetta', description: 'Toasted bread with fresh tomatoes & garlic', price: '$8.99' },
-                { name: 'Calamari Fritti', description: 'Crispy fried squid with marinara', price: '$11.99' },
-                { name: 'Mozzarella Sticks', description: 'Golden fried mozzarella with marinara', price: '$8.99' },
-                { name: 'Caprese Salad', description: 'Tomatoes, mozzarella, basil, olive oil', price: '$9.99' }
+            { category: 'GREEK SPECIALTIES', emoji: '🍟', items: [
+                { name: 'Gyro', description: 'Seasoned lamb on warm pita with lettuce, tomato, onion and tzatziki', price: '$10.99', tag: 'Signature' },
+                { name: 'Gyro Platter', description: 'Full gyro platter with sides — perfect for catering', price: 'Market Price', tag: 'Catering' },
+                { name: 'Spanakopita', description: 'Flaky phyllo pastry filled with spinach and feta', price: '$8.99', tag: 'Amazing' },
+                { name: 'Greek Salad', description: 'Crisp greens, tomatoes, cucumbers, olives, feta, red onion', price: '$9.99', tag: 'Classic' },
+                { name: 'Grape Leaves', description: 'Stuffed grape leaves with seasoned rice filling', price: '$7.99', tag: 'Authentic' },
+                { name: 'Souvlaki', description: 'Grilled marinated chicken or pork on a skewer', price: '$12.99', tag: 'Grilled' }
             ]},
-            { category: 'DESSERTS', items: [
-                { name: 'Tiramisu', description: 'Classic Italian mascarpone dessert', price: '$6.99' },
-                { name: 'Panna Cotta', description: 'Smooth vanilla cream with berry sauce', price: '$6.99' },
-                { name: 'Cannoli', description: 'Crispy shells filled with sweet ricotta', price: '$5.99' },
-                { name: 'Gelato', description: 'Creamy Italian ice cream - ask for flavors', price: '$4.99' }
+            { category: 'PASTA', emoji: '🍝', items: [
+                { name: 'Spaghetti & Meatballs', description: 'Classic spaghetti with homemade tomato sauce and meatballs', price: '$12.99', tag: 'Classic' },
+                { name: 'Fettuccine Alfredo', description: 'Creamy Parmesan Alfredo sauce with fettuccine', price: '$12.99', tag: 'Creamy' },
+                { name: 'Penne Marinara', description: 'Penne pasta in fresh homemade marinara sauce', price: '$11.99', tag: 'Light' },
+                { name: 'Lasagna', description: 'Layers of pasta, meat sauce, ricotta, and mozzarella', price: '$13.99', tag: 'Hearty' },
+                { name: 'Baked Ziti', description: 'Ziti baked with ricotta, mozzarella, and marinara', price: '$12.99', tag: 'Baked' },
+                { name: 'Carbonara', description: 'Creamy egg sauce with pancetta and pecorino', price: '$13.99', tag: 'Italian' },
+                { name: 'Ravioli Ricotta', description: 'Tender pasta pockets with ricotta filling', price: '$14.99', tag: 'Fresh' }
+            ]},
+            { category: 'WINGS & CHICKEN', emoji: '🍗', items: [
+                { name: 'Buffalo Wings', description: 'Classic crispy wings tossed in spicy buffalo sauce', price: 'From $10.99', tag: 'Spicy' },
+                { name: 'BBQ Wings', description: 'Smoky sweet BBQ glazed wings', price: 'From $10.99', tag: 'Sweet' },
+                { name: 'Garlic Parmesan Wings', description: 'Wings tossed in garlic butter and Parmesan', price: 'From $11.99', tag: 'Fan Fav' },
+                { name: 'Fried Chicken', description: 'Crispy golden fried chicken — a local favorite', price: 'From $9.99', tag: 'Popular' },
+                { name: 'Grilled Chicken', description: 'Seasoned grilled chicken breast', price: '$10.99', tag: 'Healthy' },
+                { name: 'Chicken Tenders', description: 'Crispy chicken strips with dipping sauce', price: '$9.99', tag: 'Classic' }
+            ]},
+            { category: 'HOAGIES & SANDWICHES', emoji: '🍔', items: [
+                { name: 'Italian Hoagie', description: 'Ham, salami, capicola, provolone, lettuce, tomato, onion', price: '$9.99', tag: 'Classic' },
+                { name: 'Cheesesteak', description: 'Shaved steak with peppers, onions, and melted cheese', price: '$10.99', tag: 'Popular' },
+                { name: 'Chicken Cheesesteak', description: 'Grilled chicken with peppers, onions, and cheese', price: '$10.99', tag: 'Light' },
+                { name: 'Meatball Sub', description: 'Homemade meatballs in marinara with melted mozzarella', price: '$9.99', tag: 'Hearty' },
+                { name: 'Burger', description: 'Fresh beef patty with your choice of toppings', price: 'From $8.99', tag: 'American' }
+            ]},
+            { category: 'SALADS & SOUPS', emoji: '🥗', items: [
+                { name: 'House Salad', description: 'Mixed greens, tomatoes, cucumbers, and house dressing', price: '$7.99', tag: 'Fresh' },
+                { name: 'Caesar Salad', description: 'Romaine, croutons, Parmesan, and Caesar dressing', price: '$8.99', tag: 'Classic' },
+                { name: 'Greek Salad', description: 'Crisp greens, tomatoes, cucumbers, olives, feta', price: '$9.99', tag: 'Greek' },
+                { name: 'Wedding Soup', description: 'Homemade Italian wedding soup with meatballs and greens', price: '$5.99', tag: 'Homemade' },
+                { name: 'Minestrone', description: 'Hearty Italian vegetable soup with pasta', price: '$5.99', tag: 'Veggie' },
+                { name: 'Soup of the Day', description: 'Ask your server for today\'s fresh homemade soup', price: '$5.99', tag: 'Daily' }
+            ]},
+            { category: 'BREAKFAST ALL DAY', emoji: '☕', items: [
+                { name: 'Eggs & Toast', description: 'Two eggs cooked your way with toast', price: '$6.99', tag: 'Classic' },
+                { name: 'Breakfast Sandwich', description: 'Egg, cheese, and your choice of meat on a roll', price: '$7.99', tag: 'Popular' },
+                { name: 'Pancakes', description: 'Fluffy buttermilk pancakes with syrup', price: '$7.99', tag: 'Sweet' },
+                { name: 'Omelette', description: 'Three-egg omelette with your choice of fillings', price: '$9.99', tag: 'Custom' },
+                { name: 'French Toast', description: 'Thick-cut French toast with powdered sugar and syrup', price: '$7.99', tag: 'Sweet' },
+                { name: 'Breakfast Platter', description: 'Eggs, bacon or sausage, home fries, and toast', price: '$10.99', tag: 'Hearty' }
+            ]},
+            { category: 'APPETIZERS', emoji: '🍢', items: [
+                { name: 'Bruschetta', description: 'Toasted bread with fresh tomatoes and garlic', price: '$8.99', tag: 'Classic' },
+                { name: 'Mozzarella Sticks', description: 'Golden fried mozzarella with marinara', price: '$8.99', tag: 'Popular' },
+                { name: 'Caprese Salad', description: 'Tomatoes, mozzarella, basil, olive oil', price: '$9.99', tag: 'Fresh' },
+                { name: 'Calamari Fritti', description: 'Crispy fried squid with marinara', price: '$11.99', tag: 'Seafood' }
+            ]},
+            { category: 'DESSERTS', emoji: '🍰', items: [
+                { name: 'Tiramisu', description: 'Classic Italian mascarpone and espresso dessert', price: '$6.99', tag: 'Italian' },
+                { name: 'Cannoli', description: 'Crispy shells filled with sweet ricotta cream', price: '$5.99', tag: 'Classic' },
+                { name: 'Panna Cotta', description: 'Smooth vanilla cream with fresh berry sauce', price: '$6.99', tag: 'Light' },
+                { name: 'Gelato', description: 'Creamy Italian ice cream — ask for today\'s flavors', price: '$4.99', tag: 'Fresh' },
+                { name: 'Baklava', description: 'Flaky phyllo with honey, nuts, and spices', price: '$4.99', tag: 'Greek' },
+                { name: 'Cheesecake', description: 'Creamy New York-style cheesecake', price: '$5.99', tag: 'American' }
             ]}
+        ];
+
+        // ==========================================
+        // REVIEWS DATA
+        // ==========================================
+        const reviewsData = [
+            {
+                stars: 5,
+                text: '"This is got to be one of the best kept secrets in all of Pennsylvania. We went there for dinner and I was awesomely surprised at how excellent the food was. Went there the next day for breakfast, which is served all day — once again, extremely impressive. The menu is extremely extensive. But no matter what you choose, it\'s gonna be awesome."',
+                name: 'Amos G.',
+                meta: 'Lancaster, CA — January 2025',
+                initial: 'A',
+                url: 'https://www.yelp.com/biz/ambridge-italian-villa-ambridge'
+            },
+            {
+                stars: 5,
+                text: '"The gyros here are my absolute favorite! My daughter wanted gyros for her graduation party — there was only one place I thought of. We ordered the 25 gyro platter. SO MUCH LAMB, fresh pitas, onions, lettuce, tomatoes, and more tzatziki than you could imagine. We also got two orders of their delicious grape leaves. Ambridge Italian Villa made the food the hit of the party!"',
+                name: 'Beth S.',
+                meta: 'Beaver Falls, PA — July 2020',
+                initial: 'B',
+                url: 'https://www.yelp.com/biz/ambridge-italian-villa-ambridge'
+            },
+            {
+                stars: 5,
+                text: '"Yes, the food is pretty good. I\'ve had their Gyro and their spanakopita is amazing. They renovated the place a few years ago so it looks much better than it used to. Definitely recommend trying the Greek specialties — you won\'t be disappointed!"',
+                name: 'Lisa T.',
+                meta: 'Aliquippa, PA — July 2025',
+                initial: 'L',
+                url: 'https://www.yelp.com/biz/ambridge-italian-villa-ambridge'
+            },
+            {
+                stars: 5,
+                text: '"Chastity was great and helpful, the dining area was clean and the service was excellent. As for the food it was good — for my first experience I was happy and will definitely go back! The atmosphere is warm and welcoming, exactly what you want from a neighborhood Italian spot."',
+                name: 'Anitra J.',
+                meta: 'Aliquippa, PA — June 2022',
+                initial: 'A',
+                url: 'https://www.yelp.com/biz/ambridge-italian-villa-ambridge'
+            }
         ];
 
         // ==========================================
         // UI FUNCTIONS
         // ==========================================
-        function populateMenu() {
+        var activeMenuCat = 0;
+
+        function buildMenuTabs() {
+            const tabsContainer = document.getElementById('menu-tabs');
+            tabsContainer.innerHTML = '';
+            menuData.forEach(function(cat, idx) {
+                const btn = document.createElement('button');
+                btn.className = 'menu-tab-btn' + (idx === 0 ? ' active' : '');
+                btn.textContent = cat.emoji + ' ' + cat.category;
+                btn.addEventListener('click', function() {
+                    activeMenuCat = idx;
+                    document.querySelectorAll('.menu-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+                    btn.classList.add('active');
+                    renderMenuCategory(idx);
+                });
+                tabsContainer.appendChild(btn);
+            });
+        }
+
+        function renderMenuCategory(idx) {
             const container = document.getElementById('menu-items');
             container.innerHTML = '';
+            const cat = menuData[idx];
+            cat.items.forEach(function(item) {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'menu-item';
+                itemDiv.innerHTML =
+                    '<h3>' + item.name + (item.tag ? '<span class="menu-tag">' + item.tag + '</span>' : '') + '</h3>' +
+                    '<p>' + item.description + '</p>' +
+                    '<div class="menu-price">' + item.price + '</div>';
+                container.appendChild(itemDiv);
+            });
+        }
 
-            menuData.forEach(category => {
-                const categoryTitle = document.createElement('div');
-                categoryTitle.style.cssText = `
-                    color: #d4af37;
-                    font-size: 14px;
-                    font-weight: bold;
-                    letter-spacing: 2px;
-                    margin-top: 15px;
-                    margin-bottom: 10px;
-                    padding: 10px 0;
-                    border-bottom: 2px solid #d4af37;
-                    text-transform: uppercase;
-                `;
-                categoryTitle.textContent = category.category;
-                container.appendChild(categoryTitle);
+        function populateMenu() {
+            buildMenuTabs();
+            renderMenuCategory(0);
+        }
 
-                category.items.forEach(item => {
-                    const itemDiv = document.createElement('div');
-                    itemDiv.className = 'menu-item';
-                    itemDiv.innerHTML = `
-                        <h3>${item.name}</h3>
-                        <p>${item.description}</p>
-                        <div class="menu-price">${item.price}</div>
-                    `;
-                    container.appendChild(itemDiv);
-                });
+        function populateReviews() {
+            const list = document.getElementById('reviews-list');
+            list.innerHTML = '';
+            reviewsData.forEach(function(r) {
+                const stars = '★'.repeat(r.stars) + '☆'.repeat(5 - r.stars);
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML =
+                    '<div class="review-card-stars">' + stars + '</div>' +
+                    '<div class="review-card-text">' + r.text + '</div>' +
+                    '<div class="review-card-author">' +
+                        '<div class="review-avatar">' + r.initial + '</div>' +
+                        '<div>' +
+                            '<div class="review-author-name">' + r.name + '</div>' +
+                            '<div class="review-author-meta">' + r.meta + '</div>' +
+                        '</div>' +
+                    '</div>' +
+                    '<a class="review-yelp-link" href="' + r.url + '" target="_blank" rel="noopener">View on Yelp ↗</a>';
+                list.appendChild(card);
             });
         }
 
@@ -1062,17 +1207,13 @@
         function updateInstructions() {
             const text = document.getElementById('instruction-text');
             if (appState.isInside) {
-                if (CONFIG.performance.isMobile) {
-                    text.textContent = '📱 Drag to look around • Tap forward to move to counter';
-                } else {
-                    text.textContent = '🖱 Move: WASD • Look: Mouse • Press M for Menu';
-                }
+                text.textContent = CONFIG.performance.isMobile
+                    ? '📱 Drag to look around  •  Tap to move to counter'
+                    : '🖱 Move: WASD  •  Look: Mouse  •  M = Menu  •  R = Reviews';
             } else {
-                if (CONFIG.performance.isMobile) {
-                    text.textContent = '📱 Drag to look around • Tap to enter';
-                } else {
-                    text.textContent = '🖱 Move: WASD • Look: Mouse • Press E to Enter';
-                }
+                text.textContent = CONFIG.performance.isMobile
+                    ? '📱 Drag to look around  •  Tap to enter'
+                    : '🖱 Move: WASD  •  Look: Mouse  •  E = Enter';
             }
         }
 
@@ -1080,21 +1221,39 @@
             const enterBtn = document.getElementById('enter-btn');
             const exitBtn = document.getElementById('exit-btn');
             const menuBtn = document.getElementById('menu-btn');
-            
+            const reviewsBtn = document.getElementById('reviews-btn');
+            const cateringBtn = document.getElementById('catering-btn');
+            const orderBtn = document.getElementById('order-btn');
+
             if (appState.isInside) {
                 enterBtn.style.display = 'none';
                 exitBtn.style.display = 'block';
                 menuBtn.style.display = 'block';
+                reviewsBtn.style.display = 'block';
+                cateringBtn.style.display = 'block';
+                orderBtn.style.display = 'block';
             } else {
                 enterBtn.style.display = 'block';
                 exitBtn.style.display = 'none';
                 menuBtn.style.display = 'none';
+                reviewsBtn.style.display = 'none';
+                cateringBtn.style.display = 'none';
+                orderBtn.style.display = 'none';
             }
         }
 
         function toggleMenu() {
-            const panel = document.getElementById('menu-panel');
-            panel.classList.toggle('active');
+            const menuPanel = document.getElementById('menu-panel');
+            const reviewsPanel = document.getElementById('reviews-panel');
+            reviewsPanel.classList.remove('active');
+            menuPanel.classList.toggle('active');
+        }
+
+        function toggleReviews() {
+            const menuPanel = document.getElementById('menu-panel');
+            const reviewsPanel = document.getElementById('reviews-panel');
+            menuPanel.classList.remove('active');
+            reviewsPanel.classList.toggle('active');
         }
 
         // ==========================================
@@ -1104,35 +1263,26 @@
             if (appState.isTransitioning) return;
             appState.isTransitioning = true;
 
-            // Smooth transition to interior
             for (let i = 0; i <= 1; i += 0.02) {
                 camera.position.z = 25 - (i * 15);
                 updateProgress(i);
                 await new Promise(r => setTimeout(r, 10));
             }
 
-            // Switch scenes
-            if (appState.sceneObjects.exterior) {
-                scene.remove(appState.sceneObjects.exterior);
-            }
+            if (appState.sceneObjects.exterior) scene.remove(appState.sceneObjects.exterior);
 
             appState.isInside = true;
-            if (!appState.sceneObjects.interior) {
-                appState.sceneObjects.interior = createInterior();
-            }
+            if (!appState.sceneObjects.interior) appState.sceneObjects.interior = createInterior();
             scene.add(appState.sceneObjects.interior);
 
-            // Reset camera for interior
             camera.position.set(0, 1.7, 10);
             camera.rotation.set(0, 0, 0);
 
             updateButtons();
             updateInstructions();
             updateProgress(1);
-
             appState.isTransitioning = false;
             appState.canMove = true;
-
             setTimeout(() => updateProgress(0), 500);
         }
 
@@ -1140,27 +1290,20 @@
             if (appState.isTransitioning) return;
             appState.isTransitioning = true;
 
-            // Close menu
             document.getElementById('menu-panel').classList.remove('active');
+            document.getElementById('reviews-panel').classList.remove('active');
 
-            // Switch scenes
-            if (appState.sceneObjects.interior) {
-                scene.remove(appState.sceneObjects.interior);
-            }
+            if (appState.sceneObjects.interior) scene.remove(appState.sceneObjects.interior);
 
             appState.isInside = false;
-            if (!appState.sceneObjects.exterior) {
-                appState.sceneObjects.exterior = createExterior();
-            }
+            if (!appState.sceneObjects.exterior) appState.sceneObjects.exterior = createExterior();
             scene.add(appState.sceneObjects.exterior);
 
-            // Reset camera for exterior
             camera.position.set(0, 1.7, 25);
             camera.rotation.set(0, 0, 0);
 
             updateButtons();
             updateInstructions();
-
             appState.isTransitioning = false;
             appState.canMove = true;
         }
@@ -1184,38 +1327,34 @@
         const moveSpeed = 0.12;
         const rotateSpeed = CONFIG.performance.isMobile ? 0.003 : 0.002;
 
-        // Keyboard controls
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') controls.moveForward = true;
-            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') controls.moveBackward = true;
-            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') controls.moveLeft = true;
+            if (e.key === 'ArrowUp'    || e.key === 'w' || e.key === 'W') controls.moveForward = true;
+            if (e.key === 'ArrowDown'  || e.key === 's' || e.key === 'S') controls.moveBackward = true;
+            if (e.key === 'ArrowLeft'  || e.key === 'a' || e.key === 'A') controls.moveLeft = true;
             if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') controls.moveRight = true;
             if (e.key === 'm' || e.key === 'M') toggleMenu();
+            if (e.key === 'r' || e.key === 'R') toggleReviews();
             if ((e.key === 'e' || e.key === 'E') && !appState.isInside) enterRestaurant();
         });
 
         document.addEventListener('keyup', (e) => {
-            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') controls.moveForward = false;
-            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') controls.moveBackward = false;
-            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') controls.moveLeft = false;
+            if (e.key === 'ArrowUp'    || e.key === 'w' || e.key === 'W') controls.moveForward = false;
+            if (e.key === 'ArrowDown'  || e.key === 's' || e.key === 'S') controls.moveBackward = false;
+            if (e.key === 'ArrowLeft'  || e.key === 'a' || e.key === 'A') controls.moveLeft = false;
             if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') controls.moveRight = false;
         });
 
-        // Mouse look (desktop)
         document.addEventListener('mousemove', (e) => {
             if (!CONFIG.performance.isMobile) {
                 const deltaX = e.movementX * rotateSpeed;
                 const deltaY = e.movementY * rotateSpeed;
-                
                 camera.rotation.order = 'YXZ';
                 camera.rotation.y -= deltaX;
                 camera.rotation.x -= deltaY;
-                
-                camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
+                camera.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, camera.rotation.x));
             }
         });
 
-        // Touch controls (mobile)
         document.addEventListener('touchstart', (e) => {
             controls.touchStartX = e.touches[0].clientX;
             controls.touchStartY = e.touches[0].clientY;
@@ -1224,26 +1363,21 @@
         document.addEventListener('touchmove', (e) => {
             const deltaX = (e.touches[0].clientX - controls.touchStartX) * rotateSpeed;
             const deltaY = (e.touches[0].clientY - controls.touchStartY) * rotateSpeed;
-            
             camera.rotation.order = 'YXZ';
             camera.rotation.y -= deltaX;
             camera.rotation.x -= deltaY;
-            
-            camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
-            
+            camera.rotation.x = Math.max(-Math.PI/2, Math.min(Math.PI/2, camera.rotation.x));
             controls.touchStartX = e.touches[0].clientX;
             controls.touchStartY = e.touches[0].clientY;
         });
 
-        // Button controls
         document.getElementById('enter-btn').addEventListener('click', enterRestaurant);
         document.getElementById('exit-btn').addEventListener('click', exitRestaurant);
         document.getElementById('menu-btn').addEventListener('click', toggleMenu);
+        document.getElementById('reviews-btn').addEventListener('click', toggleReviews);
         document.getElementById('menu-close-btn').addEventListener('click', toggleMenu);
+        document.getElementById('reviews-close-btn').addEventListener('click', toggleReviews);
 
-        // ==========================================
-        // RESPONSIVE CANVAS
-        // ==========================================
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
@@ -1256,12 +1390,9 @@
         function animate() {
             requestAnimationFrame(animate);
 
-            // Breathing effect
             appState.breatheOffset += 0.004;
-            const breathAmount = Math.sin(appState.breatheOffset) * 0.5;
-            camera.position.y = 1.7 + breathAmount * 0.01;
+            camera.position.y = 1.7 + Math.sin(appState.breatheOffset) * 0.005;
 
-            // Movement
             if (appState.canMove) {
                 const direction = new THREE.Vector3();
                 direction.z = Number(controls.moveForward) - Number(controls.moveBackward);
@@ -1270,21 +1401,18 @@
 
                 velocity.copy(direction).multiplyScalar(moveSpeed);
 
-                // Move forward/backward
                 const forward = new THREE.Vector3();
                 camera.getWorldDirection(forward);
                 forward.y = 0;
                 forward.normalize();
                 camera.position.addScaledVector(forward, velocity.z);
 
-                // Move left/right
                 const right = new THREE.Vector3();
                 camera.getWorldDirection(right);
                 right.cross(camera.up).normalize();
                 right.y = 0;
                 camera.position.addScaledVector(right, velocity.x);
 
-                // Limit movement bounds
                 if (appState.isInside) {
                     camera.position.x = Math.max(-15, Math.min(15, camera.position.x));
                     camera.position.z = Math.max(-12, Math.min(8, camera.position.z));
@@ -1301,26 +1429,20 @@
         // INITIALIZATION
         // ==========================================
         function init() {
-            // Create exterior scene
             appState.sceneObjects.exterior = createExterior();
             scene.add(appState.sceneObjects.exterior);
 
-            // Setup menu
             populateMenu();
+            populateReviews();
 
-            // Setup UI
             updateButtons();
             updateInstructions();
             appState.canMove = true;
 
-            // Hide loading
             document.getElementById('loading').style.display = 'none';
-
-            // Start animation
             animate();
         }
 
-        // Start when ready
         if (document.readyState === 'loading') {
             window.addEventListener('load', init);
         } else {
